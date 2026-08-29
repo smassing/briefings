@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browse daily and weekly briefings by date.">
+  <meta name="color-scheme" content="light">
+  <title>Briefings Archive</title>
+  <style>
+    :root {
+      --sidebar: #102c3d;
+      --sidebar-deep: #0a202d;
+      --sidebar-ink: #f7f2e8;
+      --sidebar-muted: #aebbc2;
+      --accent: #d5a651;
+      --accent-soft: rgba(213, 166, 81, 0.16);
+      --line: rgba(255, 255, 255, 0.11);
+      --canvas: #eee9df;
+      --sans: Aptos, "Segoe UI", Helvetica, Arial, sans-serif;
+      --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      --sidebar-width: 320px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; }
+    body { margin: 0; overflow: hidden; background: var(--canvas); color: var(--sidebar-ink); font-family: var(--sans); }
+    button, input { font: inherit; }
+
+    .shell { display: grid; grid-template-columns: var(--sidebar-width) minmax(0, 1fr); height: 100dvh; }
+    .sidebar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      min-height: 0;
+      flex-direction: column;
+      background:
+        radial-gradient(circle at 15% -10%, rgba(213, 166, 81, .15), transparent 21rem),
+        linear-gradient(160deg, var(--sidebar), var(--sidebar-deep));
+      border-right: 1px solid rgba(0, 0, 0, .24);
+      box-shadow: 12px 0 35px rgba(28, 27, 23, .11);
+    }
+
+    .brand { padding: 30px 25px 21px; border-bottom: 1px solid var(--line); }
+    .eyebrow { margin: 0 0 8px; color: var(--accent); font-size: 10px; font-weight: 750; letter-spacing: .18em; text-transform: uppercase; }
+    .brand h1 { margin: 0; font: 500 34px/.95 var(--serif); letter-spacing: -.035em; }
+    .brand p:last-child { margin: 12px 0 0; color: var(--sidebar-muted); font-size: 12px; line-height: 1.45; }
+
+    .search-wrap { position: relative; padding: 18px 18px 10px; }
+    .search-wrap svg { position: absolute; left: 31px; top: 30px; width: 15px; color: var(--sidebar-muted); pointer-events: none; }
+    .search {
+      width: 100%;
+      min-height: 42px;
+      padding: 10px 12px 10px 38px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      outline: 0;
+      background: rgba(255, 255, 255, .065);
+      color: white;
+      font-size: 13px;
+    }
+    .search::placeholder { color: #98a8b1; }
+    .search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(213, 166, 81, .13); }
+
+    .archive { flex: 1; min-height: 0; overflow-y: auto; padding: 8px 13px 25px; scrollbar-color: rgba(255,255,255,.23) transparent; scrollbar-width: thin; }
+    .archive-status { padding: 24px 12px; color: var(--sidebar-muted); font-size: 12px; line-height: 1.5; }
+    .archive-status.error { color: #f2c6b9; }
+    .group { margin-top: 13px; }
+    .group-heading { display: flex; align-items: center; gap: 9px; margin: 0; padding: 7px 11px; color: var(--sidebar-muted); font-size: 10px; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }
+    .group-heading::after { content: ""; height: 1px; flex: 1; background: var(--line); }
+    .count { color: #7f929d; font-variant-numeric: tabular-nums; }
+    .menu { margin: 3px 0 0; padding: 0; list-style: none; }
+    .menu-item { margin: 2px 0; }
+    .briefing-link {
+      position: relative;
+      display: grid;
+      grid-template-columns: 41px minmax(0, 1fr);
+      align-items: center;
+      gap: 11px;
+      width: 100%;
+      padding: 9px 11px;
+      border: 0;
+      border-radius: 5px;
+      background: transparent;
+      color: var(--sidebar-ink);
+      text-align: left;
+      cursor: pointer;
+      transition: background 140ms ease, color 140ms ease;
+    }
+    .briefing-link:hover { background: rgba(255,255,255,.07); }
+    .briefing-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+    .briefing-link.active { background: var(--accent-soft); color: white; }
+    .briefing-link.active::before { content: ""; position: absolute; inset: 8px auto 8px 0; width: 2px; background: var(--accent); }
+    .date-tile { padding: 5px 3px 4px; border: 1px solid var(--line); border-radius: 4px; text-align: center; }
+    .date-tile strong, .date-tile span { display: block; }
+    .date-tile strong { font: 600 18px/1 var(--serif); }
+    .date-tile span { margin-top: 3px; color: var(--accent); font-size: 8px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .link-copy { min-width: 0; }
+    .link-title { display: block; overflow: hidden; font: 500 15px/1.2 var(--serif); text-overflow: ellipsis; white-space: nowrap; }
+    .link-year { display: block; margin-top: 3px; color: var(--sidebar-muted); font-size: 10px; letter-spacing: .08em; }
+    .empty { padding: 22px 11px; color: var(--sidebar-muted); font-size: 12px; }
+
+    .sidebar-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 13px 18px; border-top: 1px solid var(--line); color: var(--sidebar-muted); font-size: 10px; }
+    .repo-link { color: var(--sidebar-muted); text-decoration: none; }
+    .repo-link:hover { color: white; }
+    .source-state { display: flex; align-items: center; gap: 6px; }
+    .source-state::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #63b987; box-shadow: 0 0 0 3px rgba(99,185,135,.11); }
+    .source-state.fallback::before { background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+
+    .content { position: relative; min-width: 0; min-height: 0; background: var(--canvas); }
+    .viewer { display: block; width: 100%; height: 100%; border: 0; background: var(--canvas); }
+    .welcome { position: absolute; inset: 0; display: grid; place-items: center; padding: 32px; color: #26343c; text-align: center; }
+    .welcome[hidden] { display: none; }
+    .welcome-inner { max-width: 520px; }
+    .welcome-mark { width: 58px; height: 58px; margin: 0 auto 20px; border: 1px solid #b8ad9d; border-radius: 50%; display: grid; place-items: center; font: 500 27px var(--serif); color: #8c6a2b; }
+    .welcome h2 { margin: 0; font: 500 clamp(34px, 5vw, 58px)/1 var(--serif); letter-spacing: -.04em; }
+    .welcome p { margin: 15px auto 0; color: #68747a; font: 14px/1.65 var(--sans); }
+    .mobile-bar { display: none; }
+
+    @media (max-width: 760px) {
+      body { overflow: hidden; }
+      .shell { display: block; }
+      .mobile-bar { position: fixed; z-index: 30; inset: 0 0 auto; display: flex; align-items: center; height: 54px; padding: 0 14px; background: var(--sidebar-deep); border-bottom: 1px solid var(--line); }
+      .menu-toggle { display: inline-flex; align-items: center; gap: 9px; padding: 8px 9px; border: 0; background: transparent; color: white; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; }
+      .menu-toggle svg { width: 18px; }
+      .mobile-title { overflow: hidden; margin-left: auto; color: var(--sidebar-muted); font: 500 14px var(--serif); text-overflow: ellipsis; white-space: nowrap; }
+      .sidebar { position: fixed; z-index: 25; inset: 54px auto 0 0; width: min(88vw, var(--sidebar-width)); transform: translateX(-105%); transition: transform 180ms ease; }
+      .sidebar.open { transform: translateX(0); }
+      .sidebar.open::after { content: ""; position: fixed; z-index: -1; inset: 0 0 0 100%; width: 100vw; background: rgba(8, 17, 22, .43); }
+      .brand { display: none; }
+      .content { height: calc(100dvh - 54px); margin-top: 54px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="mobile-bar">
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="sidebar">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      Archive
+    </button>
+    <span class="mobile-title" id="mobile-title">Briefings</span>
+  </div>
+
+  <div class="shell">
+    <aside class="sidebar" id="sidebar" aria-label="Briefings archive">
+      <header class="brand">
+        <p class="eyebrow">The Intelligence Desk</p>
+        <h1>Briefings</h1>
+        <p>Daily reporting and weekly analysis, organized by edition.</p>
+      </header>
+
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <label for="search" hidden>Filter briefings</label>
+        <input class="search" id="search" type="search" placeholder="Filter by date or edition" autocomplete="off">
+      </div>
+
+      <nav class="archive" id="archive" aria-live="polite">
+        <p class="archive-status">Loading the archive…</p>
+      </nav>
+
+      <footer class="sidebar-footer">
+        <a class="repo-link" href="https://github.com/smassing/briefings" target="_blank" rel="noreferrer">View repository ↗</a>
+        <span class="source-state" id="source-state">Project index</span>
+      </footer>
+    </aside>
+
+    <main class="content" id="content">
+      <div class="welcome" id="welcome">
+        <div class="welcome-inner">
+          <div class="welcome-mark" aria-hidden="true">B</div>
+          <h2>Select an edition</h2>
+          <p>Choose a daily or weekly briefing from the archive. The latest edition opens automatically.</p>
+        </div>
+      </div>
+      <iframe class="viewer" id="viewer" title="Selected briefing"></iframe>
+    </main>
+  </div>
+
+  <script src="briefings-index.js"></script>
+  <script>
+    (() => {
+      const filePattern = /^(daily|weekly)\/(\d{4})-(\d{2})-(\d{2})\.html$/;
+      const labels = { daily: "Daily Briefings", weekly: "Weekly Reviews" };
+      const monthFormat = new Intl.DateTimeFormat("en-US", { month: "short", timeZone: "UTC" });
+      const fullDateFormat = new Intl.DateTimeFormat("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
+      const archive = document.querySelector("#archive");
+      const viewer = document.querySelector("#viewer");
+      const welcome = document.querySelector("#welcome");
+      const search = document.querySelector("#search");
+      const sidebar = document.querySelector("#sidebar");
+      const menuToggle = document.querySelector("#menu-toggle");
+      const mobileTitle = document.querySelector("#mobile-title");
+      let briefings = [];
+      let selectedPath = "";
+
+      function parseFile(path) {
+        const match = path.match(filePattern);
+        if (!match) return null;
+        const [, type, year, month, day] = match;
+        const date = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day)));
+        return {
+          path,
+          type,
+          date,
+          year,
+          day: String(Number(day)),
+          month: monthFormat.format(date),
+          title: fullDateFormat.format(date),
+          searchText: `${type} ${labels[type]} ${fullDateFormat.format(date)}`.toLowerCase()
+        };
+      }
+
+      function renderMenu(filter = "") {
+        const query = filter.trim().toLowerCase();
+        const visible = briefings.filter(item => !query || item.searchText.includes(query));
+        archive.replaceChildren();
+
+        if (!visible.length) {
+          const empty = document.createElement("p");
+          empty.className = "empty";
+          empty.textContent = "No editions match that filter.";
+          archive.append(empty);
+          return;
+        }
+
+        ["daily", "weekly"].forEach(type => {
+          const items = visible.filter(item => item.type === type);
+          if (!items.length) return;
+
+          const section = document.createElement("section");
+          section.className = "group";
+          const heading = document.createElement("h2");
+          heading.className = "group-heading";
+          heading.append(document.createTextNode(labels[type]));
+          const count = document.createElement("span");
+          count.className = "count";
+          count.textContent = items.length;
+          heading.append(count);
+
+          const list = document.createElement("ul");
+          list.className = "menu";
+          items.forEach(item => {
+            const row = document.createElement("li");
+            row.className = "menu-item";
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = `briefing-link${item.path === selectedPath ? " active" : ""}`;
+            button.dataset.path = item.path;
+            button.setAttribute("aria-current", item.path === selectedPath ? "page" : "false");
+            button.innerHTML = `<span class="date-tile"><strong>${item.day}</strong><span>${item.month}</span></span><span class="link-copy"><span class="link-title">${item.title.replace(/, \d{4}$/, "")}</span><span class="link-year">${item.year} · ${item.type === "daily" ? "Daily edition" : "Weekly edition"}</span></span>`;
+            button.addEventListener("click", () => openBriefing(item, true));
+            row.append(button);
+            list.append(row);
+          });
+
+          section.append(heading, list);
+          archive.append(section);
+        });
+      }
+
+      function openBriefing(item, updateHash) {
+        if (!item) return;
+        selectedPath = item.path;
+        viewer.src = item.path;
+        viewer.title = `${labels[item.type]} — ${item.title}`;
+        welcome.hidden = true;
+        mobileTitle.textContent = `${item.type === "daily" ? "Daily" : "Weekly"} · ${item.title}`;
+        document.title = `${item.title} | Briefings`;
+        if (updateHash) history.pushState(null, "", `#${encodeURI(item.path)}`);
+        renderMenu(search.value);
+        closeSidebar();
+      }
+
+      function pathFromHash() {
+        try { return decodeURI(location.hash.slice(1)); }
+        catch { return ""; }
+      }
+
+      function openFromHash() {
+        const requested = pathFromHash();
+        const match = briefings.find(item => item.path === requested);
+        if (match) openBriefing(match, false);
+      }
+
+      function closeSidebar() {
+        sidebar.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+      }
+
+      menuToggle.addEventListener("click", () => {
+        const isOpen = sidebar.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+      search.addEventListener("input", () => renderMenu(search.value));
+      window.addEventListener("hashchange", openFromHash);
+      window.addEventListener("keydown", event => { if (event.key === "Escape") closeSidebar(); });
+
+      const indexedFiles = Array.isArray(window.BRIEFING_FILES) ? window.BRIEFING_FILES : [];
+      briefings = indexedFiles.map(parseFile).filter(Boolean).sort((a, b) => b.date - a.date || a.type.localeCompare(b.type));
+      if (!briefings.length) {
+        archive.innerHTML = '<p class="archive-status error">No dated HTML briefings were found in briefings-index.js.</p>';
+        return;
+      }
+      const requested = pathFromHash();
+      const initial = briefings.find(item => item.path === requested) || briefings[0];
+      openBriefing(initial, !requested || requested !== initial.path);
+    })();
+  </script>
+</body>
+</html>
