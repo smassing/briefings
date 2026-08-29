@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="The Daily Brief for Friday, August 28, 2026.">
+  <title>The Daily Brief | August 28, 2026</title>
+  <style>
+    :root {
+      --paper: #f5f1e8; --paper-deep: #ebe4d6; --card: #fbf9f4; --ink: #17202a;
+      --muted: #667079; --rule: #cfc7b8; --navy: #173c55; --navy-deep: #102d41;
+      --gold: #ad7c2f; --rust: #a34a31; --teal: #2c6b69;
+      --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+      --sans: Aptos, "Segoe UI", Helvetica, Arial, sans-serif;
+      --shadow: 0 20px 60px rgba(40, 34, 25, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 6.5rem; }
+    body { margin: 0; color: var(--ink); background: radial-gradient(circle at 12% 0%, rgba(173,124,47,.08), transparent 27rem), var(--paper); font-family: var(--serif); font-size: 18px; line-height: 1.67; text-rendering: optimizeLegibility; }
+    a { color: var(--navy); text-decoration-thickness: 1px; text-underline-offset: .18em; }
+    a:hover { color: var(--rust); }
+    a:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+    .skip-link { position: fixed; z-index: 100; left: 1rem; top: -5rem; padding: .65rem 1rem; background: var(--ink); color: white; font-family: var(--sans); }
+    .skip-link:focus { top: 1rem; }
+    .reading-progress { position: fixed; z-index: 60; inset: 0 auto auto 0; width: 0; height: 3px; background: var(--gold); }
+    .utility-bar { position: sticky; z-index: 50; top: 0; border-bottom: 1px solid rgba(255,255,255,.15); background: rgba(16,45,65,.96); color: white; backdrop-filter: blur(12px); }
+    .utility-inner { width: min(1180px, calc(100% - 2rem)); min-height: 3.25rem; margin: 0 auto; display: flex; align-items: center; gap: 1rem; }
+    .mini-masthead { margin-right: auto; color: white; font-family: var(--serif); font-size: .93rem; font-weight: 700; letter-spacing: .12em; text-decoration: none; text-transform: uppercase; }
+    .utility-nav { display: flex; gap: 1rem; overflow-x: auto; scrollbar-width: none; }
+    .utility-nav a { flex: 0 0 auto; color: rgba(255,255,255,.82); font-family: var(--sans); font-size: .75rem; letter-spacing: .045em; text-decoration: none; text-transform: uppercase; }
+    .cover { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; padding: clamp(3.5rem,8vw,7.25rem) 0 4rem; }
+    .masthead-block { text-align: center; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 1.35rem 0 1.15rem; }
+    .edition-line { display: flex; justify-content: center; gap: .85rem; color: var(--muted); font-family: var(--sans); font-size: .71rem; font-weight: 650; letter-spacing: .11em; text-transform: uppercase; }
+    .edition-line span + span::before { content: "•"; margin-right: .85rem; color: var(--gold); }
+    .masthead { margin: .22rem 0 0; font-size: clamp(3rem,9vw,7.5rem); font-weight: 600; letter-spacing: -.065em; line-height: .95; }
+    .tagline { margin: .75rem 0 0; color: var(--muted); font-family: var(--sans); font-size: .8rem; letter-spacing: .16em; text-transform: uppercase; }
+    .lead-grid { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(280px,.72fr); gap: clamp(2rem,5vw,5rem); padding: clamp(3rem,6vw,5.75rem) 0; border-bottom: 1px solid var(--rule); }
+    .kicker { margin: 0 0 .85rem; color: var(--rust); font-family: var(--sans); font-size: .72rem; font-weight: 750; letter-spacing: .13em; text-transform: uppercase; }
+    .lead-title { max-width: 850px; margin: 0; font-size: clamp(2.75rem,6.5vw,5.8rem); font-weight: 500; letter-spacing: -.045em; line-height: .99; }
+    .lead-deck { max-width: 780px; margin: 1.5rem 0 1.1rem; color: #3f4950; font-size: clamp(1.14rem,2vw,1.42rem); line-height: 1.48; }
+    .byline, .meta { color: var(--muted); font-family: var(--sans); font-size: .79rem; }
+    .read-link { display: inline-flex; align-items: center; gap: .45rem; margin-top: 1.25rem; font-family: var(--sans); font-size: .82rem; font-weight: 700; letter-spacing: .04em; text-decoration: none; text-transform: uppercase; }
+    .read-link::after { content: "→"; }
+    .signal-art { position: relative; min-height: 440px; overflow: hidden; align-self: stretch; background: linear-gradient(135deg,rgba(255,255,255,.08),transparent 40%), var(--navy-deep); box-shadow: var(--shadow); isolation: isolate; }
+    .signal-art::before, .signal-art::after { content: ""; position: absolute; border: 1px solid rgba(255,255,255,.28); border-radius: 50%; }
+    .signal-art::before { width: 360px; height: 360px; right: -135px; top: -100px; box-shadow: 0 0 0 55px rgba(255,255,255,.035), 0 0 0 110px rgba(255,255,255,.025); }
+    .signal-art::after { width: 230px; height: 230px; left: -110px; bottom: -75px; box-shadow: 0 0 0 45px rgba(173,124,47,.12), 0 0 0 90px rgba(173,124,47,.07); }
+    .signal-number { position: absolute; left: 2rem; top: 1.5rem; color: rgba(255,255,255,.35); font-family: var(--sans); font-size: .75rem; letter-spacing: .14em; }
+    .signal-copy { position: absolute; z-index: 2; left: 2rem; right: 2rem; bottom: 2rem; color: white; }
+    .signal-copy strong { display: block; font-size: clamp(2.8rem,7vw,5.5rem); font-weight: 500; line-height: .9; }
+    .signal-copy span { display: block; margin-top: 1rem; font-family: var(--sans); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
+    .front-page { padding-top: 3.5rem; }
+    .section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--ink); }
+    .section-heading h2 { margin: 0 0 .55rem; font-size: clamp(1.55rem,3vw,2.25rem); font-weight: 550; letter-spacing: -.025em; }
+    .section-heading p { margin: 0 0 .7rem; color: var(--muted); font-family: var(--sans); font-size: .77rem; }
+    .story-grid { display: grid; grid-template-columns: repeat(12,1fr); border-bottom: 1px solid var(--rule); }
+    .story-card { grid-column: span 4; padding: 1.5rem 1.6rem 1.8rem 0; border-right: 1px solid var(--rule); min-height: 220px; }
+    .story-card:nth-child(3n+2), .story-card:nth-child(3n+3) { padding-left: 1.6rem; }
+    .story-card:nth-child(3n) { padding-right: 0; border-right: 0; }
+    .story-card:nth-child(n+4) { border-top: 1px solid var(--rule); }
+    .card-label { color: var(--rust); font-family: var(--sans); font-size: .68rem; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+    .story-card h3 { margin: .45rem 0 .65rem; font-size: 1.42rem; line-height: 1.15; font-weight: 600; letter-spacing: -.015em; }
+    .story-card h3 a { color: var(--ink); text-decoration: none; }
+    .story-card p { margin: 0; color: #4d565d; font-size: .95rem; line-height: 1.5; }
+    .edition-note { display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; margin: 3.4rem 0 0; padding: 1.4rem 1.6rem; border-left: 3px solid var(--gold); background: rgba(255,255,255,.45); }
+    .edition-note strong { font-family: var(--sans); font-size: .73rem; letter-spacing: .1em; text-transform: uppercase; }
+    .edition-note p { margin: 0; color: #4d565d; font-size: .91rem; line-height: 1.55; }
+    .publication { background: var(--card); border-top: 1px solid var(--rule); box-shadow: 0 -15px 45px rgba(54,45,32,.05); }
+    .department { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; padding: clamp(4rem,8vw,7rem) 0; border-bottom: 1px solid var(--rule); }
+    .department-header { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; align-items: end; margin-bottom: 4rem; }
+    .department-index { color: var(--gold); font-family: var(--sans); font-size: .72rem; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }
+    .department h2 { margin: 0; font-size: clamp(2.3rem,5vw,4.5rem); font-weight: 500; letter-spacing: -.045em; line-height: 1; }
+    .article { width: min(740px,100%); margin: 0 auto; scroll-margin-top: 6rem; }
+    .article + .article { margin-top: 6rem; padding-top: 5rem; border-top: 1px solid var(--rule); }
+    .article p { margin: 0 0 1.35rem; }
+    .article p.article-label { margin: 0 0 .9rem; color: var(--rust); font-family: var(--sans); font-size: .7rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+    .article h3 { margin: 0; padding-bottom: .18em; font-size: clamp(2.15rem,5vw,4rem); font-weight: 520; letter-spacing: -.04em; line-height: 1.06; }
+    .article p.article-deck { margin: 1.85rem 0 0; color: #4c565d; font-size: 1.2rem; line-height: 1.48; }
+    .article p.article-meta { margin: 1.35rem 0 2.2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule); color: var(--muted); font-family: var(--sans); font-size: .76rem; }
+    .article-opening::first-letter { float: left; margin: .08em .1em 0 0; color: var(--navy); font-size: 4.25rem; line-height: .78; }
+    .action-box { margin: 2.2rem 0; padding: 1.25rem 1.4rem; border-top: 1px solid var(--navy); border-bottom: 1px solid var(--navy); background: #eef2f3; }
+    .action-box strong { display: block; margin-bottom: .35rem; color: var(--navy); font-family: var(--sans); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; }
+    .action-box p { margin: 0; font-size: .96rem; line-height: 1.55; }
+    .sources { margin-top: 2.3rem; padding-top: 1rem; border-top: 1px dotted var(--rule); font-family: var(--sans); font-size: .78rem; line-height: 1.55; }
+    .sources strong { color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+    .sources a { margin-right: .45rem; }
+    .back-link { display: inline-block; margin-top: 1.5rem; font-family: var(--sans); font-size: .76rem; font-weight: 650; text-decoration: none; text-transform: uppercase; }
+    .department-briefs { width: min(980px,100%); margin: 5rem auto 0; }
+    .more-heading { margin: 0 0 1rem; color: var(--muted); font-family: var(--sans); font-size: .72rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+    .briefs { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+    .briefs.two-up { grid-template-columns: repeat(2,1fr); }
+    .brief { padding: 1.6rem; background: var(--card); }
+    .brief h3 { margin: .45rem 0 .7rem; font-size: 1.35rem; font-weight: 600; line-height: 1.18; }
+    .brief p { margin: 0 0 1rem; color: #4c565d; font-size: .93rem; line-height: 1.5; }
+    .brief a { font-family: var(--sans); font-size: .75rem; font-weight: 650; }
+    .footer { padding: 4rem 1rem 5rem; background: var(--navy-deep); color: rgba(255,255,255,.78); text-align: center; }
+    .footer strong { display: block; color: white; font-size: 1.35rem; letter-spacing: .04em; }
+    .footer p { max-width: 650px; margin: .75rem auto 0; font-family: var(--sans); font-size: .8rem; line-height: 1.55; }
+    .footer a { color: white; }
+    @media (max-width: 850px) { .lead-grid { grid-template-columns: 1fr; } .signal-art { min-height: 280px; order: -1; } .story-card { grid-column: span 6; } .story-card:nth-child(n) { padding: 1.4rem; border-right: 1px solid var(--rule); } .story-card:nth-child(2n) { border-right: 0; } .story-card:nth-child(n+3) { border-top: 1px solid var(--rule); } .department-header { grid-template-columns: 1fr; gap: .7rem; } .briefs, .briefs.two-up { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) { body { font-size: 17px; } .utility-inner { width: calc(100% - 1rem); } .utility-nav { max-width: 65vw; } .cover, .department { width: min(100% - 1.3rem,1180px); } .edition-line { flex-direction: column; gap: .1rem; } .edition-line span + span::before { content: none; } .lead-title { font-size: 2.75rem; } .story-card { grid-column: 1/-1; min-height: 0; } .story-card:nth-child(n) { border-right: 0; border-top: 1px solid var(--rule); } .story-card:first-child { border-top: 0; } .edition-note { grid-template-columns: 1fr; gap: .5rem; } .department { padding: 4rem 0; } }
+    @media print { :root { --paper: white; --card: white; } .utility-bar, .reading-progress, .back-link { display: none; } body { background: white; font-size: 11pt; } .cover, .department { width: 100%; } .cover { padding-top: 1rem; } .signal-art { min-height: 240px; box-shadow: none; } .article { break-inside: avoid; } a { color: inherit; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to the briefing</a>
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+  <header class="utility-bar">
+    <div class="utility-inner">
+      <a class="mini-masthead" href="#cover">The Daily Brief</a>
+      <nav class="utility-nav" aria-label="Briefing departments">
+        <a href="#security-ai">Security + AI</a>
+        <a href="#courts-law">Courts + Law</a>
+        <a href="#enterprise-tech">Enterprise Tech</a>
+        <a href="#us-world">U.S. + World</a>
+        <a href="#interesting">Interesting</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="cover" id="cover" aria-labelledby="masthead">
+      <header class="masthead-block">
+        <div class="edition-line"><span>Friday, August 28, 2026</span><span>Morning edition</span></div>
+        <h1 class="masthead" id="masthead">The Daily Brief</h1>
+        <p class="tagline">Security, courts, technology and the wider world</p>
+      </header>
+
+      <section class="lead-grid" aria-labelledby="lead-cover-title">
+        <div>
+          <p class="kicker">The Lead · Courts + Artificial Intelligence</p>
+          <h2 class="lead-title" id="lead-cover-title">A judge rejects the Pentagon’s Anthropic blacklist</h2>
+          <p class="lead-deck">The 59-page decision draws a line between choosing a military AI vendor and using national-security authority to punish a company for criticizing the government.</p>
+          <p class="byline">A consequential ruling for federal procurement, AI-use restrictions and First Amendment review.</p>
+          <a class="read-link" href="#anthropic-ruling">Read the lead story</a>
+        </div>
+        <div class="signal-art" aria-hidden="true">
+          <span class="signal-number">SIGNAL / 01</span>
+          <div class="signal-copy"><strong>59</strong><span>pages in the district court ruling</span></div>
+        </div>
+      </section>
+
+      <section class="front-page" aria-labelledby="front-page-title">
+        <div class="section-heading">
+          <h2 id="front-page-title">Inside Today’s Brief</h2>
+          <p>12 stories · About a 17-minute read</p>
+        </div>
+        <div class="story-grid">
+          <article class="story-card"><span class="card-label">Cybersecurity</span><h3><a href="#kev-six">Six exploited flaws create two immediate deadlines</a></h3><p>NetScaler and SQL Server fixes are due for federal agencies Saturday; four older Linux and .NET flaws follow Sept. 9.</p></article>
+          <article class="story-card"><span class="card-label">Enterprise Tech</span><h3><a href="#passkeys">Microsoft’s passkey default arrives Tuesday</a></h3><p>Users enabled for SMS or voice authentication will be brought into a passkey campaign unless administrators act first.</p></article>
+          <article class="story-card"><span class="card-label">Courts + Law</span><h3><a href="#mail-ballots">Mail-ballot rule is blocked again</a></h3><p>A new two-week order follows the Supreme Court’s procedural ruling and lands just before the first midterm ballots go out.</p></article>
+          <article class="story-card"><span class="card-label">U.S. + World</span><h3><a href="#patriot">Iran war draws down Europe’s Patriot defenses</a></h3><p>Officials describe U.S. interceptor stocks in Europe as beyond critical while Russia intensifies attacks on Ukraine.</p></article>
+          <article class="story-card"><span class="card-label">Artificial Intelligence</span><h3><a href="#mhs">AI agents get a common language for physical machines</a></h3><p>Anthropic’s research preview links lab robots, microscopes and industrial devices through a model-agnostic interface.</p></article>
+          <article class="story-card"><span class="card-label">Disaster Update</span><h3><a href="#himalayan-flood">Himalayan flood toll rises sharply</a></h3><p>More than 390 are dead and 1,400 missing, while a newly formed lake creates a second flood risk.</p></article>
+        </div>
+      </section>
+
+      <aside class="edition-note" aria-label="Edition note"><strong>Edition note</strong><p>Research was current through 8:35 a.m. Mountain time.  Continuing stories return only where the facts changed: a fresh injunction in the mail-ballot case, a severe rise in the Himalayan flood toll, and a disclosed military-readiness cost from the Iran war.</p></aside>
+    </section>
+
+    <div class="publication">
+      <section class="department" id="security-ai" aria-labelledby="security-ai-title">
+        <header class="department-header"><span class="department-index">Department 01</span><h2 id="security-ai-title">Security + AI</h2></header>
+
+        <article class="article" id="kev-six">
+          <p class="article-label">Cybersecurity · Actionable</p>
+          <h3>Six exploited flaws create two immediate deadlines</h3>
+          <p class="article-deck">The list spans a current NetScaler flaw, a 2019 SQL Server bug and older Linux and .NET weaknesses.  Age is not a useful proxy for attack likelihood once exploitation is confirmed.</p>
+          <p class="article-meta">CISA update issued August 26 · 3-minute read</p>
+          <p class="article-opening">The Cybersecurity and Infrastructure Security Agency added six vulnerabilities to its Known Exploited Vulnerabilities catalog Wednesday.  Federal civilian agencies face an unusually short Aug. 29 deadline for CVE-2026-8452 in Citrix NetScaler ADC and Gateway and CVE-2019-1068 in Microsoft SQL Server.  Four other flaws are due Sept. 9.</p>
+          <p>The NetScaler vulnerability is a memory-boundary error affecting appliances configured as gateways or authentication virtual servers.  Citrix says customers should upgrade to fixed builds.  The catalog addition matters even though the vendor bulletin describes denial of service: researchers have observed exploitation attempts that drop web shells and run discovery commands, suggesting operators should treat exposed appliances as possible entry points rather than merely availability risks.</p>
+          <p>The remaining additions include a 2022 Linux kernel out-of-bounds write, two 2015 Red Hat privilege-escalation bugs and a 2021 Ajax.NET Professional deserialization flaw.  Their age is the operational point.  Attackers continue to find forgotten components, inherited applications and unpatched servers that ordinary lifecycle reports miss.</p>
+          <div class="action-box"><strong>Administrator check</strong><p>Inventory internet-facing NetScaler gateway and authentication configurations first, then verify fixed firmware and review for unexpected web shells or discovery commands.  Separately confirm whether SQL Server patch reporting covers the applicable 2019 vulnerability and whether AjaxPro remains embedded in any older .NET application.</p></div>
+          <p class="sources"><strong>Sources:</strong> <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noreferrer">CISA Known Exploited Vulnerabilities catalog</a> <a href="https://support.citrix.com/external/article/CTX696604/netscaler-adc-and-netscaler-gateway-secu.html" target="_blank" rel="noreferrer">Citrix NetScaler bulletin</a> <a href="https://thehackernews.com/2026/08/cisa-adds-six-exploited-flaws-to-kev.html" target="_blank" rel="noreferrer">technical reporting and observed exploitation</a></p>
+          <a class="back-link" href="#cover">Back to the cover ↑</a>
+        </article>
+
+        <article class="article" id="mhs">
+          <p class="article-label">Artificial Intelligence · Research Preview</p>
+          <h3>AI agents get a common language for physical machines</h3>
+          <p class="article-deck">The Model Hardware Standard tries to do for lab and industrial equipment what a shared software protocol does for tools: make devices discoverable, describable and operable without a bespoke integration for every pairing.</p>
+          <p class="article-meta">Announced August 27 · 3-minute read</p>
+          <p class="article-opening">Anthropic opened a limited research preview of the Model Hardware Standard, a model-agnostic specification for AI agents operating programmable physical devices.  Early partners are using it with microscopes, liquid handlers, robotic arms, plate readers and quantum-computing equipment.</p>
+          <p>The practical problem is unglamorous and expensive.  A laboratory may have one instrument controlled by modern software, another through an old Windows interface and a third only through an on-screen graphical interface.  MHS describes each device through a common manifest of states, procedures, characteristics and enforced safety limits.  Agents can then call simple read and write operations through the Model Context Protocol, a command line or code.</p>
+          <p>In one Genentech proof of concept, an agent coordinated a liquid handler, robotic arm and plate reader for a protein-assay workflow.  Anthropic also reports that Claude iteratively aligned a laser, observed the beam through a camera and converted the successful process into a deterministic script.</p>
+          <p>This remains a vendor-run preview, not evidence that autonomous labs are ready for unattended general deployment.  The same abstraction that reduces integration work also concentrates authority.  The safety case will depend on physical interlocks, explicit state limits, authentication, network segmentation, logging and reliable interruption outside the model’s own reasoning loop.</p>
+          <p class="sources"><strong>Source:</strong> <a href="https://www.anthropic.com/news/model-hardware-standard-research-preview" target="_blank" rel="noreferrer">Anthropic’s Model Hardware Standard research preview</a></p>
+          <a class="back-link" href="#cover">Back to the cover ↑</a>
+        </article>
+
+        <section class="department-briefs" aria-labelledby="security-more"><h3 class="more-heading" id="security-more">More in Security + AI</h3><div class="briefs two-up">
+          <article class="brief"><span class="card-label">Secure Development</span><h3>CISA’s vulnerability review points back to basic software weaknesses</h3><p>CISA’s review of 2024 and 2025 vulnerability data found memory-safety and improper-input-validation weaknesses overrepresented among exploited flaws.  Its central message is a useful counterweight to threat novelty: eliminating recurrent defect classes during design can remove attack paths before patch queues exist.</p><a href="https://www.cisa.gov/resources-tools/resources/cisa-vulnerability-review" target="_blank" rel="noreferrer">Read the CISA review →</a></article>
+          <article class="brief"><span class="card-label">Continuity</span><h3>Yesterday’s cyber-defense appeal remains a pledge, not an operating plan</h3><p>No new deadlines, funding commitments or shared measures appeared after the Aug. 27 corporate letter.  The briefing therefore does not retell it.  The test remains whether participants publish named owners and measurable actions.</p><a href="https://www.cybercollectiveaction.org/" target="_blank" rel="noreferrer">Review the coalition statement →</a></article>
+        </div></section>
+      </section>
+
+      <section class="department" id="courts-law" aria-labelledby="courts-law-title">
+        <header class="department-header"><span class="department-index">Department 02</span><h2 id="courts-law-title">Courts + Law</h2></header>
+
+        <article class="article" id="anthropic-ruling">
+          <p class="article-label">The Lead · Federal Courts</p>
+          <h3>A judge rejects the Pentagon’s Anthropic blacklist</h3>
+          <p class="article-deck">The government may select the AI vendor it wants.  The court concluded it may not turn a supply-chain designation into a sweeping penalty for a vendor’s public disagreement over surveillance and autonomous weapons.</p>
+          <p class="article-meta">Decision issued August 27 · 4-minute read</p>
+          <p class="article-opening">U.S. District Judge Rita Lin vacated the Pentagon’s designation of Anthropic as a national-security supply-chain risk and blocked related government directives.  Her 59-page ruling concludes that the measures were based on retaliation for Anthropic’s criticism of the administration’s AI-use position, not an articulable risk that the company would sabotage its model.</p>
+          <p>The dispute began when Anthropic refused to authorize unrestricted use of Claude for mass surveillance and fully autonomous weapons.  The Pentagon then moved to end its own use, bar defense contractors from doing business with Anthropic and direct federal agencies away from the company’s products.  Anthropic sued under the First Amendment and the federal supply-chain statute.</p>
+          <p>The legal distinction is narrower than a general right to a government AI contract.  Lin wrote that the Defense Department remains free to choose another vendor.  What it could not do, on the record before her, was impose penalties extending beyond military procurement primarily because Anthropic criticized the government’s views.</p>
+          <p>The decision also exposes a governance problem that contracting documents alone have not resolved.  Frontier-model providers are attempting to impose private limits on government use while agencies argue they need broad discretion for military operations.  If the ruling survives appeal, agencies will need to separate genuine technical and supply-chain findings from disagreement over a supplier’s acceptable-use terms.</p>
+          <p>The government is expected to appeal.  A separate, narrower case remains pending in the U.S. Court of Appeals for the District of Columbia Circuit, so the final boundary between procurement discretion, national-security deference and retaliatory action is not settled.</p>
+          <p class="sources"><strong>Sources:</strong> <a href="https://www.courtlistener.com/docket/72379655/250/anthropic-pbc-v-us-department-of-war/" target="_blank" rel="noreferrer">district court order</a> <a href="https://apnews.com/article/anthropic-pentagon-lawsuit-supply-chain-risk-f15e3c30186385e73e72bee82d85b05c" target="_blank" rel="noreferrer">Associated Press report</a> <a href="https://www.investing.com/news/general-news/us-judge-blocks-pentagons-anthropic-blacklisting-4880421" target="_blank" rel="noreferrer">Reuters report</a></p>
+          <a class="back-link" href="#cover">Back to the cover ↑</a>
+        </article>
+
+        <article class="article" id="mail-ballots">
+          <p class="article-label">Election Law · Developing</p>
+          <h3>Mail-ballot rule is blocked again after the Supreme Court’s procedural reset</h3>
+          <p class="article-deck">The new injunction is temporary, but its timing is immediate: the first midterm ballots are due to be mailed in roughly a week.</p>
+          <p class="article-meta">Order issued August 27 · 2-minute read</p>
+          <p class="article-opening">U.S. District Judge Indira Talwani blocked the administration’s mail-voting directive for two weeks after states and voting-rights groups refiled their challenges.  The Supreme Court had removed an earlier injunction because it concluded the judge acted before the Postal Service finalized its rule, without deciding whether the policy itself is lawful.</p>
+          <p>The final rule requires states to provide voter lists to the Postal Service and use specified envelope formats before ballots will be delivered.  Talwani accepted the states’ claim that they lack the time and money to redesign ballots, change election-management systems, train officials and upload voter data before midterm voting begins.</p>
+          <p>A hearing is set for Sept. 3, and another emergency appeal is likely.  The practical effect is continued uncertainty for election administrators rather than a final answer on executive authority or the rule’s legality.</p>
+          <p class="sources"><strong>Source:</strong> <a href="https://apnews.com/article/trump-voting-mail-ballots-democrats-lawsuits-15cf1ec7dcdb8211bf6b624b75a7f4ab" target="_blank" rel="noreferrer">Associated Press report</a></p>
+          <a class="back-link" href="#cover">Back to the cover ↑</a>
+        </article>
+      </section>
+
+      <section class="department" id="enterprise-tech" aria-labelledby="enterprise-tech-title">
+        <header class="department-header"><span class="department-index">Department 03</span><h2 id="enterprise-tech-title">Enterprise Tech</h2></header>
+
+        <article class="article" id="passkeys">
+          <p class="article-label">Microsoft Entra · Administrator Note</p>
+          <h3>Microsoft’s passkey default arrives Tuesday</h3>
+          <p class="article-deck">The Sept. 1 change does not immediately disable SMS or voice authentication.  It does automatically change policy scope and start nudging affected users toward passkey registration.</p>
+          <p class="article-meta">Deadline September 1 · 3-minute read</p>
+          <p class="article-opening">Microsoft will automatically enable passkeys for Microsoft Entra ID users who are enabled for SMS or voice authentication beginning Tuesday.  Those users will be placed in a passkey profile, and tenant registration-campaign settings will move to a Microsoft-managed state targeting passkeys.</p>
+          <p>After completing multifactor authentication, affected users will be prompted to register a passkey.  The initial prompt allows unlimited snoozes, so this is a migration nudge rather than an immediate sign-in block.  Administrators can temporarily opt out while they prepare, but they should not treat the delay as the end state.</p>
+          <p>The hard deadline is Feb. 1, 2027.  Microsoft-provided SMS and voice delivery will retire then.  Users whose only available method is SMS or voice will have to register a passkey before continuing to sign in, unless the organization has configured a customer-managed telecommunications provider.  There will be no opt-out from that behavior.</p>
+          <div class="action-box"><strong>Before Tuesday</strong><p>Identify users enabled for SMS or voice, confirm passkey policy and registration-campaign scope, decide whether the automatic nudge is acceptable, and send plain-language notice to affected users.  Test device-bound and synced passkey paths against support and regulated-use requirements before broad enforcement.</p></div>
+          <p class="sources"><strong>Source:</strong> <a href="https://learn.microsoft.com/en-us/entra/identity/authentication/concept-sms-voice-retirement" target="_blank" rel="noreferrer">Microsoft Entra transition guidance</a></p>
+          <a class="back-link" href="#cover">Back to the cover ↑</a>
+        </article>
+
+        <section class="department-briefs" aria-labelledby="enterprise-more"><h3 class="more-heading" id="enterprise-more">More in Enterprise Tech</h3><div class="briefs two-up">
+          <article class="brief"><span class="card-label">Labor Data</span><h3>Payroll benchmark is slightly lower, not dramatically rewritten</h3><p>The Bureau of Labor Statistics’ preliminary March benchmark reduces total nonfarm employment by 79,000, or 0.1%, and private employment by 178,000.  That is smaller than the 10-year average absolute revision of 0.2%; final figures arrive in February 2027.</p><a href="https://www.bls.gov/news.release/prebmk.nr0.htm" target="_blank" rel="noreferrer">Read the BLS release →</a></article>
+          <article class="brief"><span class="card-label">Microsoft Roadmap</span><h3>The roadmap consolidation is still a discovery change, not a release</h3><p>Microsoft’s coming AI at Work roadmap will absorb Dynamics 365, Power Platform and Dataverse entries in September.  No material new rollout facts appeared this morning, so the edition does not repeat Wednesday’s full treatment.</p><a href="https://www.microsoft.com/en-us/microsoft-365/roadmap" target="_blank" rel="noreferrer">Open the roadmap →</a></article>
+        </div></section>
+      </section>
+
+      <section class="department" id="us-world" aria-labelledby="us-world-title">
+        <header class="department-header"><span class="department-index">Department 04</span><h2 id="us-world-title">U.S. + World</h2></header>
+
+        <article class="article" id="patriot">
+          <p class="article-label">International Security · Readiness</p>
+          <h3>The Iran war is drawing down Europe’s Patriot defenses</h3>
+          <p class="article-deck">A six-month regional war now has a disclosed second-order effect: U.S. and NATO officials say interceptor stocks in Europe are too low for a sustained ballistic-missile defense.</p>
+          <p class="article-meta">Reported August 28 · 3-minute read</p>
+          <p class="article-opening">U.S. Patriot interceptor stocks in Europe are “beyond critical,” according to a U.S. defense official and a NATO official who spoke with The Associated Press.  U.S. missiles stationed in Europe have been moved to the Middle East, where American and Gulf forces have used large numbers against Iranian drones and missiles.</p>
+          <p>The immediate risk is not that a Russian attack on NATO is expected now.  It is that the alliance has little margin for a sustained ballistic-missile campaign or even a limited spillover event while Russia continues its war in Ukraine.  Europe’s first Patriot missile production facility is expected to open in Germany in September, but rebuilding inventories will take time.</p>
+          <p>The disclosure makes the Iran war’s opportunity cost concrete.  Washington’s move toward sanctions and diplomacy may reduce the pace of direct military consumption, but six months of operations have already shifted scarce defensive capacity away from Europe.  The latest Russian drone barrage, which struck apartment buildings and warehouses around Kyiv for a second day, shows the demand on the other side of that allocation.</p>
+          <p>Officials’ anonymous assessments should be treated as reporting about readiness, not a public inventory count.  Even so, the consistency between the reported transfers, ongoing combat use and NATO’s production plans supports the central conclusion: interceptor supply is now a strategic constraint across theaters.</p>
+          <p class="sources"><strong>Sources:</strong> <a href="https://apnews.com/article/patriot-missiles-iran-war-russia-ukraine-trump-09c7d8030a2e11fbd8ee3f7176b3f2d4" target="_blank" rel="noreferrer">Associated Press investigation</a> <a href="https://apnews.com/article/russia-ukraine-war-attacks-economy-kherson-e71dbed50bbdc710372f96deead36665" target="_blank" rel="noreferrer">latest Ukraine attack report</a></p>
+          <a class="back-link" href="#cover">Back to the cover ↑</a>
+        </article>
+
+        <section class="department-briefs" aria-labelledby="world-more"><h3 class="more-heading" id="world-more">More in U.S. + World</h3><div class="briefs">
+          <article class="brief" id="himalayan-flood"><span class="card-label">Nepal + Tibet</span><h3>Flood toll rises as a new lake creates another threat</h3><p>Authorities now report more than 390 dead and 1,400 missing after the glacier-collapse flood along the Nepal-China border.  A newly formed and expanding lake could fail, turning search and recovery into a continuing downstream emergency.</p><a href="https://apnews.com/article/climate-change-nepal-tibet-glacier-collapse-floods-61b592d428e4631add31ce052d0daf1f" target="_blank" rel="noreferrer">Read the disaster update →</a></article>
+          <article class="brief"><span class="card-label">Norway</span><h3>King Harald V dies; Haakon VIII succeeds him</h3><p>Norway’s King Harald V died Friday at 89 after a 35-year reign.  His son automatically became King Haakon VIII in the constitutional monarchy, where political authority remains with the elected parliament.</p><a href="https://www.regjeringen.no/en/whats-new/what-happens-when-a-monarch-passes-away/id3171457/" target="_blank" rel="noreferrer">Read Norway’s official transition note →</a></article>
+          <article class="brief"><span class="card-label">Aviation Safety</span><h3>Marine One close call followed known communication failures</h3><p>A National Transportation Safety Board preliminary report says pilots and controllers discussed radio problems a week before Marine One and a commercial jet lost required separation.  Their agreed backup also failed on Aug. 4, revealing a process problem that survived recognition and an attempted workaround.</p><a href="https://www.ntsb.gov/investigations/Documents/Prelim%20OPS26LA063.pdf" target="_blank" rel="noreferrer">Read the NTSB preliminary report →</a></article>
+        </div></section>
+      </section>
+
+      <section class="department" id="interesting" aria-labelledby="interesting-title">
+        <header class="department-header"><span class="department-index">Department 05</span><h2 id="interesting-title">Something Interesting</h2></header>
+        <article class="article" id="webb-merger">
+          <p class="article-label">Astronomy + Photography</p>
+          <h3>Webb looks through the dust of a galaxy in its strange final merger phase</h3>
+          <p class="article-deck">The image is visually arresting, but its real value is comparative: infrared and visible-light views reveal different layers of the same collision.</p>
+          <p class="article-meta">Image released August 27 · 2-minute read</p>
+          <p class="article-opening">The European Space Agency’s August Webb image shows an irregular galaxy late in a merger, with bright star clusters and dense, dust-rich clumps arranged in a distorted structure.  A prior Hubble image sees the luminous nebulae between the clouds; Webb’s infrared instruments expose warmer dust, embedded star formation and features hidden at visible wavelengths.</p>
+          <p>That makes the pair more than a before-and-after beauty shot.  It is a reminder that astronomical images are measurements filtered through wavelength.  The “same” object can contain different evidence depending on which light the instrument records and how the data are rendered.</p>
+          <p class="sources"><strong>Source:</strong> <a href="https://esawebb.org/images/potm2608/" target="_blank" rel="noreferrer">ESA/Webb picture of the month</a></p>
+          <a class="back-link" href="#cover">Back to the cover ↑</a>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer"><strong>The Daily Brief</strong><p>Prepared for Steve Massing.  Facts and links were checked against the cited sources through 8:35 a.m. Mountain time on August 28, 2026.</p><p><a href="#cover">Return to the cover</a></p></footer>
+  <script>
+    (() => {
+      const progress = document.getElementById('reading-progress');
+      const updateProgress = () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const value = max > 0 ? (window.scrollY / max) * 100 : 0;
+        progress.style.width = `${Math.min(100, Math.max(0, value))}%`;
+      };
+      updateProgress();
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      window.addEventListener('resize', updateProgress);
+    })();
+  </script>
+</body>
+</html>

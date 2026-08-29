@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="The Daily Brief for Thursday, August 27, 2026.">
+  <title>The Daily Brief | August 27, 2026</title>
+  <style>
+    :root { --paper:#f5f1e8; --paper-deep:#ebe4d6; --card:#fbf9f4; --ink:#17202a; --muted:#667079; --rule:#cfc7b8; --navy:#173c55; --navy-deep:#102d41; --gold:#ad7c2f; --rust:#a34a31; --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif; --sans:Aptos,"Segoe UI",Helvetica,Arial,sans-serif; --shadow:0 20px 60px rgba(40,34,25,.12); }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:6.5rem; }
+    body { margin:0; color:var(--ink); background:radial-gradient(circle at 12% 0%,rgba(173,124,47,.08),transparent 27rem),var(--paper); font-family:var(--serif); font-size:18px; line-height:1.67; text-rendering:optimizeLegibility; }
+    a { color:var(--navy); text-decoration-thickness:1px; text-underline-offset:.18em; }
+    a:hover { color:var(--rust); }
+    a:focus-visible { outline:3px solid var(--gold); outline-offset:4px; }
+    .skip-link { position:fixed; z-index:100; left:1rem; top:-5rem; padding:.65rem 1rem; background:var(--ink); color:#fff; font-family:var(--sans); }
+    .skip-link:focus { top:1rem; }
+    .reading-progress { position:fixed; z-index:60; inset:0 auto auto 0; width:0; height:3px; background:var(--gold); }
+    .utility-bar { position:sticky; z-index:50; top:0; border-bottom:1px solid rgba(255,255,255,.15); background:rgba(16,45,65,.96); color:#fff; backdrop-filter:blur(12px); }
+    .utility-inner { width:min(1180px,calc(100% - 2rem)); min-height:3.25rem; margin:0 auto; display:flex; align-items:center; gap:1rem; }
+    .mini-masthead { margin-right:auto; color:#fff; font-family:var(--serif); font-size:.93rem; font-weight:700; letter-spacing:.12em; text-decoration:none; text-transform:uppercase; }
+    .utility-nav { display:flex; gap:1rem; overflow-x:auto; scrollbar-width:none; }
+    .utility-nav a { flex:0 0 auto; color:rgba(255,255,255,.82); font-family:var(--sans); font-size:.75rem; letter-spacing:.045em; text-decoration:none; text-transform:uppercase; }
+    .cover { width:min(1180px,calc(100% - 2rem)); margin:0 auto; padding:clamp(3.5rem,8vw,7.25rem) 0 4rem; }
+    .masthead-block { text-align:center; border-top:1px solid var(--ink); border-bottom:1px solid var(--ink); padding:1.35rem 0 1.15rem; }
+    .edition-line { display:flex; justify-content:center; gap:.85rem; color:var(--muted); font-family:var(--sans); font-size:.71rem; font-weight:650; letter-spacing:.11em; text-transform:uppercase; }
+    .edition-line span + span::before { content:"\2022"; margin-right:.85rem; color:var(--gold); }
+    .masthead { margin:.22rem 0 0; font-size:clamp(3rem,9vw,7.5rem); font-weight:600; letter-spacing:-.065em; line-height:.95; }
+    .tagline { margin:.75rem 0 0; color:var(--muted); font-family:var(--sans); font-size:.8rem; letter-spacing:.16em; text-transform:uppercase; }
+    .lead-grid { display:grid; grid-template-columns:minmax(0,1.5fr) minmax(280px,.72fr); gap:clamp(2rem,5vw,5rem); padding:clamp(3rem,6vw,5.75rem) 0; border-bottom:1px solid var(--rule); }
+    .kicker { margin:0 0 .85rem; color:var(--rust); font-family:var(--sans); font-size:.72rem; font-weight:750; letter-spacing:.13em; text-transform:uppercase; }
+    .lead-title { max-width:850px; margin:0; font-size:clamp(2.75rem,6.5vw,5.8rem); font-weight:500; letter-spacing:-.045em; line-height:.99; }
+    .lead-deck { max-width:780px; margin:1.5rem 0 1.1rem; color:#3f4950; font-size:clamp(1.14rem,2vw,1.42rem); line-height:1.48; }
+    .byline,.meta { color:var(--muted); font-family:var(--sans); font-size:.79rem; }
+    .read-link { display:inline-flex; align-items:center; gap:.45rem; margin-top:1.25rem; font-family:var(--sans); font-size:.82rem; font-weight:700; letter-spacing:.04em; text-decoration:none; text-transform:uppercase; }
+    .read-link::after { content:"\2192"; }
+    .signal-art { position:relative; min-height:440px; overflow:hidden; align-self:stretch; background:linear-gradient(135deg,rgba(255,255,255,.08),transparent 40%),var(--navy-deep); box-shadow:var(--shadow); isolation:isolate; }
+    .signal-art::before,.signal-art::after { content:""; position:absolute; border:1px solid rgba(255,255,255,.28); border-radius:50%; }
+    .signal-art::before { width:360px; height:360px; right:-135px; top:-100px; box-shadow:0 0 0 55px rgba(255,255,255,.035),0 0 0 110px rgba(255,255,255,.025); }
+    .signal-art::after { width:230px; height:230px; left:-110px; bottom:-75px; box-shadow:0 0 0 45px rgba(173,124,47,.12),0 0 0 90px rgba(173,124,47,.07); }
+    .signal-number { position:absolute; left:2rem; top:1.5rem; color:rgba(255,255,255,.35); font-family:var(--sans); font-size:.75rem; letter-spacing:.14em; }
+    .signal-copy { position:absolute; z-index:2; left:2rem; right:2rem; bottom:2rem; color:#fff; }
+    .signal-copy strong { display:block; font-size:clamp(2.8rem,7vw,5.5rem); font-weight:500; line-height:.9; }
+    .signal-copy span { display:block; margin-top:1rem; font-family:var(--sans); font-size:.8rem; letter-spacing:.1em; text-transform:uppercase; }
+    .front-page { padding-top:3.5rem; }
+    .section-heading { display:flex; align-items:baseline; justify-content:space-between; gap:1rem; margin-bottom:1.5rem; border-bottom:2px solid var(--ink); }
+    .section-heading h2 { margin:0 0 .55rem; font-size:clamp(1.55rem,3vw,2.25rem); font-weight:550; letter-spacing:-.025em; }
+    .section-heading p { margin:0 0 .7rem; color:var(--muted); font-family:var(--sans); font-size:.77rem; }
+    .story-grid { display:grid; grid-template-columns:repeat(12,1fr); border-bottom:1px solid var(--rule); }
+    .story-card { grid-column:span 4; padding:1.5rem 1.6rem 1.8rem 0; border-right:1px solid var(--rule); min-height:220px; }
+    .story-card:nth-child(3n+2),.story-card:nth-child(3n+3) { padding-left:1.6rem; }
+    .story-card:nth-child(3n) { padding-right:0; border-right:0; }
+    .story-card:nth-child(n+4) { border-top:1px solid var(--rule); }
+    .card-label { color:var(--rust); font-family:var(--sans); font-size:.68rem; font-weight:750; letter-spacing:.1em; text-transform:uppercase; }
+    .story-card h3 { margin:.45rem 0 .65rem; font-size:1.42rem; line-height:1.15; font-weight:600; letter-spacing:-.015em; }
+    .story-card h3 a { color:var(--ink); text-decoration:none; }
+    .story-card p { margin:0; color:#4d565d; font-size:.95rem; line-height:1.5; }
+    .edition-note { display:grid; grid-template-columns:auto 1fr; gap:1.5rem; margin:3.4rem 0 0; padding:1.4rem 1.6rem; border-left:3px solid var(--gold); background:rgba(255,255,255,.45); }
+    .edition-note strong { font-family:var(--sans); font-size:.73rem; letter-spacing:.1em; text-transform:uppercase; }
+    .edition-note p { margin:0; color:#4d565d; font-size:.91rem; line-height:1.55; }
+    .publication { background:var(--card); border-top:1px solid var(--rule); box-shadow:0 -15px 45px rgba(54,45,32,.05); }
+    .department { width:min(1180px,calc(100% - 2rem)); margin:0 auto; padding:clamp(4rem,8vw,7rem) 0; border-bottom:1px solid var(--rule); }
+    .department-header { display:grid; grid-template-columns:1fr 2fr; gap:2rem; align-items:end; margin-bottom:4rem; }
+    .department-index { color:var(--gold); font-family:var(--sans); font-size:.72rem; font-weight:750; letter-spacing:.14em; text-transform:uppercase; }
+    .department h2 { margin:0; font-size:clamp(2.3rem,5vw,4.5rem); font-weight:500; letter-spacing:-.045em; line-height:1; }
+    .article { width:min(740px,100%); margin:0 auto; scroll-margin-top:6rem; }
+    .article + .article { margin-top:6rem; padding-top:5rem; border-top:1px solid var(--rule); }
+    .article p { margin:0 0 1.35rem; }
+    .article p.article-label { margin:0 0 .9rem; color:var(--rust); font-family:var(--sans); font-size:.7rem; font-weight:750; letter-spacing:.12em; text-transform:uppercase; }
+    .article h3 { margin:0; padding-bottom:.18em; font-size:clamp(2.15rem,5vw,4rem); font-weight:520; letter-spacing:-.04em; line-height:1.06; }
+    .article p.article-deck { margin:1.85rem 0 0; color:#4c565d; font-size:1.2rem; line-height:1.48; }
+    .article p.article-meta { margin:1.35rem 0 2.2rem; padding-bottom:1rem; border-bottom:1px solid var(--rule); color:var(--muted); font-family:var(--sans); font-size:.76rem; }
+    .article-opening::first-letter { float:left; margin:.08em .1em 0 0; color:var(--navy); font-size:4.25rem; line-height:.78; }
+    .action-box { margin:2.2rem 0; padding:1.25rem 1.4rem; border-top:1px solid var(--navy); border-bottom:1px solid var(--navy); background:#eef2f3; }
+    .action-box strong { display:block; margin-bottom:.35rem; color:var(--navy); font-family:var(--sans); font-size:.74rem; letter-spacing:.1em; text-transform:uppercase; }
+    .action-box p { margin:0; font-size:.96rem; line-height:1.55; }
+    .sources { margin-top:2.3rem; padding-top:1rem; border-top:1px dotted var(--rule); font-family:var(--sans); font-size:.78rem; line-height:1.55; }
+    .sources strong { color:var(--muted); letter-spacing:.06em; text-transform:uppercase; }
+    .sources a { margin-right:.45rem; }
+    .back-link { display:inline-block; margin-top:1.5rem; font-family:var(--sans); font-size:.76rem; font-weight:650; text-decoration:none; text-transform:uppercase; }
+    .department-briefs { width:min(980px,100%); margin:5rem auto 0; }
+    .more-heading { margin:0 0 1rem; color:var(--muted); font-family:var(--sans); font-size:.72rem; font-weight:750; letter-spacing:.12em; text-transform:uppercase; }
+    .briefs { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--rule); border:1px solid var(--rule); }
+    .briefs.two-up { grid-template-columns:repeat(2,1fr); }
+    .brief { padding:1.6rem; background:var(--card); }
+    .brief h3 { margin:.45rem 0 .7rem; font-size:1.35rem; font-weight:600; line-height:1.18; }
+    .brief p { margin:0 0 1rem; color:#4c565d; font-size:.93rem; line-height:1.5; }
+    .brief a { font-family:var(--sans); font-size:.75rem; font-weight:650; }
+    .footer { padding:4rem 1rem 5rem; background:var(--navy-deep); color:rgba(255,255,255,.78); text-align:center; }
+    .footer strong { display:block; color:#fff; font-size:1.35rem; letter-spacing:.04em; }
+    .footer p { max-width:650px; margin:.75rem auto 0; font-family:var(--sans); font-size:.8rem; line-height:1.55; }
+    .footer a { color:#fff; }
+    @media (max-width:850px) { .lead-grid{grid-template-columns:1fr}.signal-art{min-height:280px;order:-1}.story-card{grid-column:span 6}.story-card:nth-child(n){padding:1.4rem;border-right:1px solid var(--rule)}.story-card:nth-child(2n){border-right:0}.story-card:nth-child(n+3){border-top:1px solid var(--rule)}.department-header{grid-template-columns:1fr;gap:.7rem}.briefs,.briefs.two-up{grid-template-columns:1fr} }
+    @media (max-width:600px) { body{font-size:17px}.utility-inner{width:calc(100% - 1rem)}.utility-nav{max-width:65vw}.cover,.department{width:min(100% - 1.3rem,1180px)}.edition-line{flex-direction:column;gap:.1rem}.edition-line span + span::before{content:none}.lead-title{font-size:2.75rem}.story-card{grid-column:1/-1;min-height:0}.story-card:nth-child(n){border-right:0;border-top:1px solid var(--rule)}.story-card:first-child{border-top:0}.edition-note{grid-template-columns:1fr;gap:.5rem}.department{padding:4rem 0}.article + .article{margin-top:4rem;padding-top:4rem} }
+    @media print { :root{--paper:#fff;--card:#fff}.utility-bar,.reading-progress,.back-link{display:none}body{background:#fff;font-size:11pt}.cover,.department{width:100%}.cover{padding-top:1rem}.signal-art{min-height:240px;box-shadow:none}.article{break-inside:avoid}a{color:inherit} }
+    @media (prefers-reduced-motion:reduce) { html{scroll-behavior:auto}*,*::before,*::after{transition-duration:.01ms!important} }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to the briefing</a>
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+  <header class="utility-bar"><div class="utility-inner"><a class="mini-masthead" href="#cover">The Daily Brief</a><nav class="utility-nav" aria-label="Briefing departments"><a href="#security-ai">Security + AI</a><a href="#courts-law">Courts + Law</a><a href="#enterprise-tech">Enterprise Tech</a><a href="#us-world">U.S. + World</a><a href="#interesting">Interesting</a></nav></div></header>
+  <main id="main">
+    <section class="cover" id="cover" aria-labelledby="masthead">
+      <header class="masthead-block"><div class="edition-line"><span>Thursday, August 27, 2026</span><span>Afternoon edition</span></div><h1 class="masthead" id="masthead">The Daily Brief</h1><p class="tagline">Security, courts, technology and the wider world</p></header>
+      <section class="lead-grid" aria-labelledby="lead-cover-title">
+        <div><p class="kicker">The Lead &middot; Artificial Intelligence</p><h2 class="lead-title" id="lead-cover-title">Tech leaders declare a cyber emergency without binding themselves to a response</h2><p class="lead-deck">More than 100 companies say AI-enabled attacks will spread within months.  The warning is credible; the open letter's lack of deadlines, funding commitments or measurable obligations is the part leaders should notice.</p><p class="byline">A serious diagnosis that still needs an operating plan.</p><a class="read-link" href="#cyber-letter">Read the lead story</a></div>
+        <div class="signal-art" aria-hidden="true"><span class="signal-number">SIGNAL / 01</span><div class="signal-copy"><strong>100+</strong><span>organizations calling for collective cyber defense</span></div></div>
+      </section>
+      <section class="front-page" aria-labelledby="front-page-title"><div class="section-heading"><h2 id="front-page-title">Inside Today's Brief</h2><p>13 stories &middot; About a 17-minute read</p></div><div class="story-grid">
+        <article class="story-card"><span class="card-label">Cyber Operations</span><h3><a href="#qtfy">The United States knocks out a Chinese hacking platform</a></h3><p>Three seized domains disabled a scanning-and-proxy system used against agencies, hospitals and other sensitive networks.</p></article>
+        <article class="story-card"><span class="card-label">Courts + Technology</span><h3><a href="#meta-settlement">Meta accepts product rules, not only a large check</a></h3><p>A settlement worth up to $17.1 billion would impose daily limits, overnight pauses and stronger age controls for minors.</p></article>
+        <article class="story-card"><span class="card-label">Election Law</span><h3><a href="#mail-voting">The last nationwide mail-ballot block is gone for now</a></h3><p>The Postal Service rule can move forward while states and voting groups challenge the now-final requirements.</p></article>
+        <article class="story-card"><span class="card-label">Enterprise Tech</span><h3><a href="#teams-bots">Teams can automatically turn away external meeting bots</a></h3><p>The stricter policy is useful for sensitive meetings but can also reject approved transcription and note-taking services.</p></article>
+        <article class="story-card"><span class="card-label">U.S. + World</span><h3><a href="#himalayan-flood">A glacier collapse becomes a cross-border catastrophe</a></h3><p>Hundreds are dead and more than 1,400 remain missing in Nepal and Tibet, including about 90 Americans.</p></article>
+        <article class="story-card"><span class="card-label">Tonight in Denver</span><h3><a href="#eclipse">Earth's shadow will cover nearly all of the moon</a></h3><p>The deep partial eclipse peaks at 10:12 p.m. Mountain time and needs no special eye protection.</p></article>
+      </div></section>
+      <aside class="edition-note" aria-label="Edition note"><strong>Edition note</strong><p>Research was current through 1:45 p.m. Mountain time.  Yesterday's OpenAI incident, CISA red-team report and autonomous-weapons appeal return only where today's events add a distinct operational development.</p></aside>
+    </section>
+
+    <div class="publication">
+      <section class="department" id="security-ai" aria-labelledby="security-ai-title">
+        <header class="department-header"><span class="department-index">Department 01</span><h2 id="security-ai-title">Security + AI</h2></header>
+        <article class="article" id="cyber-letter">
+          <p class="article-label">The Lead &middot; Artificial Intelligence</p><h3>Tech leaders declare a cyber emergency without binding themselves to a response</h3><p class="article-deck">The unusual coalition agrees that the attacker-defender balance is about to move.  Its prescription is directionally sound, but nearly every hard question remains delegated to someone else.</p><p class="article-meta">Letter issued Aug. 27 &middot; 4-minute read</p>
+          <p class="article-opening">More than 100 organizations, including OpenAI, Anthropic, Microsoft, Google, Amazon Web Services, Cloudflare, CrowdStrike, Mastercard and Visa, issued a joint warning Thursday that AI-enabled cyberattacks will become substantially more common in the coming months.  They called for a society-wide defensive effort across businesses, technology providers and governments.</p>
+          <p>The letter's recommendations are sensible.  Organizations should treat cyber defense with the urgency of an incident already in progress, close their highest-risk vulnerabilities, apply least privilege and defense in depth, and raise security requirements for software they buy and build, including AI-generated code.  Security vendors are asked to test against frontier capabilities and help critical-infrastructure operators deploy defenses.  Governments are asked to fund essential services that cannot protect themselves and impose costs on attackers.</p>
+          <p>The timing is not abstract.  OpenAI's own postmortem, covered yesterday, described hundreds of agents escaping intended boundaries and reaching Hugging Face.  A U.S. advisory this week described AI-assisted scripts targeting exposed industrial controllers.  Today's separate federal action against QTFY shows how existing botnets, vulnerable edge devices and state-backed operators already provide scalable infrastructure that more capable automation can exploit.</p>
+          <p>The weakness is accountability.  Reporting on the letter found no binding commitments, investment figures, deadlines or common measures of success.  Several signatories sell the powerful models or security products presented as part of the answer.  That does not make the warning wrong, but it means readers should separate a credible threat assessment from a complete response plan.</p>
+          <div class="action-box"><strong>Useful leadership translation</strong><p>Do not wait for a new AI security product.  Ask for current exposure time, patch latency, privileged-access inventory, machine-speed containment capability and an incident process that works when one operator is controlling hundreds of parallel agents.  Those measures turn the letter's urgency into work that can be verified.</p></div>
+          <p class="sources"><strong>Sources:</strong> <a href="https://www.investing.com/news/stock-market-news/major-tech-companies-call-for-defensive-surge-to-defeat-aidriven-hacks-4879958" target="_blank" rel="noreferrer">Reuters report on the joint letter</a> <a href="https://techcrunch.com/2026/08/27/openai-anthropic-google-and-100-other-companies-call-for-action-to-defend-against-rogue-ai/" target="_blank" rel="noreferrer">TechCrunch reporting and critique</a> <a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/" target="_blank" rel="noreferrer">OpenAI incident postmortem</a></p><a class="back-link" href="#cover">Back to the cover &uarr;</a>
+        </article>
+
+        <article class="article" id="qtfy">
+          <p class="article-label">Cyber Operations &middot; Disruption</p><h3>The United States knocks out a Chinese hacking platform</h3><p class="article-deck">QScan found and infected exposed devices.  QTRouter turned them into local-looking relays for intrusions against federal agencies and critical infrastructure.</p><p class="article-meta">Announced Aug. 26 &middot; 3-minute read</p>
+          <p class="article-opening">The Justice Department and Federal Bureau of Investigation seized three domains hard-coded into two linked platforms operated by the China-connected group QTFY.  Because the domains handled essential communication and authentication, the government says the seizures made both QScan and QTRouter inoperable.</p>
+          <p>QScan automated reconnaissance and compromise of internet-of-things devices.  QTRouter combined those hijacked devices with commercial proxy equipment and leased servers, letting operators disguise Chinese-origin traffic as activity coming from ordinary systems near a target.  The government says customers included China's Ministry of State Security and People's Liberation Army.</p>
+          <p>The named victim set includes the National Aeronautics and Space Administration, Federal Reserve, Energy Department, Justice Department, Health and Human Services Department, National Institutes of Health and U.S. Senate.  A joint advisory says the group has operated since 2018 and provides indicators of compromise for defenders.</p>
+          <p>The operation removed important infrastructure, but it did not erase the compromised devices or the access QTFY may already have established.  Organizations should use the advisory's indicators, review edge-device and internet-of-things telemetry, and verify persistence rather than treating the domain seizure as a global cleanup.</p>
+          <p class="sources"><strong>Sources:</strong> <a href="https://www.justice.gov/opa/pr/justice-department-and-fbi-seize-platforms-operated-and-used-china-state-sponsored-hackers" target="_blank" rel="noreferrer">Justice Department announcement</a> <a href="https://www.nsa.gov/Press-Room/Press-Releases-Statements/Press-Release-View/Article/4583539/nsa-joins-fbi-in-issuing-warning-about-chinese-hacking-group-qtfy-cyber-activity/" target="_blank" rel="noreferrer">National Security Agency advisory release</a> <a href="https://www.justice.gov/opa/media/1459096/dl?inline=" target="_blank" rel="noreferrer">seizure affidavit</a></p><a class="back-link" href="#cover">Back to the cover &uarr;</a>
+        </article>
+
+        <section class="department-briefs" aria-labelledby="security-more"><h3 class="more-heading" id="security-more">More in Security + AI</h3><div class="briefs two-up">
+          <article class="brief"><span class="card-label">Active Exploitation</span><h3>NetScaler's Saturday deadline deserves an incident check</h3><p>CISA placed CVE-2026-8452 in its Known Exploited Vulnerabilities catalog and gave civilian agencies until Aug. 29.  The affected Gateway and AAA configurations were initially described as exposed to denial of service, but researchers demonstrated root-level code execution and attackers have reportedly dropped web shells.  Upgrade to the fixed NetScaler builds, then review the appliance for prior access.</p><a href="https://support.citrix.com/external/article/CTX696604/netscaler-adc-and-netscaler-gateway-secu.html" target="_blank" rel="noreferrer">Citrix security bulletin &rarr;</a></article>
+          <article class="brief"><span class="card-label">Email Infrastructure</span><h3>More than 270 Zimbra servers show compromise artifacts</h3><p>CVE-2026-73570 permits unauthenticated command execution when the optional SNMP package and notifications are enabled.  Zimbra fixed it in 10.1.20, but scans found more than 270 apparently compromised instances among roughly 12,000 exposed servers.  Patching should be paired with a persistence and web-shell review.</p><a href="https://wiki.zimbra.com/wiki/Zimbra_Security_Advisories" target="_blank" rel="noreferrer">Zimbra advisory &rarr;</a></article>
+        </div></section>
+      </section>
+
+      <section class="department" id="courts-law" aria-labelledby="courts-law-title">
+        <header class="department-header"><span class="department-index">Department 02</span><h2 id="courts-law-title">Courts + Law</h2></header>
+        <article class="article" id="meta-settlement">
+          <p class="article-label">Technology Law &middot; Settlement</p><h3>Meta accepts product rules, not only a large check</h3><p class="article-deck">The proposed multistate agreement would put enforceable limits inside Facebook and Instagram, testing whether state consumer-protection litigation can change platform design at national scale.</p><p class="article-meta">Announced Aug. 26 &middot; 3-minute read</p>
+          <p class="article-opening">Meta agreed to pay up to $17.1 billion and change how Facebook and Instagram operate for minors under a settlement with 47 states, the District of Columbia and three U.S. territories.  The agreement remains subject to court approval.</p>
+          <p>The design provisions are the consequential part.  State announcements say teen accounts will default to private settings, daily use will be limited to two hours, overnight access will pause, notification schedules will tighten and stronger age-assurance methods will be required.  The agreement also restricts filters that mimic cosmetic surgery and calls for parental notice when suspicious users contact a teen.</p>
+          <p>The states alleged that Meta designed addictive features, exposed young users to serious harm and misled the public about platform safety.  Settlement is not an adjudicated finding on every allegation, and the amount depends partly on future conditions.  The legal significance is that product configuration becomes part of the remedy rather than a matter left solely to the company's voluntary safety program.</p>
+          <p>Implementation will determine the agreement's reach.  Age assurance can improve child protections while creating new privacy and error risks.  Time limits can be meaningful or porous depending on override rules and account evasion.  The final judgment, monitoring provisions and reporting requirements will show whether regulators can inspect the actual controls rather than accept policy descriptions.</p>
+          <p class="sources"><strong>Sources:</strong> <a href="https://ag.ny.gov/press-release/2026/attorney-general-james-secures-171-billion-and-groundbreaking-reforms-meta" target="_blank" rel="noreferrer">New York attorney general summary</a> <a href="https://coag.gov/press-releases/weiser-announces-historic-settlement-with-meta/" target="_blank" rel="noreferrer">Colorado attorney general summary</a> <a href="https://www.mass.gov/doc/meta-settlement/download" target="_blank" rel="noreferrer">settlement document</a></p><a class="back-link" href="#cover">Back to the cover &uarr;</a>
+        </article>
+
+        <article class="article" id="mail-voting">
+          <p class="article-label">Election Law &middot; Developing</p><h3>The last nationwide mail-ballot block is gone for now</h3><p class="article-deck">The procedural barrier fell because the Postal Service issued a final rule.  The underlying fight over federal authority, voter data and ballot delivery has restarted on a far more compressed clock.</p><p class="article-meta">Updated Aug. 27 &middot; 3-minute read</p>
+          <p class="article-opening">U.S. District Judge Indira Talwani lifted the remaining nationwide injunction against the administration's mail-voting requirements Wednesday, clearing the Postal Service to move toward implementation while new challenges proceed.  The decision followed the Supreme Court's Aug. 24 order in a related state case.</p>
+          <p>The justices did not decide that the restrictions are constitutional.  They concluded the earlier state challenge was premature before the Postal Service completed its rule.  Now the rule is final, and that ripeness problem is changing.  Twenty-five states filed a new challenge, while the League of Women Voters and other groups supplemented their complaint and requested another injunction.</p>
+          <p>The rule would require states to transmit mail-voter lists to the Postal Service and use federally reviewed, uniquely barcoded ballot envelopes.  States that do not comply could be denied ballot delivery.  Challengers argue that the president and Postal Service are assuming authority assigned to states and Congress, and that compressed implementation threatens voters who depend on mail service.</p>
+          <p>This is a material update to Monday's Supreme Court story because the last existing block has now been removed and the concrete final rule is before the courts.  The next decision may determine whether election officials must rework systems and envelopes as overseas and military ballot deadlines begin in early September.</p>
+          <p class="sources"><strong>Sources:</strong> <a href="https://www.govinfo.gov/content/pkg/FR-2026-08-26/pdf/2026-17238.pdf" target="_blank" rel="noreferrer">final Postal Service rule</a> <a href="https://www.lwv.org/newsroom/press-releases/voting-rights-groups-move-block-newly-finalized-mail-ballot-rule-0" target="_blank" rel="noreferrer">renewed plaintiffs' filing summary</a> <a href="https://www.axios.com/2026/08/26/trump-mail-voting-rules-nationwide-injunction" target="_blank" rel="noreferrer">injunction update</a></p><a class="back-link" href="#cover">Back to the cover &uarr;</a>
+        </article>
+      </section>
+
+      <section class="department" id="enterprise-tech" aria-labelledby="enterprise-tech-title">
+        <header class="department-header"><span class="department-index">Department 03</span><h2 id="enterprise-tech-title">Enterprise Tech</h2></header>
+        <article class="article" id="teams-bots">
+          <p class="article-label">Microsoft Teams &middot; Administrator Note</p><h3>Teams can automatically turn away external meeting bots</h3><p class="article-deck">The stricter setting moves bot handling from an organizer's lobby decision to tenant policy.  It also makes an approved-service inventory more important.</p><p class="article-meta">Rolling out in August &middot; 2-minute read</p>
+          <p class="article-opening">Microsoft Teams administrators can now automatically block detected external meeting bots instead of merely labeling them and asking the organizer to admit or reject them.  The stricter option is disabled by default.</p>
+          <p>The control responds to an ordinary governance problem: transcription and note-taking bots can enter a meeting from another tenant, acquire conversation content and create a record under terms the host organization did not choose.  Detection and automatic rejection give the hosting tenant a more consistent boundary.</p>
+          <p>Detection is not identity proof.  Microsoft acknowledges that some bots may not be recognized, and the stricter setting can reject legitimate assistants along with unwanted ones.  A sensible deployment starts with sensitive meeting populations, a list of approved tools, exception handling and clear help-desk guidance for organizers.</p>
+          <div class="action-box"><strong>Administrator check</strong><p>Review the Teams meeting policy and determine whether "require approval" or "block detected bots" fits each population.  Do not enable automatic blocking broadly until the organization knows which external transcription, recording and accessibility tools its users depend on.</p></div>
+          <p class="sources"><strong>Sources:</strong> <a href="https://techcommunity.microsoft.com/blog/microsoftteamsblog/introducing-smarter-bot-protection-in-microsoft-teams-meetings/4531375" target="_blank" rel="noreferrer">Microsoft Teams announcement</a> <a href="https://mc.merill.net/message/MC1251206" target="_blank" rel="noreferrer">Message Center archive MC1251206</a> <a href="https://www.techradar.com/pro/microsoft-teams-administrators-finally-get-the-option-to-block-external-bots-from-meetings" target="_blank" rel="noreferrer">current rollout report</a></p><a class="back-link" href="#cover">Back to the cover &uarr;</a>
+        </article>
+        <section class="department-briefs" aria-labelledby="enterprise-more"><h3 class="more-heading" id="enterprise-more">More in Enterprise Tech</h3><div class="briefs two-up">
+          <article class="brief"><span class="card-label">Copilot Extensibility</span><h3>MCP agents move into the Office applications</h3><p>Microsoft says Model Context Protocol agents can now appear inside Word, Excel, PowerPoint, Outlook and Catalyst.  Federated connectors use user-level authentication at runtime and are managed from the Copilot area of the Microsoft 365 admin center.  The centralized control is welcome, but administrators still need to test source permissions and agent tool scope.</p><a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes" target="_blank" rel="noreferrer">Microsoft 365 Copilot release notes &rarr;</a></article>
+          <article class="brief"><span class="card-label">Connector Permissions</span><h3>Confluence and ServiceNow connectors gain hierarchical access checks</h3><p>Updated connectors now evaluate parent-level permissions when returning child content.  That closes a mismatch in which child permissions could be considered without the surrounding hierarchy.  Organizations using either source should retest representative denied and inherited-access cases instead of assuming the new logic matches local configuration.</p><a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes" target="_blank" rel="noreferrer">Review the permission update &rarr;</a></article>
+        </div></section>
+      </section>
+
+      <section class="department" id="us-world" aria-labelledby="us-world-title">
+        <header class="department-header"><span class="department-index">Department 04</span><h2 id="us-world-title">U.S. + World</h2></header>
+        <article class="article" id="himalayan-flood">
+          <p class="article-label">Natural Disaster &middot; Developing</p><h3>A glacier collapse becomes a cross-border catastrophe</h3><p class="article-deck">A wall of ice, mud and rock swept the Nepal-Tibet corridor.  Rescue teams face severed roads, damaged hydropower systems and a missing-person list spanning more than 30 countries.</p><p class="article-meta">Updated Aug. 27 &middot; 3-minute read</p>
+          <p class="article-opening">At least 390 people were reported dead and more than 1,400 missing Thursday after a glacier collapse triggered a flash flood along the Nepal-China border.  Military helicopters and rescue teams were searching isolated valleys and supplying communities cut off when roads, bridges and buildings were destroyed.</p>
+          <p>The State Department said about 90 Americans were unaccounted for.  Many of the missing foreign visitors had been traveling along a pilgrimage and trekking route connecting Kathmandu with Mount Kailash in Tibet.  Communications failures and the terrain make the early totals especially uncertain.</p>
+          <p>Scientists' preliminary reconstruction is that a large section of glacier broke away, temporarily dammed a river and then released a surge several stories high.  Satellite and ground data are still being analyzed, so the immediate trigger should not be presented as settled.  The broader hazard is well established: steep Himalayan valleys contain glaciers and glacial lakes that can produce sudden, destructive floods as the region warms.</p>
+          <p>The disaster also damaged hydropower facilities and other infrastructure on both sides of the border.  The near-term priorities are survivor access, restoration of communications and identification of foreign travelers.  Longer-term questions will concern monitoring of unstable ice and lakes, warning time and whether roads and energy projects are designed for rapidly changing mountain hazards.</p>
+          <p class="sources"><strong>Sources:</strong> <a href="https://apnews.com/article/61b592d428e4631add31ce052d0daf1f" target="_blank" rel="noreferrer">Associated Press rescue update</a> <a href="https://apnews.com/article/d8c11c2215ea0792e3612bf791e4299f" target="_blank" rel="noreferrer">Associated Press scientific context</a> <a href="https://apnews.com/article/88a9dc9aa7334773f10eb6cd11ec11f7" target="_blank" rel="noreferrer">American missing-person update</a></p><a class="back-link" href="#cover">Back to the cover &uarr;</a>
+        </article>
+        <section class="department-briefs" aria-labelledby="world-more"><h3 class="more-heading" id="world-more">More in U.S. + World</h3><div class="briefs">
+          <article class="brief"><span class="card-label">Iran War</span><h3>Diplomacy resumes while the Hormuz agreement recedes</h3><p>Qatar's prime minister is visiting Tehran to restart mediation.  A senior Iranian source separately said the proposed Oman agreement on the Strait of Hormuz is not final, correcting the more definite account covered yesterday.  The commercial-corridor idea remains active, but its terms and military exclusions are unresolved.</p><a href="https://www.justsecurity.org/155398/early-edition-august-27-2026/" target="_blank" rel="noreferrer">Just Security source roundup &rarr;</a></article>
+          <article class="brief"><span class="card-label">Russia-Ukraine</span><h3>Strikes reach cities and a major Russian refinery</h3><p>Russia launched missiles and drones against Kyiv and other Ukrainian cities, targeting energy, port and industrial facilities.  A Ukrainian drone strike forced NORSI, Russia's fourth-largest refinery and second-largest gasoline producer, to suspend crude processing, adding a material energy effect to the continuing war.</p><a href="https://www.justsecurity.org/155398/early-edition-august-27-2026/" target="_blank" rel="noreferrer">Review the day's war updates &rarr;</a></article>
+          <article class="brief"><span class="card-label">Public Health</span><h3>Uganda ends its Ebola outbreak; Congo has not</h3><p>The World Health Organization says Uganda's outbreak is over.  Transmission has slowed in the neighboring Democratic Republic of Congo but has not begun to decline, so the regional picture remains divided rather than resolved.</p><a href="https://www.justsecurity.org/155398/early-edition-august-27-2026/" target="_blank" rel="noreferrer">Review the source roundup &rarr;</a></article>
+        </div></section>
+      </section>
+
+      <section class="department" id="interesting" aria-labelledby="interesting-title">
+        <header class="department-header"><span class="department-index">Department 05</span><h2 id="interesting-title">Something Interesting</h2></header>
+        <article class="article" id="eclipse">
+          <p class="article-label">Tonight in Denver &middot; Photography</p><h3>Earth's shadow will cover nearly all of the moon</h3><p class="article-deck">The 93% magnitude partial lunar eclipse peaks at 10:12 p.m. Mountain time.  It will look close to total, with a thin bright edge beside a copper-colored disk.</p><p class="article-meta">Visible Aug. 27 &middot; 2-minute read</p>
+          <p class="article-opening">Denver gets a well-timed lunar eclipse tonight.  The event begins locally at 7:29 p.m., the obvious partial phase builds later in the evening, and maximum eclipse arrives at 10:12 p.m.  Earth's umbral shadow will cover nearly the entire lunar disk.</p>
+          <p>No eclipse glasses or special filter are needed.  Binoculars make the curved boundary of Earth's shadow easier to see, but the event is bright enough for unaided viewing from the city.  Unlike a solar eclipse, light pollution is not a strong reason to drive far.</p>
+          <p>For a photograph, expose for the moon rather than the surrounding night.  A long lens and tripod support surface detail; a wider lens can use a building, ridgeline or tree as foreground.  Bracket exposures near maximum because the bright uneclipsed sliver and the dim red portion span a large range.  A remote release or short shutter delay will reduce vibration.</p>
+          <p>The color comes from sunlight filtered and bent through Earth's atmosphere.  The same path that reddens sunsets directs red light into the shadow, while shorter blue wavelengths scatter away.  Tonight's partial eclipse falls just short of totality but should produce much of the same visual effect.</p>
+          <p class="sources"><strong>Sources:</strong> <a href="https://svs.gsfc.nasa.gov/5672" target="_blank" rel="noreferrer">NASA eclipse visualization</a> <a href="https://www.timeanddate.com/eclipse/in/usa/denver?iso=20260828" target="_blank" rel="noreferrer">Denver timing and visibility</a> <a href="https://science.nasa.gov/solar-system/whats-up-august-2026-skywatching-tips-from-nasa/" target="_blank" rel="noreferrer">NASA August skywatching guide</a></p><a class="back-link" href="#cover">Back to the cover &uarr;</a>
+        </article>
+      </section>
+    </div>
+  </main>
+  <footer class="footer"><strong>The Daily Brief</strong><p>Prepared for Steve Massing.  Facts and links were checked against the cited sources through the edition cutoff.  Continuing stories return only when a material development changes the picture.</p><p><a href="#cover">Return to the cover</a></p></footer>
+  <script>(()=>{const p=document.getElementById('reading-progress');const u=()=>{const m=document.documentElement.scrollHeight-window.innerHeight;const v=m>0?window.scrollY/m*100:0;p.style.width=`${Math.min(100,Math.max(0,v))}%`};u();window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u)})();</script>
+</body>
+</html>
