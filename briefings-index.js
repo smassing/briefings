@@ -20,6 +20,7 @@ window.BRIEFING_FILES = [
   "daily/2026-09-22.html",
   "daily/2026-09-23.html",
   "daily/2026-09-24.html",
+  "daily/2026-09-29.html",
   "weekly/2026-08-21.html",
   "weekly/2026-08-28.html",
   "weekly/2026-09-04.html",
