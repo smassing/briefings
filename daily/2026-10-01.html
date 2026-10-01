@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><meta name="description" content="The Daily Brief for October 1, 2026: Microsoft threat research, EWS retirement, ROSS copyright, persistent agents and selected world news."><title>The Daily Brief | October 1, 2026</title><style>
+    :root {
+      --paper: #f5f1e8;
+      --paper-deep: #ebe4d6;
+      --card: #fbf9f4;
+      --ink: #17202a;
+      --muted: #667079;
+      --rule: #cfc7b8;
+      --navy: #173c55;
+      --navy-deep: #102d41;
+      --gold: #ad7c2f;
+      --rust: #a34a31;
+      --teal: #2c6b69;
+      --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+      --sans: Aptos, "Segoe UI", Helvetica, Arial, sans-serif;
+      --shadow: 0 20px 60px rgba(40, 34, 25, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 6.5rem; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(173, 124, 47, 0.08), transparent 27rem),
+        var(--paper);
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.67;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: var(--navy); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+    a:hover { color: var(--rust); }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+    .skip-link {
+      position: fixed;
+      z-index: 100;
+      left: 1rem;
+      top: -5rem;
+      padding: 0.65rem 1rem;
+      background: var(--ink);
+      color: white;
+      font-family: var(--sans);
+    }
+    .skip-link:focus { top: 1rem; }
+    .reading-progress {
+      position: fixed;
+      z-index: 60;
+      inset: 0 auto auto 0;
+      width: 0;
+      height: 3px;
+      background: var(--gold);
+    }
+    .utility-bar {
+      position: sticky;
+      z-index: 50;
+      top: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(16, 45, 65, 0.96);
+      color: white;
+      backdrop-filter: blur(12px);
+    }
+    .utility-inner {
+      width: min(1180px, calc(100% - 2rem));
+      min-height: 3.25rem;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .mini-masthead {
+      margin-right: auto;
+      color: white;
+      font-family: var(--serif);
+      font-size: 0.93rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .utility-nav { display: flex; gap: 1rem; overflow-x: auto; scrollbar-width: none; }
+    .utility-nav a {
+      flex: 0 0 auto;
+      color: rgba(255, 255, 255, 0.82);
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      letter-spacing: 0.045em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .utility-nav a:hover { color: white; }
+    .cover {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: clamp(3.5rem, 8vw, 7.25rem) 0 4rem;
+    }
+    .masthead-block {
+      text-align: center;
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      padding: 1.35rem 0 1.15rem;
+    }
+    .edition-line {
+      display: flex;
+      justify-content: center;
+      gap: 0.85rem;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 0.71rem;
+      font-weight: 650;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+    .edition-line span + span::before { content: "•"; margin-right: 0.85rem; color: var(--gold); }
+    .masthead {
+      margin: 0.22rem 0 0;
+      font-size: clamp(3rem, 9vw, 7.5rem);
+      font-weight: 600;
+      letter-spacing: -0.065em;
+      line-height: 0.95;
+    }
+    .tagline {
+      margin: 0.75rem 0 0;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .lead-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.72fr);
+      gap: clamp(2rem, 5vw, 5rem);
+      padding: clamp(3rem, 6vw, 5.75rem) 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .kicker {
+      margin: 0 0 0.85rem;
+      color: var(--rust);
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 750;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+    .lead-title {
+      max-width: 850px;
+      margin: 0;
+      font-size: clamp(2.75rem, 6.5vw, 5.8rem);
+      font-weight: 500;
+      letter-spacing: -0.045em;
+      line-height: 0.99;
+    }
+    .lead-deck {
+      max-width: 780px;
+      margin: 1.5rem 0 1.1rem;
+      color: #3f4950;
+      font-size: clamp(1.14rem, 2vw, 1.42rem);
+      line-height: 1.48;
+    }
+    .byline, .meta {
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 0.79rem;
+    }
+    .read-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: 1.25rem;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .read-link::after { content: "→"; transition: transform 160ms ease; }
+    .read-link:hover::after { transform: translateX(4px); }
+    .signal-art {
+      position: relative;
+      min-height: 440px;
+      overflow: hidden;
+      align-self: stretch;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.08), transparent 40%),
+        var(--navy-deep);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+    .signal-art::before, .signal-art::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 50%;
+    }
+    .signal-art::before { width: 360px; height: 360px; right: -135px; top: -100px; box-shadow: 0 0 0 55px rgba(255,255,255,0.035), 0 0 0 110px rgba(255,255,255,0.025); }
+    .signal-art::after { width: 230px; height: 230px; left: -110px; bottom: -75px; box-shadow: 0 0 0 45px rgba(173,124,47,0.12), 0 0 0 90px rgba(173,124,47,0.07); }
+    .signal-number {
+      position: absolute;
+      left: 2rem;
+      top: 1.5rem;
+      color: rgba(255,255,255,0.35);
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+    }
+    .signal-copy {
+      position: absolute;
+      z-index: 2;
+      left: 2rem;
+      right: 2rem;
+      bottom: 2rem;
+      color: white;
+    }
+    .signal-copy strong { display: block; font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 500; line-height: 0.9; }
+    .signal-copy span { display: block; margin-top: 1rem; font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .front-page { padding-top: 3.5rem; }
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .section-heading h2 {
+      margin: 0 0 0.55rem;
+      font-size: clamp(1.55rem, 3vw, 2.25rem);
+      font-weight: 550;
+      letter-spacing: -0.025em;
+    }
+    .section-heading p { margin: 0 0 0.7rem; color: var(--muted); font-family: var(--sans); font-size: 0.77rem; }
+    .story-grid { display: grid; grid-template-columns: repeat(12, 1fr); border-bottom: 1px solid var(--rule); }
+    .story-card {
+      grid-column: span 4;
+      padding: 1.5rem 1.6rem 1.8rem 0;
+      border-right: 1px solid var(--rule);
+      min-height: 220px;
+    }
+    .story-card:nth-child(3n+2), .story-card:nth-child(3n+3) { padding-left: 1.6rem; }
+    .story-card:nth-child(3n) { padding-right: 0; border-right: 0; }
+    .story-card:nth-child(n+4) { border-top: 1px solid var(--rule); }
+    .card-label { color: var(--rust); font-family: var(--sans); font-size: 0.68rem; font-weight: 750; letter-spacing: 0.1em; text-transform: uppercase; }
+    .story-card h3 { margin: 0.45rem 0 0.65rem; font-size: 1.42rem; line-height: 1.15; font-weight: 600; letter-spacing: -0.015em; }
+    .story-card h3 a { color: var(--ink); text-decoration: none; }
+    .story-card h3 a:hover { color: var(--rust); }
+    .story-card p { margin: 0; color: #4d565d; font-size: 0.95rem; line-height: 1.5; }
+    .edition-note {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.5rem;
+      margin: 3.4rem 0 0;
+      padding: 1.4rem 1.6rem;
+      border-left: 3px solid var(--gold);
+      background: rgba(255,255,255,0.45);
+    }
+    .edition-note strong { font-family: var(--sans); font-size: 0.73rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .edition-note p { margin: 0; color: #4d565d; font-size: 0.91rem; line-height: 1.55; }
+    .publication {
+      background: var(--card);
+      border-top: 1px solid var(--rule);
+      box-shadow: 0 -15px 45px rgba(54, 45, 32, 0.05);
+    }
+    .department {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: clamp(4rem, 8vw, 7rem) 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .department-header {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 4rem;
+    }
+    .department-index { color: var(--gold); font-family: var(--sans); font-size: 0.72rem; font-weight: 750; letter-spacing: 0.14em; text-transform: uppercase; }
+    .department h2 { margin: 0; font-size: clamp(2.3rem, 5vw, 4.5rem); font-weight: 500; letter-spacing: -0.045em; line-height: 1; }
+    .article {
+      width: min(740px, 100%);
+      margin: 0 auto;
+      scroll-margin-top: 6rem;
+    }
+    .article + .article { margin-top: 6rem; padding-top: 5rem; border-top: 1px solid var(--rule); }
+    .article p { margin: 0 0 1.35rem; }
+    .article p.article-label { margin: 0 0 0.9rem; color: var(--rust); font-family: var(--sans); font-size: 0.7rem; font-weight: 750; letter-spacing: 0.12em; text-transform: uppercase; }
+    .article h3 { margin: 0; padding-bottom: 0.18em; font-size: clamp(2.15rem, 5vw, 4rem); font-weight: 520; letter-spacing: -0.04em; line-height: 1.06; }
+    .article p.article-deck { margin: 1.85rem 0 0; color: #4c565d; font-size: 1.2rem; line-height: 1.48; }
+    .article p.article-meta { margin: 1.35rem 0 2.2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule); color: var(--muted); font-family: var(--sans); font-size: 0.76rem; }
+    .article-opening::first-letter {
+      float: left;
+      margin: 0.08em 0.1em 0 0;
+      color: var(--navy);
+      font-size: 4.25rem;
+      line-height: 0.78;
+    }
+    .action-box {
+      margin: 2.2rem 0;
+      padding: 1.25rem 1.4rem;
+      border-top: 1px solid var(--navy);
+      border-bottom: 1px solid var(--navy);
+      background: #eef2f3;
+    }
+    .action-box strong { display: block; margin-bottom: 0.35rem; color: var(--navy); font-family: var(--sans); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .action-box p { margin: 0; font-size: 0.96rem; line-height: 1.55; }
+    .sources { margin-top: 2.3rem; padding-top: 1rem; border-top: 1px dotted var(--rule); font-family: var(--sans); font-size: 0.78rem; line-height: 1.55; }
+    .sources strong { color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+    .sources a { margin-right: 0.45rem; }
+    .back-link { display: inline-block; margin-top: 1.5rem; font-family: var(--sans); font-size: 0.76rem; font-weight: 650; text-decoration: none; text-transform: uppercase; }
+    .briefs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+    .department-briefs { width: min(980px, 100%); margin: 5rem auto 0; }
+    .more-heading {
+      margin: 0 0 1rem;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 750;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .briefs.two-up { grid-template-columns: repeat(2, 1fr); }
+    .brief { padding: 1.6rem; background: var(--card); }
+    .brief h3 { margin: 0.45rem 0 0.7rem; font-size: 1.35rem; font-weight: 600; line-height: 1.18; }
+    .brief p { margin: 0 0 1rem; color: #4c565d; font-size: 0.93rem; line-height: 1.5; }
+    .brief a { font-family: var(--sans); font-size: 0.75rem; font-weight: 650; }
+    .footer {
+      padding: 4rem 1rem 5rem;
+      background: var(--navy-deep);
+      color: rgba(255,255,255,0.78);
+      text-align: center;
+    }
+    .footer strong { display: block; color: white; font-size: 1.35rem; letter-spacing: 0.04em; }
+    .footer p { max-width: 650px; margin: 0.75rem auto 0; font-family: var(--sans); font-size: 0.8rem; line-height: 1.55; }
+    .footer a { color: white; }
+
+    @media (max-width: 850px) {
+      .lead-grid { grid-template-columns: 1fr; }
+      .signal-art { min-height: 280px; order: -1; }
+      .story-card { grid-column: span 6; }
+      .story-card:nth-child(n) { padding: 1.4rem; border-right: 1px solid var(--rule); }
+      .story-card:nth-child(2n) { border-right: 0; }
+      .story-card:nth-child(n+3) { border-top: 1px solid var(--rule); }
+      .department-header { grid-template-columns: 1fr; gap: 0.7rem; }
+      .briefs { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      body { font-size: 17px; }
+      .utility-inner { width: calc(100% - 1rem); }
+      .utility-nav { max-width: 65vw; }
+      .cover, .department { width: min(100% - 1.3rem, 1180px); }
+      .edition-line { flex-direction: column; gap: 0.1rem; }
+      .edition-line span + span::before { content: none; }
+      .lead-title { font-size: 2.75rem; }
+      .story-card { grid-column: 1 / -1; min-height: 0; }
+      .story-card:nth-child(n) { border-right: 0; border-top: 1px solid var(--rule); }
+      .story-card:first-child { border-top: 0; }
+      .edition-note { grid-template-columns: 1fr; gap: 0.5rem; }
+      .department { padding: 4rem 0; }
+      .article + .article { margin-top: 4rem; padding-top: 4rem; }
+    }
+    @media print {
+      :root { --paper: white; --card: white; }
+      .utility-bar, .reading-progress, .back-link { display: none; }
+      body { background: white; font-size: 11pt; }
+      .cover, .department { width: 100%; }
+      .cover { padding-top: 1rem; }
+      .signal-art { min-height: 240px; box-shadow: none; }
+      .article { break-inside: avoid; }
+      a { color: inherit; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+  
+.brief .article-label{color:var(--rust);font:700 .7rem var(--sans);text-transform:uppercase;letter-spacing:.1em}.brief h4{font-size:1.35rem;line-height:1.2}.brief p{line-height:1.6}.sources{font-size:.88rem}.signal-number{color:#d0d8df}</style></head><body><a class="skip-link" href="#main">Skip to the briefing</a><header class="utility-bar"><div class="utility-inner"><a class="mini-masthead" href="#cover">The Daily Brief</a><nav class="utility-nav" aria-label="Briefing departments"><a href="#security-ai">Security + AI</a><a href="#courts-law">Courts + Law</a><a href="#enterprise-tech">Enterprise Tech</a><a href="#us-world">U.S. + World</a><a href="#interesting">Interesting</a></nav></div></header><main id="main"><section class="cover" id="cover" aria-labelledby="masthead"><header class="masthead-block"><div class="edition-line"><span>Thursday, October 1, 2026</span><span>Evening edition</span></div><h1 class="masthead" id="masthead">The Daily Brief</h1><p class="tagline">Security, courts, technology and the wider world</p></header><section class="lead-grid" aria-labelledby="lead-cover-title"><div><p class="kicker">The Lead · Cybersecurity</p><h2 class="lead-title" id="lead-cover-title">AI accelerates attacks. Trust still opens the door.</h2><p class="lead-deck">Microsoft’s new threat report puts faster attacks alongside familiar access paths.  Today’s most immediate administrative change is the start of Exchange Online’s EWS disablement rollout.</p><p class="byline">Fresh research, concrete deadlines and decisions with institutional consequences.</p><a class="read-link" href="#trust">Read the lead story</a></div><aside class="signal-art" aria-label="Microsoft initial-access measurements"><span class="signal-number">MICROSOFT DEFENDER EXPERTS</span><div class="signal-copy"><strong>30% / 20%</strong><span>User execution / valid accounts in observed initial access</span></div></aside></section><section class="front-page" aria-labelledby="front-page-title"><div class="section-heading"><h2 id="front-page-title">Inside Today’s Brief</h2><p>14 stories · About a 15-minute read</p></div><div class="story-grid"><article class="story-card"><span class="card-label">Exchange Online</span><h3><a href="#ews">The EWS retirement rollout starts today. Inventory the applications, not just the mailboxes.</a></h3><p>Phased disablement begins; app ownership and tenant settings determine the disruption.</p></article><article class="story-card"><span class="card-label">Third Circuit</span><h3><a href="#ross">ROSS loses its fair-use appeal. The opinion is narrower than the AI-training headline.</a></h3><p>Read the original opinion before applying its holding to every kind of AI training.</p></article><article class="story-card"><span class="card-label">OpenAI</span><h3><a href="#dots">Always-on agents bring permission design into everyday work</a></h3><p>Persistent work makes connected-account permissions and action review central.</p></article><article class="story-card"><span class="card-label">NIST</span><h3><a href="#agent-identity">NIST chooses software development as its first agent-identity use case</a></h3><p>NIST moves its identity project into a software-development demonstration.</p></article><article class="story-card"><span class="card-label">Mobile Security</span><h3><a href="#false-base">A 5G label does not settle the false-base-station question</a></h3><p>New testbed research examines rogue cellular stations and 5G protections.</p></article><article class="story-card"><span class="card-label">Supreme Court</span><h3><a href="#detention">Justices will hear the mandatory-detention dispute</a></h3><p>The Supreme Court accepts the bond-hearing dispute; the merits remain open.</p></article><article class="story-card"><span class="card-label">Iran</span><h3><a href="#iran">Iran’s reported contingency planning broadens the escalation risk</a></h3><p>Reported contingency planning broadens possible targets if major U.S. attacks resume.</p></article><article class="story-card"><span class="card-label">Science</span><h3><a href="#webb">Webb reads the chemistry left behind by planetary collisions</a></h3><p>The chemistry of warm dust helps distinguish different planetary impact histories.</p></article></div></section><aside class="edition-note"><strong>Research cutoff</strong><p>5:12 p.m. Mountain time, Oct. 1, 2026.  Coverage follows the Sept. 29 edition, returning to continuing stories only for a material development.  Analysis is identified within the articles; announcements, draft work and court review are distinguished from deployed capabilities, final standards and merits judgments.</p></aside></section><section class="department" id="security-ai" aria-labelledby="security-ai-title"><header class="department-header"><span class="department-index">Department 01</span><h2 id="security-ai-title">Security + AI</h2></header><article class="article" id="trust"><p class="article-label">The Lead · New Research</p><h3>AI accelerates attacks. Trust still opens the door.</h3><p class="article-deck">Microsoft’s new Digital Defense Report describes faster attacks, but its most useful operational evidence points back to user execution, valid accounts and unresolved exposure.</p><p class="article-meta">Oct. 1 · 2-minute read</p><p class="article-opening">Microsoft published its 2026 Digital Defense Report today with a warning about the speed and scale of AI-enabled attacks.  The report’s operational measurements are more useful than its broad language about changing the physics of cybersecurity: in Microsoft Defender Experts observations, user execution accounted for 30% of initial access and valid accounts for another 20%.  Those are measurements from Microsoft’s observed cases, not a census of every intrusion.</p><p>The company also reports ClickFix-style attacker commands running on more than 1.1 million unique devices between February and early May, roughly an eightfold increase.  In that pattern, the victim is persuaded to execute a command as part of an apparent fix or verification step.  Among detections associated with the five leading vulnerabilities Microsoft analyzed, 58% involved CVE-2020-1472, disclosed in 2020.  The denominators matter: that figure does not mean the old flaw caused 58% of all attacks.</p><p>Our reading is that the report strengthens the case for closing ordinary access paths before adding another layer of automation.  Faster reconnaissance and more convincing instructions can make an existing permission or execution mistake more valuable to an attacker.  A security program that can identify sophisticated model behavior but cannot explain where administrative credentials work still has a serious gap.</p><p>For an enterprise team, the useful translation is concrete.  Can a user be persuaded to paste a command into a shell?  Can an application identity read more material than its owner realizes?  Are exposed systems tied to an accountable owner and a mitigation decision?  Each question connects an attack path to something the organization can change and verify.  An awareness message or a patch count alone does not establish that the path has closed.</p><p>There is a corresponding caution for AI-assisted defense.  A faster investigation is useful when it produces an accurate explanation, preserves evidence and reaches a person or control that can act.  Automatically generating more findings can instead increase work without reducing exposure.  For evaluation, we would ask whether the system shortens the time from a meaningful signal to a justified containment decision, including the false positives it sends to analysts.</p><p>Microsoft sees a very large environment, but it is also selling security products.  Its telemetry deserves attention without treating its preferred product architecture as the only response.  The strongest takeaway is an operating discipline: know what is trusted, constrain what that trust permits and measure whether the resulting exposure actually falls.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.microsoft.com/en-us/security/security-insider/threat-landscape/2026-digital-defense-report" target="_blank" rel="noreferrer">Microsoft: 2026 Digital Defense Report</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="dots"><p class="article-label">OpenAI · Launch Follow-Through</p><h3>Always-on agents bring permission design into everyday work</h3><p class="article-deck">DevDay’s concrete announcements move beyond Tuesday’s event watch.  Background access, action review and shared connections are now the details to examine.</p><p class="article-meta">Sept. 29 · 2-minute read</p><p class="article-opening">OpenAI’s Sept. 29 launch introduces dots, persistent assistants that can follow work across connected applications and use a separate cloud computer.  The company says background proactive research uses read-only tools; actively assigned work can involve actions subject to its rules and review.  That distinction is central.  A product that can watch for developments is not necessarily authorized to send the resulting message or change a record.</p><p>The rollout begins with Pro and Business Premium users in eligible markets.  Enterprise, education and healthcare workspaces can try the beta when an administrator enables it.  Specialist dots for organizational responsibilities are beginning in focused enterprise pilots.  Those availability boundaries should survive any internal retelling of the announcement; a pilot description is not evidence of general production readiness.</p><p>In its separate safety explanation, OpenAI says controls for action review sit outside the environments dots can modify.  Supported sign-in flows keep passwords outside the model’s context.  Connected-account permissions are shared across ChatGPT, Work and Codex, and disconnecting an app stops new sharing but does not erase information already learned.  Those are different controls over credentials, authority and retained context, rather than one universal privacy switch.</p><p>Our assessment is that the permission inventory becomes more consequential as work persists between conversations.  The important review unit is the combination of an identity, its connected applications, the information it has accumulated and the actions it can perform.  A harmless-looking request may become consequential when the same assistant can consult a mailbox, retrieve files and act through another service.</p><p>A useful organizational trial would begin with a narrow responsibility and observable outputs.  Preparing a draft from an approved source set is easier to assess than handing over a broadly stated business function.  Review should cover mistaken recipients, stale instructions, records that disagree and external material containing hostile directions.  The test should establish what happens when the agent is uncertain and whether a human can reconstruct the action afterward.</p><p>This updates Tuesday’s DevDay watch with actual product evidence.  It does not turn a launch into approval for sensitive work.  The announced separation between model activity and enforcement is worth examining, while consequential decisions still need accountable owners and a review path that works when the assistant is wrong.</p><p class="sources"><strong>Sources:</strong> <a href="https://openai.com/index/introducing-dots/" target="_blank" rel="noreferrer">OpenAI: Introducing dots</a> · <a href="https://openai.com/index/how-we-build-safety-security-and-privacy-into-dots/" target="_blank" rel="noreferrer">OpenAI: Safety, security and privacy for dots</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="agent-identity"><p class="article-label">NIST · Implementation Work</p><h3>NIST chooses software development as its first agent-identity use case</h3><p class="article-deck">The new comment summary moves the identity project toward a demonstrable environment, rather than another general discussion of agent risk.</p><p class="article-meta">Sept. 29 · 1-minute read</p><p class="article-opening">The National Institute of Standards and Technology’s National Cybersecurity Center of Excellence published its agent-identity comment summary Sept. 29, following feedback from more than 600 commenters.  Its first implementation use case will be software development, working with the center’s development, security and operations project to demonstrate how agents can be identified, authenticated and authorized through that lifecycle.</p><p>The concrete next step is useful because coding agents sit where several forms of authority overlap: repository access, build systems, package registries, signing operations and deployment credentials.  Our interpretation is that a working example could reveal gaps that an abstract instruction to apply least privilege leaves unresolved.  It should be possible to distinguish the person requesting work from the software identity performing it and the service enforcing its permissions.</p><p>The center has also opened a resource hub and will accept feedback on a rolling basis.  A joint webinar is scheduled for Oct. 28 at 1 p.m. Eastern, or 11 a.m. Mountain.  This remains implementation and demonstration work, not a newly binding federal standard.  The question to follow is whether the examples make agent authority visible and revocable across the actual development workflow.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.nccoe.nist.gov/news-insights/comments-software-and-agentic-si-identity-concept-paper" target="_blank" rel="noreferrer">NIST: Comment summary and first use case</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="false-base"><p class="article-label">Mobile Security · Draft Research</p><h3>A 5G label does not settle the false-base-station question</h3><p class="article-deck">NIST’s Sept. 30 draft examines six simulated rogue-cell scenarios and the protections that devices and networks actually exercise.</p><p class="article-meta">Sept. 30 · 1-minute read</p><p class="article-opening">NIST has released an initial draft white paper on false base stations: equipment that impersonates a legitimate cellular network to attract a device’s connection.  The announcement describes inexpensive commercial hardware and software, six simulated scenarios and potential consequences including degraded service, privacy breaches and location tracking.  Public comments are open through Oct. 31.</p><p>The news is the new testbed work, not the discovery that cellular interception exists.  A laboratory evaluation also does not establish that a specific traveler has encountered a rogue station.  It gives network operators and security reviewers a better basis for asking which protective features are enabled and what remains exposed in the connection process.</p><p>For travel and remote-work guidance, our reading is a refinement rather than a reversal.  Cellular service can be a comparatively preferable connection while still relying on carrier and device protections outside the traveler’s control.  Avoid describing any transport as inherently private.  Choose the approved connection, minimize sensitive data on the device and maintain the account controls that protect work even when the transport is imperfect.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.nccoe.nist.gov/news-insights/draft-5g-white-paper-now-available-false-base-station" target="_blank" rel="noreferrer">NIST: New false-base-station draft</a> · <a href="https://www.nccoe.nist.gov/5g-cybersecurity" target="_blank" rel="noreferrer">NIST: 5G project and comment period</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><section class="department-briefs" aria-label="Additional Security + AI coverage"><div class="briefs"><article class="brief" id="sol"><p class="article-label">Model Release · Brief</p><h4>GPT-6.1 Sol puts a lower-cost work model into Work and Codex</h4><p>OpenAI’s Sept. 29 announcement makes GPT-6.1 Sol available in Work and Codex on eligible paid plans and through the API; it says the model is not yet in Chat.  Standard API prices are $2 per million input tokens, $0.10 for cached input and $10 for output.  Claims about approaching Astra’s performance remain the vendor’s evaluation results.  For an enterprise comparison, test representative work, failure rates and review effort alongside price; a cheaper token is not automatically a cheaper completed task.</p><p><a href="https://openai.com/index/introducing-gpt-6-1-sol/" target="_blank" rel="noreferrer">OpenAI model announcement</a></p></article></div></section></section><section class="department" id="courts-law" aria-labelledby="courts-law-title"><header class="department-header"><span class="department-index">Department 02</span><h2 id="courts-law-title">Courts + Law</h2></header><article class="article" id="ross"><p class="article-label">Third Circuit · Opinion Read</p><h3>ROSS loses its fair-use appeal. The opinion is narrower than the AI-training headline.</h3><p class="article-deck">The Sept. 29 appellate decision protects Westlaw’s editorial headnotes and rejects their use to build a competing legal-search product.  It does not decide every generative-AI training dispute.</p><p class="article-meta">Filed Sept. 29 · 2-minute read</p><p class="article-opening">The Third Circuit has affirmed partial summary judgment for Thomson Reuters in its copyright dispute with ROSS Intelligence.  The court’s original 32-page opinion, filed Sept. 29, addresses whether Westlaw’s headnotes have sufficient originality for protection and whether ROSS’s use was fair.  It answers yes to copyrightability and no to fair use, emphasizing the editorial expression and the competing purpose of the product.</p><p>The distinction between the legal text and the publisher’s contribution is essential.  The opinion describes judicial opinions as the underlying uncopyrighted material and headnotes as editorial annotations that select and express important legal points.  The decision does not grant a commercial publisher ownership of the law itself.  It holds that the added editorial work can contain protected expression even when it is closely grounded in a public judicial opinion.</p><p>The system also matters.  ROSS’s engine returned relevant passages from existing opinions in response to plain-language questions.  The court explicitly says it was not generative AI and did not create new expression.  Training memoranda prepared through a contractor used Westlaw headnotes to teach the system which passages answered legal questions.  Looking only at the eventual output would miss the dispute over the material used to build the competing service.</p><p>For fair use, the panel focuses on purpose and market relationship, not simply the fact that copyrighted material was processed by software.  ROSS sought to compete with Westlaw in legal research using the editorial material for a highly similar function.  The court’s framing is a warning against treating an AI label as an exemption from ordinary copyright analysis.  It is equally a warning against announcing a universal rule about all training from a case with these particular facts.</p><p>Our interpretation for institutional buyers is that provenance belongs in product diligence.  An assurance that a system returns public legal text does not answer how it was trained, which editorial datasets were used or what licenses support that use.  A vendor should be able to distinguish public source material, licensed enhancements and other training inputs, and explain which contractual assurances cover each.  Those questions concern the product’s legal foundation as well as its answer quality.</p><p>The opinion leaves room for different outcomes involving different technologies, source material, purposes and markets.  Generative systems that create new expression present additional questions; so do research uses that differ from building a direct market substitute.  Read this as an important appellate application of copyright principles to a specific legal-search system, rather than a final settlement of the broader AI-training debate.</p><p class="sources"><strong>Sources:</strong> <a href="https://www2.ca3.uscourts.gov/opinarch/252153p.pdf" target="_blank" rel="noreferrer">Third Circuit: Original opinion, No. 25-2153</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><section class="department-briefs" aria-label="Additional Courts + Law coverage"><div class="briefs"><article class="brief" id="detention"><p class="article-label">Supreme Court · Review Granted</p><h4>Justices will hear the mandatory-detention dispute</h4><p>The Associated Press reports that the Supreme Court agreed today to review the administration’s policy denying bond hearings to immigrants facing removal, with conflicting appellate rulings on the governing statute.  The grant puts a consequential detention question on the Court’s docket; it is not a merits decision endorsing either reading.  The distinction to retain in subsequent coverage is between accepting a case, issuing interim relief and deciding the legal question.</p><p><a href="https://apnews.com/article/f8ee63bcb11f1be3d7d6300022f3bc88" target="_blank" rel="noreferrer">Associated Press: Review granted</a></p></article><article class="brief" id="ucla"><p class="article-label">Civil Rights · Contested Finding</p><h4>Justice Department announces findings against UCLA Law</h4><p>The Justice Department says its investigation found race discrimination in UCLA Law admissions for the 2023–25 entering classes.  It describes an administrative finding and a settlement-or-litigation enforcement path.  UCLA says it complies with applicable law and is confident in its admissions process, according to the Associated Press.  Treat the department’s finding as an enforcement development, not as a court judgment resolving the disputed facts.</p><p><a href="https://www.justice.gov/opa/pr/justice-department-finds-ucla-law-school-discriminates-based-race-admissions" target="_blank" rel="noreferrer">Justice Department announcement</a> · <a href="https://apnews.com/article/a88ce5730cef78f8458896bb757cddaf" target="_blank" rel="noreferrer">Associated Press: UCLA response</a></p></article></div></section></section><section class="department" id="enterprise-tech" aria-labelledby="enterprise-tech-title"><header class="department-header"><span class="department-index">Department 03</span><h2 id="enterprise-tech-title">Enterprise Tech</h2></header><article class="article" id="ews"><p class="article-label">Exchange Online · Operational Deadline</p><h3>The EWS retirement rollout starts today. Inventory the applications, not just the mailboxes.</h3><p class="article-deck">Oct. 1 is the start of phased disablement, not a claim that every tenant loses the service at the same moment.  Permanent shutdown is scheduled for April 1, 2027.</p><p class="article-meta">Oct. 1 · 2-minute read</p><p class="article-opening">Microsoft’s announced retirement plan for Exchange Web Services (EWS) enters its disablement phase today.  In Exchange Online, tenants that leave EWSEnabled at Null are subject to a change to False as the rollout reaches them.  The documented True setting depends on an application-ID allow list; an empty list under that setting allows no applications.  These details make tenant configuration and application dependencies more useful than the headline date.</p><p>The retirement applies to Exchange Online, not a corresponding shutdown of EWS in on-premises Exchange Server.  Microsoft’s current migration documentation points administrators to usage reports, an analyzer and operation mappings for Microsoft Graph.  It also lists remaining parity work with estimated delivery targets that may change.  A feature appearing on that roadmap should not be treated as available until the required scenario is verified.</p><p>Our operational recommendation is to identify the workflow behind each application using EWS.  A mailbox can continue working for its owner while a scheduling tool, synchronization job, records integration or service process fails.  The useful dependency record names the application, its business purpose, owner, authentication method and replacement path.  Then test the part of the workflow that users actually depend on, including permissions and error handling.</p><p>Be especially careful about temporary continuity measures.  An allow-list exception can preserve an essential process while migration proceeds, but it needs an owner and an exit plan.  Broadly restoring access without identifying the application turns a retirement project into an undocumented operating condition.  Conversely, disabling a service before locating a critical dependency can create an outage whose source looks unrelated to email.</p><p>For Microsoft 365 planning, the actionable boundary is this: confirm your tenant’s state and observed usage now, establish which applications remain necessary and validate their migration.  April’s final shutdown date is not a six-month guarantee that an unchanged integration will keep functioning.  The phased change beginning today is the reason to verify rather than wait for a user report.</p><p class="sources"><strong>Sources:</strong> <a href="https://techcommunity.microsoft.com/blog/exchange/exchange-online-ews-your-time-is-almost-up/4492361" target="_blank" rel="noreferrer">Microsoft: Retirement timeline and tenant behavior</a> · <a href="https://learn.microsoft.com/en-us/exchange/clients-and-mobile-in-exchange-online/deprecation-of-ews-exchange-online" target="_blank" rel="noreferrer">Microsoft Learn: Migration tools and parity roadmap</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><section class="department-briefs" aria-label="Additional Enterprise Tech coverage"><div class="briefs"><article class="brief" id="lifecycle"><p class="article-label">Lifecycle · Near-Term Watch</p><h4>Office 2021’s support deadline is less than two weeks away</h4><p>Microsoft’s lifecycle calendar places the Office 2021 family’s end of support on Oct. 13, along with Windows 11 Home and Pro version 24H2.  Enterprise and Education releases have different dates; do not apply the Home and Pro deadline to every Windows endpoint.  This is a scheduled deadline rather than a newly announced vulnerability.  It is a useful point to reconcile the edition and version in inventory with the servicing plan, especially where an application dependency has delayed upgrades.</p><p><a href="https://learn.microsoft.com/en-au/lifecycle/end-of-support/end-of-support-2026" target="_blank" rel="noreferrer">Microsoft: Products ending support in 2026</a></p></article></div></section></section><section class="department" id="us-world" aria-labelledby="us-world-title"><header class="department-header"><span class="department-index">Department 04</span><h2 id="us-world-title">U.S. + World</h2></header><article class="article" id="iran"><p class="article-label">Iran · Escalation Planning</p><h3>Iran’s reported contingency planning broadens the escalation risk</h3><p class="article-deck">New Reuters reporting concerns preparations for a renewed U.S. attack, not evidence that those wider retaliatory operations have begun.</p><p class="article-meta">Oct. 1 · 1-minute read</p><p class="article-opening">Reuters reports today that Iranian commanders are considering a broader response if the United States resumes large-scale attacks.  Its account, attributed to senior Iranian officials and an insider familiar with the discussions, says potential targets could extend beyond U.S.-linked assets to states supporting U.S. operations and possibly locations outside the Middle East.  The same reporting describes a continued diplomatic effort that Iranian officials privately judge unlikely to succeed.</p><p>This is a material development from Tuesday’s coverage of sanctions and currency pressure because it concerns the possible geography of retaliation.  It remains a report about contingency planning.  Sources describing a plan do not establish that a strike has been authorized, that every proposed target is within reach or that negotiations have ended.</p><p>Our reading is that exposure should be assessed through dependencies as well as country names.  Airlines, ports, energy supply and regional facilities can face disruption before a traveler’s immediate destination becomes a direct target.  Watch for verified operational changes: airspace restrictions, carrier cancellations, maritime warnings and official security alerts.  Those would give a stronger basis for a concrete adjustment than rhetoric or an anonymous account of possible options alone.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.aol.com/articles/iran-readies-harder-retaliation-attacked-111607000.html" target="_blank" rel="noreferrer">Reuters report, syndicated by AOL</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><section class="department-briefs" aria-label="Additional U.S. + World coverage"><div class="briefs"><article class="brief" id="ukraine"><p class="article-label">Ukraine · Brief</p><h4>A Kyiv school strike shows both the danger and the value of sheltering</h4><p>A Russian drone hit a Kyiv school today while pupils and staff were in a shelter; officials reported no injuries at the school.  Reuters also reports a strike on the Southern Bridge that temporarily halted metro traffic without major bridge damage.  These are specific developments in the sustained aerial campaign, rather than a claim that every part of Ukraine has identical conditions.  The immediate operational evidence is the disruption of civilian movement and the protective value of getting people into shelter before impact.</p><p><a href="https://uk.marketscreener.com/news/russian-air-strikes-injure-two-in-ukraine-s-kyiv-odesa-officials-say-ce785ad3dd89fe2d" target="_blank" rel="noreferrer">Reuters: School and bridge strikes</a></p></article><article class="brief" id="ai-policy"><p class="article-label">AI Policy · On the Radar</p><h4>A voluntary AI accord may become a legislative fight</h4><p>Axios reports that Senate Majority Leader John Thune wants to codify some safeguards after Tuesday’s White House AI accord.  That moves the continuing story toward a specific legislative question, but no enacted protections follow from the statement alone.  Watch for bill text, enforceable duties, oversight arrangements and the treatment of incidents; a pledge and a statutory obligation have different consequences.</p><p><a href="https://www.axios.com/2026/10/01/senate-ai-artificial-intelligence-trump" target="_blank" rel="noreferrer">Axios: Thune’s legislative direction</a></p></article></div></section></section><section class="department" id="interesting" aria-labelledby="interesting-title"><header class="department-header"><span class="department-index">Department 05</span><h2 id="interesting-title">Things Steve Would Find Interesting</h2></header><article class="article" id="webb"><p class="article-label">Science · Fresh Evidence</p><h3>Webb reads the chemistry left behind by planetary collisions</h3><p class="article-deck">A study announced today uses the mineral composition of warm debris to infer how violently young planetary bodies collided.</p><p class="article-meta">Oct. 1 · 1-minute read</p><p class="article-opening">Astronomers led by Kate Su of the Space Science Institute in Boulder examined 21 extreme debris disks using Webb and archival Spitzer observations.  NASA’s Oct. 1 account describes small grains, abundant warm dust and irregular brightness as common properties.  The team groups the disks by mineral composition: roughly one-third are silica-rich, consistent with especially energetic collisions between Mars-sized bodies; the others suggest less energetic encounters involving smaller bodies.</p><p>These are inferred collisions, not movies of planets smashing together.  Spectra reveal what the debris contains, and the researchers use that chemistry to distinguish possible impact histories.  The work gives a broader comparison set for understanding the violent stages of rocky-planet formation, including events analogous to the proposed impact that formed our Moon.</p><p>The appealing part is the method.  Objects too small and distant to examine directly can leave a material record whose composition narrows the explanation.  An attractive illustration is not the observation; the evidence is in the measured emission and the analysis connecting it to plausible physical processes.  NASA’s linked release explains that distinction and provides the accompanying scientific figures.</p><p class="sources"><strong>Sources:</strong> <a href="https://science.nasa.gov/missions/webb/nasas-webb-provides-crash-course-on-planet-shattering-collisions/" target="_blank" rel="noreferrer">NASA: Webb collision research</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article></section></main><footer class="footer"><strong>The Daily Brief</strong><p>Research checked through 5:12 p.m. Mountain time on Oct. 1, 2026.  The ROSS opinion was retrieved directly from the Third Circuit.  CISA’s current catalog endpoints could not be retrieved; no unverified fresh catalog additions are asserted.  Certain news pages were available through indexed reporting rather than direct full-page retrieval.</p><p><a href="#cover">Return to the cover</a></p></footer></body></html>
