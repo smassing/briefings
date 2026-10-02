@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="The Daily Brief for Friday, October 2, 2026.">
+  <title>The Daily Brief | October 2, 2026</title>
+  <style>
+    :root {
+      --paper: #f5f1e8;
+      --paper-deep: #ebe4d6;
+      --card: #fbf9f4;
+      --ink: #17202a;
+      --muted: #667079;
+      --rule: #cfc7b8;
+      --navy: #173c55;
+      --navy-deep: #102d41;
+      --gold: #ad7c2f;
+      --rust: #a34a31;
+      --teal: #2c6b69;
+      --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+      --sans: Aptos, "Segoe UI", Helvetica, Arial, sans-serif;
+      --shadow: 0 20px 60px rgba(40, 34, 25, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 6.5rem; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(173, 124, 47, 0.08), transparent 27rem),
+        var(--paper);
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.67;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: var(--navy); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+    a:hover { color: var(--rust); }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+    .skip-link {
+      position: fixed;
+      z-index: 100;
+      left: 1rem;
+      top: -5rem;
+      padding: 0.65rem 1rem;
+      background: var(--ink);
+      color: white;
+      font-family: var(--sans);
+    }
+    .skip-link:focus { top: 1rem; }
+    .reading-progress {
+      position: fixed;
+      z-index: 60;
+      inset: 0 auto auto 0;
+      width: 0;
+      height: 3px;
+      background: var(--gold);
+    }
+    .utility-bar {
+      position: sticky;
+      z-index: 50;
+      top: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(16, 45, 65, 0.96);
+      color: white;
+      backdrop-filter: blur(12px);
+    }
+    .utility-inner {
+      width: min(1180px, calc(100% - 2rem));
+      min-height: 3.25rem;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .mini-masthead {
+      margin-right: auto;
+      color: white;
+      font-family: var(--serif);
+      font-size: 0.93rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .utility-nav { display: flex; gap: 1rem; overflow-x: auto; scrollbar-width: none; }
+    .utility-nav a {
+      flex: 0 0 auto;
+      color: rgba(255, 255, 255, 0.82);
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      letter-spacing: 0.045em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .utility-nav a:hover { color: white; }
+    .cover {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: clamp(3.5rem, 8vw, 7.25rem) 0 4rem;
+    }
+    .masthead-block {
+      text-align: center;
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      padding: 1.35rem 0 1.15rem;
+    }
+    .edition-line {
+      display: flex;
+      justify-content: center;
+      gap: 0.85rem;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 0.71rem;
+      font-weight: 650;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+    .edition-line span + span::before { content: "•"; margin-right: 0.85rem; color: var(--gold); }
+    .masthead {
+      margin: 0.22rem 0 0;
+      font-size: clamp(3rem, 9vw, 7.5rem);
+      font-weight: 600;
+      letter-spacing: -0.065em;
+      line-height: 0.95;
+    }
+    .tagline {
+      margin: 0.75rem 0 0;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .lead-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.72fr);
+      gap: clamp(2rem, 5vw, 5rem);
+      padding: clamp(3rem, 6vw, 5.75rem) 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .kicker {
+      margin: 0 0 0.85rem;
+      color: var(--rust);
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 750;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+    .lead-title {
+      max-width: 850px;
+      margin: 0;
+      font-size: clamp(2.75rem, 6.5vw, 5.8rem);
+      font-weight: 500;
+      letter-spacing: -0.045em;
+      line-height: 0.99;
+    }
+    .lead-deck {
+      max-width: 780px;
+      margin: 1.5rem 0 1.1rem;
+      color: #3f4950;
+      font-size: clamp(1.14rem, 2vw, 1.42rem);
+      line-height: 1.48;
+    }
+    .byline, .meta {
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 0.79rem;
+    }
+    .read-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: 1.25rem;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .read-link::after { content: "→"; transition: transform 160ms ease; }
+    .read-link:hover::after { transform: translateX(4px); }
+    .signal-art {
+      position: relative;
+      min-height: 440px;
+      overflow: hidden;
+      align-self: stretch;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.08), transparent 40%),
+        var(--navy-deep);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+    .signal-art::before, .signal-art::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 50%;
+    }
+    .signal-art::before { width: 360px; height: 360px; right: -135px; top: -100px; box-shadow: 0 0 0 55px rgba(255,255,255,0.035), 0 0 0 110px rgba(255,255,255,0.025); }
+    .signal-art::after { width: 230px; height: 230px; left: -110px; bottom: -75px; box-shadow: 0 0 0 45px rgba(173,124,47,0.12), 0 0 0 90px rgba(173,124,47,0.07); }
+    .signal-number {
+      position: absolute;
+      left: 2rem;
+      top: 1.5rem;
+      color: rgba(255,255,255,0.35);
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+    }
+    .signal-copy {
+      position: absolute;
+      z-index: 2;
+      left: 2rem;
+      right: 2rem;
+      bottom: 2rem;
+      color: white;
+    }
+    .signal-copy strong { display: block; font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 500; line-height: 0.9; }
+    .signal-copy span { display: block; margin-top: 1rem; font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .front-page { padding-top: 3.5rem; }
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .section-heading h2 {
+      margin: 0 0 0.55rem;
+      font-size: clamp(1.55rem, 3vw, 2.25rem);
+      font-weight: 550;
+      letter-spacing: -0.025em;
+    }
+    .section-heading p { margin: 0 0 0.7rem; color: var(--muted); font-family: var(--sans); font-size: 0.77rem; }
+    .story-grid { display: grid; grid-template-columns: repeat(12, 1fr); border-bottom: 1px solid var(--rule); }
+    .story-card {
+      grid-column: span 4;
+      padding: 1.5rem 1.6rem 1.8rem 0;
+      border-right: 1px solid var(--rule);
+      min-height: 220px;
+    }
+    .story-card:nth-child(3n+2), .story-card:nth-child(3n+3) { padding-left: 1.6rem; }
+    .story-card:nth-child(3n) { padding-right: 0; border-right: 0; }
+    .story-card:nth-child(n+4) { border-top: 1px solid var(--rule); }
+    .card-label { color: var(--rust); font-family: var(--sans); font-size: 0.68rem; font-weight: 750; letter-spacing: 0.1em; text-transform: uppercase; }
+    .story-card h3 { margin: 0.45rem 0 0.65rem; font-size: 1.42rem; line-height: 1.15; font-weight: 600; letter-spacing: -0.015em; }
+    .story-card h3 a { color: var(--ink); text-decoration: none; }
+    .story-card h3 a:hover { color: var(--rust); }
+    .story-card p { margin: 0; color: #4d565d; font-size: 0.95rem; line-height: 1.5; }
+    .edition-note {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.5rem;
+      margin: 3.4rem 0 0;
+      padding: 1.4rem 1.6rem;
+      border-left: 3px solid var(--gold);
+      background: rgba(255,255,255,0.45);
+    }
+    .edition-note strong { font-family: var(--sans); font-size: 0.73rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .edition-note p { margin: 0; color: #4d565d; font-size: 0.91rem; line-height: 1.55; }
+    .publication {
+      background: var(--card);
+      border-top: 1px solid var(--rule);
+      box-shadow: 0 -15px 45px rgba(54, 45, 32, 0.05);
+    }
+    .department {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: clamp(4rem, 8vw, 7rem) 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .department-header {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 4rem;
+    }
+    .department-index { color: var(--gold); font-family: var(--sans); font-size: 0.72rem; font-weight: 750; letter-spacing: 0.14em; text-transform: uppercase; }
+    .department h2 { margin: 0; font-size: clamp(2.3rem, 5vw, 4.5rem); font-weight: 500; letter-spacing: -0.045em; line-height: 1; }
+    .article {
+      width: min(740px, 100%);
+      margin: 0 auto;
+      scroll-margin-top: 6rem;
+    }
+    .article + .article { margin-top: 6rem; padding-top: 5rem; border-top: 1px solid var(--rule); }
+    .article p { margin: 0 0 1.35rem; }
+    .article p.article-label { margin: 0 0 0.9rem; color: var(--rust); font-family: var(--sans); font-size: 0.7rem; font-weight: 750; letter-spacing: 0.12em; text-transform: uppercase; }
+    .article h3 { margin: 0; padding-bottom: 0.18em; font-size: clamp(2.15rem, 5vw, 4rem); font-weight: 520; letter-spacing: -0.04em; line-height: 1.06; }
+    .article p.article-deck { margin: 1.85rem 0 0; color: #4c565d; font-size: 1.2rem; line-height: 1.48; }
+    .article p.article-meta { margin: 1.35rem 0 2.2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule); color: var(--muted); font-family: var(--sans); font-size: 0.76rem; }
+    .article-opening::first-letter {
+      float: left;
+      margin: 0.08em 0.1em 0 0;
+      color: var(--navy);
+      font-size: 4.25rem;
+      line-height: 0.78;
+    }
+    .action-box {
+      margin: 2.2rem 0;
+      padding: 1.25rem 1.4rem;
+      border-top: 1px solid var(--navy);
+      border-bottom: 1px solid var(--navy);
+      background: #eef2f3;
+    }
+    .action-box strong { display: block; margin-bottom: 0.35rem; color: var(--navy); font-family: var(--sans); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .action-box p { margin: 0; font-size: 0.96rem; line-height: 1.55; }
+    .sources { margin-top: 2.3rem; padding-top: 1rem; border-top: 1px dotted var(--rule); font-family: var(--sans); font-size: 0.78rem; line-height: 1.55; }
+    .sources strong { color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+    .sources a { margin-right: 0.45rem; }
+    .back-link { display: inline-block; margin-top: 1.5rem; font-family: var(--sans); font-size: 0.76rem; font-weight: 650; text-decoration: none; text-transform: uppercase; }
+    .briefs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+    .department-briefs { width: min(980px, 100%); margin: 5rem auto 0; }
+    .more-heading {
+      margin: 0 0 1rem;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 750;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .briefs.two-up { grid-template-columns: repeat(2, 1fr); }
+    .brief { padding: 1.6rem; background: var(--card); }
+    .brief h3 { margin: 0.45rem 0 0.7rem; font-size: 1.35rem; font-weight: 600; line-height: 1.18; }
+    .brief p { margin: 0 0 1rem; color: #4c565d; font-size: 0.93rem; line-height: 1.5; }
+    .brief a { font-family: var(--sans); font-size: 0.75rem; font-weight: 650; }
+    .footer {
+      padding: 4rem 1rem 5rem;
+      background: var(--navy-deep);
+      color: rgba(255,255,255,0.78);
+      text-align: center;
+    }
+    .footer strong { display: block; color: white; font-size: 1.35rem; letter-spacing: 0.04em; }
+    .footer p { max-width: 650px; margin: 0.75rem auto 0; font-family: var(--sans); font-size: 0.8rem; line-height: 1.55; }
+    .footer a { color: white; }
+
+    @media (max-width: 850px) {
+      .lead-grid { grid-template-columns: 1fr; }
+      .signal-art { min-height: 280px; order: -1; }
+      .story-card { grid-column: span 6; }
+      .story-card:nth-child(n) { padding: 1.4rem; border-right: 1px solid var(--rule); }
+      .story-card:nth-child(2n) { border-right: 0; }
+      .story-card:nth-child(n+3) { border-top: 1px solid var(--rule); }
+      .department-header { grid-template-columns: 1fr; gap: 0.7rem; }
+      .briefs { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      body { font-size: 17px; }
+      .utility-inner { width: calc(100% - 1rem); }
+      .utility-nav { max-width: 65vw; }
+      .cover, .department { width: min(100% - 1.3rem, 1180px); }
+      .edition-line { flex-direction: column; gap: 0.1rem; }
+      .edition-line span + span::before { content: none; }
+      .lead-title { font-size: 2.75rem; }
+      .story-card { grid-column: 1 / -1; min-height: 0; }
+      .story-card:nth-child(n) { border-right: 0; border-top: 1px solid var(--rule); }
+      .story-card:first-child { border-top: 0; }
+      .edition-note { grid-template-columns: 1fr; gap: 0.5rem; }
+      .department { padding: 4rem 0; }
+      .article + .article { margin-top: 4rem; padding-top: 4rem; }
+    }
+    @media print {
+      :root { --paper: white; --card: white; }
+      .utility-bar, .reading-progress, .back-link { display: none; }
+      body { background: white; font-size: 11pt; }
+      .cover, .department { width: 100%; }
+      .cover { padding-top: 1rem; }
+      .signal-art { min-height: 240px; box-shadow: none; }
+      .article { break-inside: avoid; }
+      a { color: inherit; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body><a class="skip-link" href="#main">Skip to the briefing</a><div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+<header class="utility-bar"><div class="utility-inner"><a class="mini-masthead" href="#cover">The Daily Brief</a><nav class="utility-nav" aria-label="Briefing departments"><a href="#security-ai">Security + AI</a><a href="#courts-law">Courts + Law</a><a href="#enterprise-tech">Enterprise Tech</a><a href="#us-world">U.S. + World</a><a href="#interesting">Interesting</a></nav></div></header>
+<main id="main"><section class="cover" id="cover" aria-labelledby="masthead"><header class="masthead-block"><div class="edition-line"><span>Friday, October 2, 2026</span><span>Morning edition</span></div><h1 class="masthead" id="masthead">The Daily Brief</h1><p class="tagline">Security, courts, technology and the wider world</p></header>
+<section class="lead-grid" aria-labelledby="lead-cover-title"><div><p class="kicker">The Lead · Network Security</p><h2 class="lead-title" id="lead-cover-title">Patch the Manager. Preserve the evidence.</h2><p class="lead-deck">Cisco’s exploited SD-WAN authentication bypass makes the upgrade urgent. Its updated response also asks whether attackers already got in.</p><p class="byline">A Friday edition led by operational security, with a federal audit, judiciary changes and selective world coverage.</p><a class="read-link" href="#cisco">Read the lead story</a></div><div class="signal-art" aria-hidden="true"><span class="signal-number">SIGNAL / 01</span><div class="signal-copy"><strong>2</strong><span>jobs to track: close the flaw and review for compromise</span></div></div></section>
+<section class="front-page" aria-labelledby="front-page-title"><div class="section-heading"><h2 id="front-page-title">Inside Today’s Brief</h2><p>12 stories · About a 9-minute read</p></div><div class="story-grid"><article class="story-card"><span class="card-label">Email Security · Developing</span><h3><a href="#fortimail">FortiMail has an exploited flaw, with fixes still listed as upcoming</a></h3><p>The practical response depends on the available workaround, rather than assuming that a named future firmware version is already downloadable.</p></article><article class="story-card"><span class="card-label">Email Security · Patch Available</span><h3><a href="#kiteworks">Kiteworks fixes a remote root-code-execution flaw</a></h3><p>The Email Protection Gateway advisory gives a clear version boundary: releases before 9.4.1 are affected.</p></article><article class="story-card"><span class="card-label">Federal Cybersecurity · Assessment</span><h3><a href="#audit">An “effective” security rating can hide a program moving backward</a></h3><p>Education’s new audit preserves the overall rating while warning that regression across several domains is unsustainable.</p></article><article class="story-card"><span class="card-label">Exchange Online · Verification Watch</span><h3><a href="#ews">The next EWS question is which applications remain authorized</a></h3><p>A newly reproduced Message Center notice points to a more specific allow-list deadline; confirm the controlling notice in the tenant.</p></article><article class="story-card"><span class="card-label">Federal Judiciary · News Brief</span><h3><a href="#chairs">Judicial Conference leadership changes, with continuity in IT</a></h3><p>Nine new committee chairs took office; the Information Technology chair received a one-year extension.</p></article><article class="story-card"><span class="card-label">Energy · Developing</span><h3><a href="#diesel">Trump announces a European diesel-reserve release, with details missing</a></h3><p>The announcement adds a concrete supply-policy claim to the war’s energy consequences, but volumes and participating countries remain unspecified.</p></article><article class="story-card"><span class="card-label">Ukraine · Update</span><h3><a href="#kyiv">Kyiv bridge closures turn renewed strikes into a mobility problem</a></h3><p>Friday’s update adds transport disruption to the attacks covered yesterday.</p></article><article class="story-card"><span class="card-label">Photography · Worth a Look</span><h3><a href="#nebulae">One photographer, 313 nebulas and about 800 hours</a></h3><p>Today’s astronomy picture is a completed catalog rather than another isolated spectacular object.</p></article></div></section><aside class="edition-note" aria-label="Edition note"><strong>Edition note</strong><p>Research cutoff: 8:38 a.m. Mountain, Oct. 2, 2026.  A focused morning package, shorter than the normal 15–20-minute target.  Continuing stories return for new operational details.  EWS Message Center dates are a verification watch because the authenticated tenant notice was unavailable.</p></aside></section><div class="publication"><section class="department" id="security-ai" aria-labelledby="security-ai-title"><header class="department-header"><span class="department-index">Department 01</span><h2 id="security-ai-title">Security + AI</h2></header><article class="article" id="cisco"><p class="article-label">The Lead · Active Exploitation</p><h3>Cisco’s SD-WAN fix comes with a second job: checking for compromise</h3><p class="article-deck">The vendor’s updated remediation instructions pair an immediate upgrade with evidence collection across every Manager node.</p><p class="article-meta">October 2 morning edition</p><p class="article-opening">Cisco says attackers are exploiting CVE-2026-76504, an authentication bypass in Catalyst SD-WAN Manager.  The flaw allows a remote attacker without an account to reach the application programming interface with administrator privileges.  Cisco disclosed it Sept. 30; the remediation guide was updated Oct. 1.</p><p>The vulnerability concerns how encoded request addresses are handled.  Cisco says affected Manager software is vulnerable regardless of configuration and that no workaround fixes the flaw.  Restricting access to trusted hosts is a temporary exposure reduction.  It does not replace installing the appropriate fixed release.  The advisory lists a separate first fixed version for each supported release train.</p><p>The updated response sequence deserves attention.  Collect diagnostic bundles from all Managers before upgrading, including every cluster member and disaster-recovery node.  Then upgrade without waiting for Cisco’s Technical Assistance Center to finish its review.  Submit the bundles for compromise scanning and follow the additional remediation guidance if the review finds evidence of intrusion.</p><p>Editorial assessment: This is a useful distinction between closing the entry point and deciding whether the system remains trustworthy.  An upgrade can prevent the original exploit from working again while leaving the question of earlier unauthorized activity unresolved.  A patch-completion report should therefore preserve a separate entry for the compromise review and its result.</p><p>For a network team, the immediate scope question is whether it operates Catalyst SD-WAN Manager, formerly vManage, and which release train it runs.  Cisco’s managed-cloud release has a separate remediation status.  A generic statement that “Cisco is patched” is too broad to establish what happened to a particular deployment.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.cisco.com/c/en/us/support/docs/csa/cisco-sa-sdwan-webauth-xr8beuuU.html" target="_blank" rel="noreferrer">Cisco security advisory</a> · <a href="https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/226384-remediate-catalyst-sd-wan-security.html" target="_blank" rel="noreferrer">Cisco’s updated remediation workflow</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="fortimail"><p class="article-label">Email Security · Developing</p><h3>FortiMail has an exploited flaw, with fixes still listed as upcoming</h3><p class="article-deck">The practical response depends on the available workaround, rather than assuming that a named future firmware version is already downloadable.</p><p class="article-meta">October 2 morning edition</p><p class="article-opening">Fortinet’s Oct. 1 advisory identifies CVE-2026-104286 as an unauthenticated FortiMail vulnerability exploited in the wild.  Crafted web requests can write arbitrary files through path traversal and null-byte handling flaws.  The vendor rates it critical and publishes indicators of compromise.</p><p>At this edition’s cutoff, the advisory lists FortiMail 8.0.2, 7.6.7 and 7.4.9 as upcoming fixes.  Its workaround is to disable the identity-based encryption (IBE) feature, or disable internet access to the management interface or limit access to a trusted private network.  Administrators should use the advisory’s affected-version table and check current release availability before choosing an upgrade path.</p><p>Editorial assessment: The release-status wording changes the response.  A ticket that merely schedules one of those versions can leave current exposure unaddressed.  Record which supported mitigation was actually applied, confirm that it works in the deployment, and retain the separate compromise-review task.  Do not equate reduced reachability with proof that an appliance was never compromised.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.fortiguard.com/psirt/FG-IR-26-175" target="_blank" rel="noreferrer">Fortinet advisory FG-IR-26-175</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="kiteworks"><p class="article-label">Email Security · Patch Available</p><h3>Kiteworks fixes a remote root-code-execution flaw</h3><p class="article-deck">The Email Protection Gateway advisory gives a clear version boundary: releases before 9.4.1 are affected.</p><p class="article-meta">October 2 morning edition</p><p class="article-opening">Kiteworks’ Sept. 30 advisory says CVE-2026-54154 may let a remote attacker execute arbitrary code with root privileges on its Email Protection Gateway.  Its severity score is 10.0; the published attack metrics require neither authentication nor user interaction.  The affected range is all gateway versions before 9.4.1, with 9.4.1 or later identified as the remediation.</p><p>The vendor credits researchers working through its bug bounty program.  This advisory does not establish that the vulnerability has been exploited in the wild.  Keep that evidence boundary separate from its severe potential impact.</p><p>Editorial assessment: Gateway inventories should identify the product and installed version explicitly.  This finding concerns the Email Protection Gateway, and should not be generalized to every Kiteworks service or deployment.  Teams using a managed provider should obtain confirmation for their instance rather than infer protection from a general vendor announcement.</p><p class="sources"><strong>Sources:</strong> <a href="https://github.com/kiteworks/security-advisories/security/advisories/GHSA-5xhq-9wq3-rvj6" target="_blank" rel="noreferrer">Kiteworks’ original security advisory</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="audit"><p class="article-label">Federal Cybersecurity · Assessment</p><h3>An “effective” security rating can hide a program moving backward</h3><p class="article-deck">Education’s new audit preserves the overall rating while warning that regression across several domains is unsustainable.</p><p class="article-meta">October 2 morning edition</p><p class="article-opening">The Department of Education’s inspector general published its fiscal 2026 information-security audit Sept. 30.  The assessed program met the minimum requirements for an effective rating, but the report’s summary identifies 23 conditions across six of ten domains and warns about deterioration.  The conclusion applies to the subset of systems evaluated, not a universal assurance about every agency system.</p><p>The report gives the warning substance.  Its core-domain table shows supply-chain risk management dropping from an optimized rating to consistently implemented, and identity and access management falling from consistently implemented to defined.  Incident response improved.  A single overall adjective would obscure that uneven pattern.</p><p>The oversight summary also identifies missing retained documentation supporting access provisioning.  That is a practical evidence problem: an organization may have a process, but cannot reliably demonstrate the basis on which users received access.</p><p>Editorial assessment: This is relevant to implementation-accountability work because a binary completion label can erase both deterioration and partial success.  A stronger management view preserves the assessed scope, current operating evidence, unresolved findings and direction of travel.  “Effective” should be read with the audit’s qualifiers rather than used as a substitute for them.</p><p>The constructive lesson is to ask what would make a control stop being operationally verified after it was first completed.  Expired agreements, missing access records or a weakening inventory can change that answer without any new technology arriving.  Evidence must be maintained through the control’s life, and a dashboard needs room to show regression.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.oversight.gov/reports/audit/federal-information-security-modernization-act-2014-audit-us-department-educations" target="_blank" rel="noreferrer">Inspector general’s oversight summary</a> · <a href="https://www.oversight.gov/sites/default/files/documents/reports/2026-10/FY26%20A26IT0281%20%289.30.26%29v100_508_SECURED.pdf" target="_blank" rel="noreferrer">Original 78-page audit</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="divd"><p class="article-label">AI Security · Investigation</p><h3>A breached security nonprofit is cautious about its AI attribution</h3><p class="article-deck">A recent disclosure deserves attention, but does not yet establish the full autonomy, method or extent of the attack.</p><p class="article-meta">October 2 morning edition</p><p class="article-opening">The Dutch Institute for Vulnerability Disclosure says its infrastructure was breached and that the attack’s modus operandi indicates agentic artificial intelligence was involved.  In its initial Sept. 24 disclosure, it described isolating infrastructure, bringing in outside incident-response assistance and notifying the relevant authorities and directly involved parties.</p><p>This is a recent disclosure newly included in the briefing, rather than an assertion of a new Oct. 2 finding.  The notice says the investigation is ongoing.  It does not, by itself, establish which model was involved, how much human direction occurred, or a final data-loss count.</p><p>Editorial assessment: Keep the attribution provisional.  The operational response can proceed while that uncertainty remains: preserve evidence, constrain access and determine what was reached.  The AI label adds an investigative question; it does not remove the need to reconstruct the intrusion from logs and affected systems.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.divd.nl/newsroom/articles/when-no-if/" target="_blank" rel="noreferrer">DIVD’s initial incident disclosure</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article></section><section class="department" id="courts-law" aria-labelledby="courts-law-title"><header class="department-header"><span class="department-index">Department 02</span><h2 id="courts-law-title">Courts + Law</h2></header><article class="article" id="chairs"><p class="article-label">Federal Judiciary · News Brief</p><h3>Judicial Conference leadership changes, with continuity in IT</h3><p class="article-deck">Nine new committee chairs took office; the Information Technology chair received a one-year extension.</p><p class="article-meta">October 2 morning edition</p><p class="article-opening">Chief Justice John Roberts selected nine new Judicial Conference committee chairs and extended four current chairs for a year, the judiciary announced Oct. 1.  Judge Michael Scudder’s term as chair of the Information Technology Committee was extended by one year.  The appointments generally took effect Oct. 1, with exceptions identified in the announcement.</p><p>This is a leadership update rather than a new technology policy.  It adds a current governance development without repeating last month’s case-management and AI-policy report as though another operating rule had been issued.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.uscourts.gov/data-news/judiciary-news/2026/10/01/chief-justice-names-conference-committee-chairs" target="_blank" rel="noreferrer">Official judiciary announcement</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="chicago"><p class="article-label">Federal Circuit · Coming Week</p><h3>Chicago law schools become working federal courtrooms</h3><p class="article-deck">The court’s visiting session will hear real appeals across seven venues next week.</p><p class="article-meta">October 2 morning edition</p><p class="article-opening">The U.S. Court of Appeals for the Federal Circuit says eight three-judge panels will hear 32 pending appeals in Chicago Oct. 5–8.  The venues include six law schools and the Seventh Circuit courthouse.  The court announced the session Sept. 29.</p><p>The interesting feature is the connection between legal education and an operating appellate docket.  These are pending cases, rather than a mock argument or a demonstration detached from judicial work.  The court’s announcement links the full press release for the session.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.cafc.uscourts.gov/chicago-law-schools-become-federal-courtrooms-for-citywide-october-session/" target="_blank" rel="noreferrer">Federal Circuit session announcement</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article></section><section class="department" id="enterprise-tech" aria-labelledby="enterprise-tech-title"><header class="department-header"><span class="department-index">Department 03</span><h2 id="enterprise-tech-title">Enterprise Tech</h2></header><article class="article" id="ews"><p class="article-label">Exchange Online · Verification Watch</p><h3>The next EWS question is which applications remain authorized</h3><p class="article-deck">A newly reproduced Message Center notice points to a more specific allow-list deadline; confirm the controlling notice in the tenant.</p><p class="article-meta">October 2 morning edition</p><p class="article-opening">Yesterday’s edition covered Exchange Web Services (EWS) retirement.  The new item to check is Microsoft Message Center notice MC1485116.  Public reproductions describe an Oct. 10 requirement for affected Worldwide tenants that retain EWS to configure EWSAllowedAppIDs.  The authenticated tenant notice was not available for direct verification here, so those operational dates should be confirmed there before action.</p><p>The official Microsoft guidance independently establishes the broader requirement: this is a phased Exchange Online retirement, with an application-ID allow list controlling continued access.  It does not retire EWS in on-premises Exchange Server.  Microsoft also provides usage reports and migration tools.</p><p>Editorial assessment: An enabled protocol does not establish that every dependent application is authorized or that a replacement workflow works.  The useful review starts with actual application use, then checks the allow list and the migration path.  Infrequent jobs deserve deliberate testing because a recent-activity inventory can miss them.</p><p>The verification target is narrow: read MC1485116 in the organization’s Message Center, compare its scope and dates with the tenant’s current settings, and test the applications that still require EWS.  Treat the published reproductions as a pointer to the controlling notice.</p><p class="sources"><strong>Sources:</strong> <a href="https://techcommunity.microsoft.com/blog/exchange/exchange-online-ews-your-time-is-almost-up/4492361" target="_blank" rel="noreferrer">Microsoft’s official retirement plan</a> · <a href="https://learn.microsoft.com/en-us/exchange/clients-and-mobile-in-exchange-online/deprecation-of-ews-exchange-online" target="_blank" rel="noreferrer">Microsoft’s official migration guidance</a> · <a href="https://message.cengizyilmaz.net/message/mc1485116-microsoft-exchange-online-exchange-web-services-ews-enforcement-update-for-ewsallowedappids" target="_blank" rel="noreferrer">Public reproduction of MC1485116; verify in tenant</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article></section><section class="department" id="us-world" aria-labelledby="us-world-title"><header class="department-header"><span class="department-index">Department 04</span><h2 id="us-world-title">U.S. + World</h2></header><article class="article" id="diesel"><p class="article-label">Energy · Developing</p><h3>Trump announces a European diesel-reserve release, with details missing</h3><p class="article-deck">The announcement adds a concrete supply-policy claim to the war’s energy consequences, but volumes and participating countries remain unspecified.</p><p class="article-meta">October 2 morning edition</p><p class="article-opening">President Donald Trump said Friday that Europe had agreed to release diesel reserves immediately, the Associated Press reported.  His announcement did not identify the countries or volumes.  The report also described an overnight conversation with France’s president and a Group of Seven leaders’ discussion of petroleum availability.</p><p>Editorial assessment: The meaningful next evidence is a country-by-country release plan and delivery timetable.  Until that appears, the announcement should not be converted into a quantified supply increase or a prediction that fuel prices will fall.  It returns the Iran-energy story for a new proposed response, rather than repeating yesterday’s military-contingency coverage.</p><p class="sources"><strong>Sources:</strong> <a href="https://apnews.com/article/774a360d1646d9ce8aba764fdd9959d2" target="_blank" rel="noreferrer">Associated Press on the announcement and missing details</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="kyiv"><p class="article-label">Ukraine · Update</p><h3>Kyiv bridge closures turn renewed strikes into a mobility problem</h3><p class="article-deck">Friday’s update adds transport disruption to the attacks covered yesterday.</p><p class="article-meta">October 2 morning edition</p><p class="article-opening">Russian air strikes killed one person, injured two and forced the closure of two bridges across the Dnipro River, Reuters reported Friday, citing Kyiv authorities.  Traffic was closed on the Southern and Paton bridges, with partial restrictions on the Metro Bridge.  Russia described its targets as military-related; that is its claim, rather than an independently established characterization.</p><p>Editorial assessment: The new consequence is the disruption to movement across the city.  Bridge restrictions can affect ordinary commuting, supply routes and emergency access even when the structures remain standing.  The closures justify a short continuity update; they do not warrant retelling the full overnight-strike history.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.streetinsider.com/Reuters/Russian%2Bair%2Bstrikes%2Bkill%2Bone%2C%2Brestrict%2Btraffic%2Bacross%2BDnipro%2BRiver%2Bin%2BKyiv/27137856.html" target="_blank" rel="noreferrer">Reuters report, syndicated by StreetInsider</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="gandak"><p class="article-label">Earth Observation · News Brief</p><h3>Satellite images reveal the Gandak flood’s expanded footprint</h3><p class="article-deck">NASA’s before-and-after view adds geographic evidence to the disaster reports.</p><p class="article-meta">October 2 morning edition</p><p class="article-opening">NASA Earth Observatory’s Oct. 2 report compares Sept. 20 and Sept. 29 satellite observations of the Gandak River after intense late-monsoon rain in Nepal.  It describes record river levels and breached embankments in Nepal and India, with farmland and settlements inundated along hundreds of kilometers.</p><p>In the false-color imagery, floodwater is blue and vegetation green.  The images help show where water expanded, including beyond the river’s ordinarily flood-prone agricultural channel.  They establish geographic extent rather than a final casualty or damage tally; the linked report includes the imagery and its observation dates.</p><p class="sources"><strong>Sources:</strong> <a href="https://science.nasa.gov/earth/earth-observatory/rains-swamp-the-gandak-river/" target="_blank" rel="noreferrer">NASA’s dated satellite comparison</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article></section><section class="department" id="interesting" aria-labelledby="interesting-title"><header class="department-header"><span class="department-index">Department 05</span><h2 id="interesting-title">Things Steve Would Find Interesting</h2></header><article class="article" id="nebulae"><p class="article-label">Photography · Worth a Look</p><h3>One photographer, 313 nebulas and about 800 hours</h3><p class="article-deck">Today’s astronomy picture is a completed catalog rather than another isolated spectacular object.</p><p class="article-meta">October 2 morning edition</p><p class="article-opening">NASA’s Astronomy Picture of the Day features Bing Xin’s images of all 313 objects in the Sharpless catalog.  The project involved dark-sky travel in eastern China and Inner Mongolia, with individual objects taking two to six hours to capture and the complete collection roughly 800 hours.</p><p>The collection combines narrowband imaging of ionized hydrogen and oxygen with ordinary color filters.  Despite the catalog’s emphasis on hydrogen-emission regions, the set also includes planetary nebulas and supernova remnants.</p><p>Editorial assessment: It is an appealing photographic project because completeness changes the experience.  The famous objects become part of a varied population rather than the whole story.  Open the linked NASA page and explore the photographer’s collection at full scale; a small decorative thumbnail would lose much of what makes it worth seeing.</p><p class="sources"><strong>Sources:</strong> <a href="https://science.nasa.gov/image-article/apod-2026-october-2-the-complete-sharpless-catalog-313-nebulae/" target="_blank" rel="noreferrer">NASA’s Oct. 2 catalog feature and photographer links</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article></section></div></main><footer class="footer"><strong>The Daily Brief</strong><p>Prepared for Steve.  Source findings, provisional claims and editorial interpretation are distinguished in the articles.  Research cutoff: Oct. 2, 2026, 8:38 a.m. Mountain.</p><p><a href="#cover">Return to the cover</a></p></footer>  <script>
+    (() => {
+      const progress = document.getElementById('reading-progress');
+      const updateProgress = () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const value = max > 0 ? (window.scrollY / max) * 100 : 0;
+        progress.style.width = `${Math.min(100, Math.max(0, value))}%`;
+      };
+      updateProgress();
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      window.addEventListener('resize', updateProgress);
+    })();
+  </script>
+</body>
+</html>
