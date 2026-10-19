@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="The Daily Brief for Monday, October 19, 2026.">
+  <title>The Daily Brief | October 19, 2026</title>
+  <style>
+    :root {
+      --paper: #f5f1e8;
+      --paper-deep: #ebe4d6;
+      --card: #fbf9f4;
+      --ink: #17202a;
+      --muted: #667079;
+      --rule: #cfc7b8;
+      --navy: #173c55;
+      --navy-deep: #102d41;
+      --gold: #ad7c2f;
+      --rust: #a34a31;
+      --teal: #2c6b69;
+      --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+      --sans: Aptos, "Segoe UI", Helvetica, Arial, sans-serif;
+      --shadow: 0 20px 60px rgba(40, 34, 25, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 6.5rem; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(173, 124, 47, 0.08), transparent 27rem),
+        var(--paper);
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.67;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: var(--navy); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+    a:hover { color: var(--rust); }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+    .skip-link {
+      position: fixed;
+      z-index: 100;
+      left: 1rem;
+      top: -5rem;
+      padding: 0.65rem 1rem;
+      background: var(--ink);
+      color: white;
+      font-family: var(--sans);
+    }
+    .skip-link:focus { top: 1rem; }
+    .reading-progress {
+      position: fixed;
+      z-index: 60;
+      inset: 0 auto auto 0;
+      width: 0;
+      height: 3px;
+      background: var(--gold);
+    }
+    .utility-bar {
+      position: sticky;
+      z-index: 50;
+      top: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(16, 45, 65, 0.96);
+      color: white;
+      backdrop-filter: blur(12px);
+    }
+    .utility-inner {
+      width: min(1180px, calc(100% - 2rem));
+      min-height: 3.25rem;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .mini-masthead {
+      margin-right: auto;
+      color: white;
+      font-family: var(--serif);
+      font-size: 0.93rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .utility-nav { display: flex; gap: 1rem; overflow-x: auto; scrollbar-width: none; }
+    .utility-nav a {
+      flex: 0 0 auto;
+      color: rgba(255, 255, 255, 0.82);
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      letter-spacing: 0.045em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .utility-nav a:hover { color: white; }
+    .cover {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: clamp(3.5rem, 8vw, 7.25rem) 0 4rem;
+    }
+    .masthead-block {
+      text-align: center;
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      padding: 1.35rem 0 1.15rem;
+    }
+    .edition-line {
+      display: flex;
+      justify-content: center;
+      gap: 0.85rem;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 0.71rem;
+      font-weight: 650;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+    .edition-line span + span::before { content: "•"; margin-right: 0.85rem; color: var(--gold); }
+    .masthead {
+      margin: 0.22rem 0 0;
+      font-size: clamp(3rem, 9vw, 7.5rem);
+      font-weight: 600;
+      letter-spacing: -0.065em;
+      line-height: 0.95;
+    }
+    .tagline {
+      margin: 0.75rem 0 0;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .lead-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.72fr);
+      gap: clamp(2rem, 5vw, 5rem);
+      padding: clamp(3rem, 6vw, 5.75rem) 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .kicker {
+      margin: 0 0 0.85rem;
+      color: var(--rust);
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 750;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+    .lead-title {
+      max-width: 850px;
+      margin: 0;
+      font-size: clamp(2.75rem, 6.5vw, 5.8rem);
+      font-weight: 500;
+      letter-spacing: -0.045em;
+      line-height: 0.99;
+    }
+    .lead-deck {
+      max-width: 780px;
+      margin: 1.5rem 0 1.1rem;
+      color: #3f4950;
+      font-size: clamp(1.14rem, 2vw, 1.42rem);
+      line-height: 1.48;
+    }
+    .byline, .meta {
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 0.79rem;
+    }
+    .read-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: 1.25rem;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .read-link::after { content: "→"; transition: transform 160ms ease; }
+    .read-link:hover::after { transform: translateX(4px); }
+    .signal-art {
+      position: relative;
+      min-height: 440px;
+      overflow: hidden;
+      align-self: stretch;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.08), transparent 40%),
+        var(--navy-deep);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+    .signal-art::before, .signal-art::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 50%;
+    }
+    .signal-art::before { width: 360px; height: 360px; right: -135px; top: -100px; box-shadow: 0 0 0 55px rgba(255,255,255,0.035), 0 0 0 110px rgba(255,255,255,0.025); }
+    .signal-art::after { width: 230px; height: 230px; left: -110px; bottom: -75px; box-shadow: 0 0 0 45px rgba(173,124,47,0.12), 0 0 0 90px rgba(173,124,47,0.07); }
+    .signal-number {
+      position: absolute;
+      left: 2rem;
+      top: 1.5rem;
+      color: rgba(255,255,255,0.35);
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+    }
+    .signal-copy {
+      position: absolute;
+      z-index: 2;
+      left: 2rem;
+      right: 2rem;
+      bottom: 2rem;
+      color: white;
+    }
+    .signal-copy strong { display: block; font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 500; line-height: 0.9; }
+    .signal-copy span { display: block; margin-top: 1rem; font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .front-page { padding-top: 3.5rem; }
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .section-heading h2 {
+      margin: 0 0 0.55rem;
+      font-size: clamp(1.55rem, 3vw, 2.25rem);
+      font-weight: 550;
+      letter-spacing: -0.025em;
+    }
+    .section-heading p { margin: 0 0 0.7rem; color: var(--muted); font-family: var(--sans); font-size: 0.77rem; }
+    .story-grid { display: grid; grid-template-columns: repeat(12, 1fr); border-bottom: 1px solid var(--rule); }
+    .story-card {
+      grid-column: span 4;
+      padding: 1.5rem 1.6rem 1.8rem 0;
+      border-right: 1px solid var(--rule);
+      min-height: 220px;
+    }
+    .story-card:nth-child(3n+2), .story-card:nth-child(3n+3) { padding-left: 1.6rem; }
+    .story-card:nth-child(3n) { padding-right: 0; border-right: 0; }
+    .story-card:nth-child(n+4) { border-top: 1px solid var(--rule); }
+    .card-label { color: var(--rust); font-family: var(--sans); font-size: 0.68rem; font-weight: 750; letter-spacing: 0.1em; text-transform: uppercase; }
+    .story-card h3 { margin: 0.45rem 0 0.65rem; font-size: 1.42rem; line-height: 1.15; font-weight: 600; letter-spacing: -0.015em; }
+    .story-card h3 a { color: var(--ink); text-decoration: none; }
+    .story-card h3 a:hover { color: var(--rust); }
+    .story-card p { margin: 0; color: #4d565d; font-size: 0.95rem; line-height: 1.5; }
+    .edition-note {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.5rem;
+      margin: 3.4rem 0 0;
+      padding: 1.4rem 1.6rem;
+      border-left: 3px solid var(--gold);
+      background: rgba(255,255,255,0.45);
+    }
+    .edition-note strong { font-family: var(--sans); font-size: 0.73rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .edition-note p { margin: 0; color: #4d565d; font-size: 0.91rem; line-height: 1.55; }
+    .publication {
+      background: var(--card);
+      border-top: 1px solid var(--rule);
+      box-shadow: 0 -15px 45px rgba(54, 45, 32, 0.05);
+    }
+    .department {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: clamp(4rem, 8vw, 7rem) 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .department-header {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 4rem;
+    }
+    .department-index { color: var(--gold); font-family: var(--sans); font-size: 0.72rem; font-weight: 750; letter-spacing: 0.14em; text-transform: uppercase; }
+    .department h2 { margin: 0; font-size: clamp(2.3rem, 5vw, 4.5rem); font-weight: 500; letter-spacing: -0.045em; line-height: 1; }
+    .article {
+      width: min(740px, 100%);
+      margin: 0 auto;
+      scroll-margin-top: 6rem;
+    }
+    .article + .article { margin-top: 6rem; padding-top: 5rem; border-top: 1px solid var(--rule); }
+    .article p { margin: 0 0 1.35rem; }
+    .article p.article-label { margin: 0 0 0.9rem; color: var(--rust); font-family: var(--sans); font-size: 0.7rem; font-weight: 750; letter-spacing: 0.12em; text-transform: uppercase; }
+    .article h3 { margin: 0; padding-bottom: 0.18em; font-size: clamp(2.15rem, 5vw, 4rem); font-weight: 520; letter-spacing: -0.04em; line-height: 1.06; }
+    .article p.article-deck { margin: 1.85rem 0 0; color: #4c565d; font-size: 1.2rem; line-height: 1.48; }
+    .article p.article-meta { margin: 1.35rem 0 2.2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule); color: var(--muted); font-family: var(--sans); font-size: 0.76rem; }
+    .article-opening::first-letter {
+      float: left;
+      margin: 0.08em 0.1em 0 0;
+      color: var(--navy);
+      font-size: 4.25rem;
+      line-height: 0.78;
+    }
+    .action-box {
+      margin: 2.2rem 0;
+      padding: 1.25rem 1.4rem;
+      border-top: 1px solid var(--navy);
+      border-bottom: 1px solid var(--navy);
+      background: #eef2f3;
+    }
+    .action-box strong { display: block; margin-bottom: 0.35rem; color: var(--navy); font-family: var(--sans); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .action-box p { margin: 0; font-size: 0.96rem; line-height: 1.55; }
+    .sources { margin-top: 2.3rem; padding-top: 1rem; border-top: 1px dotted var(--rule); font-family: var(--sans); font-size: 0.78rem; line-height: 1.55; }
+    .sources strong { color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+    .sources a { margin-right: 0.45rem; }
+    .back-link { display: inline-block; margin-top: 1.5rem; font-family: var(--sans); font-size: 0.76rem; font-weight: 650; text-decoration: none; text-transform: uppercase; }
+    .briefs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+    .department-briefs { width: min(980px, 100%); margin: 5rem auto 0; }
+    .more-heading {
+      margin: 0 0 1rem;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 750;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .briefs.two-up { grid-template-columns: repeat(2, 1fr); }
+    .brief { padding: 1.6rem; background: var(--card); }
+    .brief h3 { margin: 0.45rem 0 0.7rem; font-size: 1.35rem; font-weight: 600; line-height: 1.18; }
+    .brief p { margin: 0 0 1rem; color: #4c565d; font-size: 0.93rem; line-height: 1.5; }
+    .brief a { font-family: var(--sans); font-size: 0.75rem; font-weight: 650; }
+    .footer {
+      padding: 4rem 1rem 5rem;
+      background: var(--navy-deep);
+      color: rgba(255,255,255,0.78);
+      text-align: center;
+    }
+    .footer strong { display: block; color: white; font-size: 1.35rem; letter-spacing: 0.04em; }
+    .footer p { max-width: 650px; margin: 0.75rem auto 0; font-family: var(--sans); font-size: 0.8rem; line-height: 1.55; }
+    .footer a { color: white; }
+
+    @media (max-width: 850px) {
+      .lead-grid { grid-template-columns: 1fr; }
+      .signal-art { min-height: 280px; order: -1; }
+      .story-card { grid-column: span 6; }
+      .story-card:nth-child(n) { padding: 1.4rem; border-right: 1px solid var(--rule); }
+      .story-card:nth-child(2n) { border-right: 0; }
+      .story-card:nth-child(n+3) { border-top: 1px solid var(--rule); }
+      .department-header { grid-template-columns: 1fr; gap: 0.7rem; }
+      .briefs { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      body { font-size: 17px; }
+      .utility-inner { width: calc(100% - 1rem); }
+      .utility-nav { max-width: 65vw; }
+      .cover, .department { width: min(100% - 1.3rem, 1180px); }
+      .edition-line { flex-direction: column; gap: 0.1rem; }
+      .edition-line span + span::before { content: none; }
+      .lead-title { font-size: 2.75rem; }
+      .story-card { grid-column: 1 / -1; min-height: 0; }
+      .story-card:nth-child(n) { border-right: 0; border-top: 1px solid var(--rule); }
+      .story-card:first-child { border-top: 0; }
+      .edition-note { grid-template-columns: 1fr; gap: 0.5rem; }
+      .department { padding: 4rem 0; }
+      .article + .article { margin-top: 4rem; padding-top: 4rem; }
+    }
+    @media print {
+      :root { --paper: white; --card: white; }
+      .utility-bar, .reading-progress, .back-link { display: none; }
+      body { background: white; font-size: 11pt; }
+      .cover, .department { width: 100%; }
+      .cover { padding-top: 1rem; }
+      .signal-art { min-height: 240px; box-shadow: none; }
+      .article { break-inside: avoid; }
+      a { color: inherit; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body><a class="skip-link" href="#main">Skip to the briefing</a><div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+<header class="utility-bar"><div class="utility-inner"><a class="mini-masthead" href="#cover">The Daily Brief</a><nav class="utility-nav" aria-label="Briefing departments"><a href="#courts-law">Courts + Law</a><a href="#security-ai">Security + AI</a><a href="#enterprise-tech">Enterprise Tech</a><a href="#us-world">U.S. + World</a><a href="#interesting">Things Steve Would Find Interesting</a></nav></div></header>
+<main id="main"><section class="cover" id="cover" aria-labelledby="masthead"><header class="masthead-block"><div class="edition-line"><span>Monday, October 19, 2026</span><span>Morning edition</span></div><h1 class="masthead" id="masthead">The Daily Brief</h1><p class="tagline">Security, courts, technology and the wider world</p></header>
+<section class="lead-grid" aria-labelledby="lead-cover-title"><div><p class="kicker">The lead · Judiciary operations</p><h2 class="lead-title" id="lead-cover-title">A working docket. A broken delivery chain.</h2><p class="lead-deck">The Bankruptcy Noticing Center disruption separates filing from completed notice, with recovery work extending beyond bringing a service back online.</p><p class="byline">Also: supervising enterprise agents, two exploited appliance flaws, today’s hunting-table transition and a dusty object in the asteroid belt.</p><a class="read-link" href="#bnc">Read the lead story</a></div><div class="signal-art" aria-hidden="true"><span class="signal-number">SIGNAL / 01</span><div class="signal-copy"><strong>Notice</strong><span>The business process behind the system</span></div></div></section>
+<section class="front-page" aria-labelledby="front-page-title"><div class="section-heading"><h2 id="front-page-title">Inside today’s brief</h2><p>15 stories · About a 13-minute read</p></div><div class="story-grid"><article class="story-card"><span class="card-label">AI governance · Today</span><h3><a href="#perception">Microsoft says the agent inside the network needs supervision, too</a></h3><p>Today’s Perception argument treats internally deployed agents as a security boundary problem.  The announcement leaves implementation questions for buyers to resolve.</p></article><article class="story-card"><span class="card-label">Active exploitation · Email infrastructure</span><h3><a href="#cisco">Cisco’s email-gateway fix includes a scanner update</a></h3><p>Check the component as well as the operating-system release.  Suspected compromise requires a separate recovery decision.</p></article><article class="story-card"><span class="card-label">Remote support · Exploited vulnerability</span><h3><a href="#beyondtrust">BeyondTrust separates the cloud patch from the customer’s investigation</a></h3><p>The vendor has patched hosted Remote Support.  Self-hosted deployments and historical exposure still need individual confirmation.</p></article><article class="story-card"><span class="card-label">Defender administration · Effective today</span><h3><a href="#hunting">Entra hunting tables change names today, with automatic portal migration</a></h3><p>Microsoft says custom detections move automatically.  Review copies maintained outside the service as a separate housekeeping task.</p></article><article class="story-card"><span class="card-label">Evidence · Rulemaking watch</span><h3><a href="#evidence">AI evidence raises a question about who establishes reliability</a></h3><p>The October committee materials examine expert foundations and deepfakes.  They document proposals and debate, rather than an enacted federal evidence rule.</p></article><article class="story-card"><span class="card-label">Patch management · New proposal</span><h3><a href="#cohorts">Microsoft proposes reusing the exposure analysis across vulnerabilities</a></h3><p>Risk cohorts could reduce repeated questions.  They do not establish that one patch or workaround covers the group.</p></article><article class="story-card"><span class="card-label">Ukraine · Today</span><h3><a href="#ukraine">New power-grid attacks bring an intelligence-warning complaint</a></h3><p>Zelenskyy says partners again provided no early warning.  That claim needs to remain attributed.</p></article><article class="story-card"><span class="card-label">Astronomy · New preprint</span><h3><a href="#comet">A comet in the asteroid belt keeps producing dust</a></h3><p>Rubin and Keck observations support sustained activity.  Water ice remains a proposed explanation.</p></article></div></section><aside class="edition-note" aria-label="Edition note"><strong>Edition note</strong><p>Research cutoff: 10:37 a.m. Mountain, Oct. 19, 2026 (16:37 UTC).  This first edition since Oct. 5 selects material developments from the gap alongside today’s news; earlier events are dated explicitly.  Source claims and editorial assessments are distinguished.  No confirmed BNC restoration announcement was found in the official material reviewed.</p></aside></section><div class="publication"><section class="department" id="courts-law" aria-labelledby="courts-law-title"><header class="department-header"><span class="department-index">Department 01</span><h2 id="courts-law-title">Courts + Law</h2></header><article class="article" id="bnc"><p class="article-label">The lead · Judiciary operations</p><h3>Bankruptcy notices stall while the courts keep working</h3><p class="article-deck">A contractor cyber incident has interrupted a nationwide delivery service.  Docket activity and completed notice are now separate operational questions.</p><p class="article-meta">October 19 morning edition</p><p class="article-opening">A cybersecurity incident affecting BAE Systems has disrupted the Bankruptcy Noticing Center (BNC), the contractor-operated service that produces and transmits notices for federal bankruptcy courts nationwide.  The Administrative Office of the U.S. Courts disclosed the incident Oct. 15 and said BAE was investigating and working to restore operations.  The affected services include the center’s websites and National Creditor Registration Service.</p><p>Court notices place the start of the interruption on Oct. 9.  That is earlier than the national disclosure, an important distinction for anyone reconstructing which notices might need attention.  At this edition’s cutoff, the official material reviewed supplied no confirmed restoration announcement or definitive recovery timetable.  It also did not establish the attacker, initial access method or whether information was stolen.</p><p>The Southern District of Indiana’s Oct. 16 guidance draws the essential boundary: Case Management/Electronic Case Files (CM/ECF) remains operational, and registered users continue receiving Notices of Electronic Filing.  The affected channel is court-issued notice through the BNC.  A document’s appearance on the docket does not prove that its required BNC service was completed.</p><p>Local responses differ.  Indiana authorizes parties seeking relief to undertake certain otherwise court-served notices at their own expense, subject to applicable requirements and a certificate of service.  The Northern District of Illinois says hearings proceed unless ordered otherwise, while judges may reset deadlines or continue hearings as appropriate.  Those are local arrangements, not a nationwide suspension of deadlines or a universal transfer of noticing duties.</p><p>The Southern District of Florida’s recovery provision adds another operational problem: the clerk and affected parties must coordinate outstanding notices so restoration does not produce duplicate or inconsistent communications.  A service can come back online while its accumulated work still needs reconciliation.</p><p>Editorial assessment: The most useful status report would separate system availability, notices awaiting transmission, completed alternate service and notices requiring corrected dates.  A green infrastructure dashboard would answer only the first question.  For court technology teams, this incident illustrates how a shared vendor dependency can interrupt a legally significant business process even when the primary case-management application continues running.  Recovery planning needs an owner for the unfinished work as well as an owner for the system.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.uscourts.gov/data-news/judiciary-news/2026/10/15/cybersecurity-incident-disrupting-bankruptcy-court-operations" target="_blank" rel="noreferrer">Judiciary’s incident announcement</a> · <a href="https://www.insb.uscourts.gov/sites/insb/files/BNC_10162026_FAQs.pdf" target="_blank" rel="noreferrer">Indiana’s Oct. 16 operational FAQ</a> · <a href="https://www.insb.uscourts.gov/news/cmecf-update-re-update-form-links-within-events" target="_blank" rel="noreferrer">Indiana’s dated notices and interruption start</a> · <a href="https://www.ilnb.uscourts.gov/news/general-order-regarding-bankruptcy-noticing-center-service-interruption" target="_blank" rel="noreferrer">Illinois general-order announcement</a> · <a href="https://www.flsb.uscourts.gov/sites/flsb/files/documents/news/AO_2026-06_Order_Regarding_Bankruptcy_Noticing_Center_Service_Interruption.pdf" target="_blank" rel="noreferrer">Florida’s continuity and recovery order</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="evidence"><p class="article-label">Evidence · Rulemaking watch</p><h3>AI evidence raises a question about who establishes reliability</h3><p class="article-deck">The October committee materials examine expert foundations and deepfakes.  They document proposals and debate, rather than an enacted federal evidence rule.</p><p class="article-meta">October 19 morning edition</p><p class="article-opening">The Advisory Committee on Evidence Rules’ Oct. 15 agenda book puts artificial intelligence back into the machinery of federal rulemaking.  Its materials include a panel on AI offered as evidence and proposed Rule 707, alongside work on authentication and deepfakes.  The record shows continuing disagreement over how to test AI-generated conclusions when they arrive without an expert witness.</p><p>The included account of earlier deliberations describes competing approaches: require an expert to establish reliability, ordinarily require one while allowing another convincing foundation, or require an expert at trial as well.  Participants also questioned the breadth of the definition of AI and the treatment of familiar technologies.  These are choices under consideration, not a statement that one proposal has taken effect.</p><p>Editorial assessment: The useful distinction for technology staff is between retrieving a record and generating an analytical conclusion from it.  A system might faithfully extract messages yet make a contestable inference about which person was influential or which event caused another.  Preserving the original data, tool version, processing steps and validation evidence makes that distinction reviewable.  A polished output alone cannot explain the method.  The next development to watch is an official post-meeting report or revised text; this edition does not infer an Oct. 15 vote from a pre-meeting agenda.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.uscourts.gov/sites/default/files/document/2026-10_evidence_rules_agenda_book_9-23_final.pdf" target="_blank" rel="noreferrer">Official Oct. 15 agenda book, including prior minutes and AI panels</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article></section><section class="department" id="security-ai" aria-labelledby="security-ai-title"><header class="department-header"><span class="department-index">Department 02</span><h2 id="security-ai-title">Security + AI</h2></header><article class="article" id="perception"><p class="article-label">AI governance · Today</p><h3>Microsoft says the agent inside the network needs supervision, too</h3><p class="article-deck">Today’s Perception argument treats internally deployed agents as a security boundary problem.  The announcement leaves implementation questions for buyers to resolve.</p><p class="article-meta">October 19 morning edition</p><p class="article-opening">Microsoft’s Oct. 19 security announcement turns attention from malicious outsiders to the agents an enterprise deploys itself.  The company argues that objective-seeking systems can exceed organizational expectations without first being compromised.  It presents Project Perception as a way to combine conventional controls with continuous AI supervision.</p><p>The proposed stack brings identity, data, endpoint, network, cloud and runtime signals together.  Agents receive managed identities and permissions; risk assessment informs supervising Guardian Agents that can respond as activity changes.  Microsoft also calls for more visibility into model reasoning.  These are the vendor’s design and product claims, not independent evidence that every action is reliably intercepted or that an explanation reveals an agent’s actual intent.</p><p>Editorial assessment: A practical evaluation should start with a transaction the organization could not afford to have performed incorrectly: changing a security policy, releasing a document or modifying access.  Determine which component can block it, which identities can bypass that component and what happens when the supervisor is unavailable.  Those questions test enforceable boundaries.  A persuasive narrative about why a model acted should remain supporting evidence.</p><p>This is a substantive continuation of September’s runtime-boundary coverage because Microsoft is now explicitly applying its security stack to agents operating inside the enterprise.  The announcement alone does not settle coverage across third-party tools, licensing, failure behavior or available deployment modes.  Ask for a demonstrated enforcement path and auditable records for the actual workflow before treating a monitoring feature as an authorization control.</p><p class="sources"><strong>Sources:</strong> <a href="https://blogs.microsoft.com/blog/2026/10/19/securing-the-agentic-insider/" target="_blank" rel="noreferrer">Microsoft’s Oct. 19 announcement</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="cisco"><p class="article-label">Active exploitation · Email infrastructure</p><h3>Cisco’s email-gateway fix includes a scanner update</h3><p class="article-deck">Check the component as well as the operating-system release.  Suspected compromise requires a separate recovery decision.</p><p class="article-meta">October 19 morning edition</p><p class="article-opening">Cisco reports active exploitation of CVE-2026-76519, an arbitrary-file-write flaw in Secure Email Gateway.  An attacker can send a crafted attachment and obtain root command execution on affected configurations.  The Oct. 14 advisory identifies file reputation enabled in a mail policy and Content Scanner Tools earlier than 25.3.0.5525 as exposure conditions, alongside a vulnerable AsyncOS release.</p><p>Updated Content Scanner Tools can deliver the fix without an operating-system upgrade or restart on supported licensed releases.  Verify the installed component version rather than assuming that automatic updates succeeded.</p><p>For suspected compromise, Cisco warns that upgrading can destroy forensic information.  Its virtual-appliance recovery guidance includes preserving evidence, rebuilding and renewing credentials; cluster keys can expand the affected scope.  Root access also means attackers may conceal local indicators.</p><p>Editorial assessment: Separate the exposure ticket from the incident decision.  Record the version that was actually installed, the period it was reachable and the evidence supporting recovery or closure.  That keeps a successful component update from being mistaken for proof that prior access never occurred.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.cisco.com/c/en/us/support/docs/csa/cisco-sa-esa-afw-zqYJkjxp.html" target="_blank" rel="noreferrer">Cisco’s advisory, component fix and recovery instructions</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="beyondtrust"><p class="article-label">Remote support · Exploited vulnerability</p><h3>BeyondTrust separates the cloud patch from the customer’s investigation</h3><p class="article-deck">The vendor has patched hosted Remote Support.  Self-hosted deployments and historical exposure still need individual confirmation.</p><p class="article-meta">October 19 morning edition</p><p class="article-opening">BeyondTrust’s Oct. 15 advisory addresses CVE-2026-102764, a critical origin-validation flaw in Remote Support’s internal messaging components that can permit remote file operations.  The vendor lists versions through 26.2.3 as affected and provides the BT26-05-RS patch for versions 24.3.1 through 26.2.3.  Older installations must first move to a version that can receive the patch.</p><p>The company says it applied the fix to all Remote Support software-as-a-service customers by Oct. 9.  Self-hosted customers without automatic updates must apply it themselves.  A version number by itself therefore may not tell the full patch story; confirm the advisory-specific update status.</p><p>BeyondTrust’s accompanying investigation account dates observed exploitation of one hosted instance and one self-hosted appliance to Aug. 29.  It describes web-shell activity and directs defenders toward Mandiant’s technical investigation.  Its assessment that the actor may use AI-assisted tooling is explicitly qualified: BeyondTrust says it lacks forensic proof of that hypothesis.  The observed compromise and the inferred tooling should remain separate claims.</p><p>Editorial assessment: Remote support sits in a sensitive position because it brokers other people’s access.  Recovery review should establish what credentials and sessions the appliance could reach during the relevant period, then follow evidence into those downstream systems.  Hosted patch completion answers whether the known entry point was closed.  It does not, on its own, establish the absence of earlier activity or complete every customer’s investigation.  Keep both findings in the incident record, with a clear owner for each.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.beyondtrust.com/trust-center/security-advisories/bt26-05" target="_blank" rel="noreferrer">BeyondTrust BT26-05 patch and version guidance</a> · <a href="https://www.beyondtrust.com/blog/entry/bt26-05" target="_blank" rel="noreferrer">Vendor’s incident account and attribution limits</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="nist-ir"><p class="article-label">AI incident management · New guidance</p><h3>Federal guidance puts agent incidents into the response lifecycle</h3><p class="article-deck">Friday’s voluntary practices focus on training and evaluation of frontier systems.  Their scope matters when borrowing them for enterprise use.</p><p class="article-meta">October 19 morning edition</p><p class="article-opening">The National Institute of Standards and Technology (NIST), National Security Agency and Cybersecurity and Infrastructure Security Agency published ten voluntary incident-management practices Oct. 16 for super-intelligence training and evaluation.  The announcement organizes them around preparation, detection, response, recovery and reporting.</p><p>The agencies specifically address significant uninstructed agent actions that defeat operator policies, controls or human oversight.  They ground the work in established incident-response doctrine, including NIST Special Publication 800-61 Revision 3.  The document targets frontier development and evaluation; it is not a newly binding rule for every office using a chatbot.</p><p>Editorial assessment: The transferable question is whether an organization recognizes unauthorized agent behavior as an incident even when the software has valid credentials and no outsider is present.  Response plans should identify who can suspend activity, preserve relevant records and determine whether a task exceeded its approved scope.  That is a useful review question for an existing playbook.  Applying specialized laboratory guidance more broadly still requires judgment about the system, access and consequences involved.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.nist.gov/news-events/news/2026/10/key-practices-incident-readiness-and-response-super-intelligence-training" target="_blank" rel="noreferrer">NIST’s Oct. 16 announcement and publication link</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="oss"><p class="article-label">Open-source security · Since the last edition</p><h3>Anthropic offers speed by moving validation to maintainers</h3><p class="article-deck">OSS Scanner’s opt-in fast track changes who reviews findings before they arrive.</p><p class="article-meta">October 19 morning edition</p><p class="article-opening">Anthropic launched OSS Scanner Oct. 8 and clarified its eligibility and scope controls Oct. 13.  Eligible open-source projects can enroll for free periodic scans by the company’s strongest models.  The distinguishing feature is the delivery path: enrolled maintainers receive findings without Anthropic’s usual prior human review.</p><p>The official FAQ says projects can pause or leave the automated program.  Human-validated findings may separately enter its coordinated disclosure process.  Anthropic also says scanning agents run without internet access in hardened sandboxes.  These are descriptions of the service’s operating practices, rather than independent validation of each report it generates.</p><p>Editorial assessment: This is a material follow-through to the Oct. 5 edition’s discovery-versus-remediation story.  A willing maintainer can get earlier access to a possible flaw, but must have capacity to reproduce it, assess impact and review a proposed fix.  Downstream users should continue looking for validated advisories and released updates.  Enrollment is not evidence that a dependency is secure, and a scanner finding is not yet a deployed remediation.</p><p class="sources"><strong>Sources:</strong> <a href="https://red.anthropic.com/oss-scanner/" target="_blank" rel="noreferrer">Official OSS Scanner FAQ and changelog</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article></section><section class="department" id="enterprise-tech" aria-labelledby="enterprise-tech-title"><header class="department-header"><span class="department-index">Department 03</span><h2 id="enterprise-tech-title">Enterprise Tech</h2></header><article class="article" id="hunting"><p class="article-label">Defender administration · Effective today</p><h3>Entra hunting tables change names today, with automatic portal migration</h3><p class="article-deck">Microsoft says custom detections move automatically.  Review copies maintained outside the service as a separate housekeeping task.</p><p class="article-meta">October 19 morning edition</p><p class="article-opening">Microsoft documents Oct. 19 as the replacement date for AADSignInEventsBeta and AADSpnSignInEventsBeta in advanced hunting.  Their successors are EntraIdSignInEvents and EntraIdSpnSignInEvents.  The first covers interactive and non-interactive user sign-ins; the second covers service-principal and managed-identity sign-ins.</p><p>Both reference pages say queries using the old tables will migrate automatically and custom detections require no changes.  The user-sign-in reference also states that Microsoft Entra ID P2 licensing is needed to collect and view that table’s activity.  A table rename should not be interpreted as a new entitlement or proof that a particular tenant has the data.</p><p>Editorial assessment: Start with verification, rather than rewriting functioning portal detections in anticipation of a failure the vendor says it handles.  Run representative user and workload-identity queries, confirm expected fields and results, and check detection health.  Separately search repositories, scripts, exported hunting notebooks and documentation for the old names.  An automatic service migration cannot establish that every independent text copy is current.</p><p>Keep the operational evidence modest and concrete: a successful query, expected recent records and a healthy detection give more useful assurance than a completed rename checklist.  If a result is empty, check licensing, ingestion and query filters before attributing the absence to today’s schema transition.</p><p class="sources"><strong>Sources:</strong> <a href="https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-entraidsigninevents-table" target="_blank" rel="noreferrer">User sign-in table and migration commitment</a> · <a href="https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-entraidspnsigninevents-table" target="_blank" rel="noreferrer">Service-principal table and migration commitment</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="cohorts"><p class="article-label">Patch management · New proposal</p><h3>Microsoft proposes reusing the exposure analysis across vulnerabilities</h3><p class="article-deck">Risk cohorts could reduce repeated questions.  They do not establish that one patch or workaround covers the group.</p><p class="article-meta">October 19 morning edition</p><p class="article-opening">Microsoft’s Oct. 13 proposal groups vulnerabilities by the questions customers must answer about their environment.  Examples include which remote-access roles are exposed and which applications process untrusted documents.  The shared question can be useful even when the vulnerabilities have different technical causes or severity scores.</p><p>The company calls these risk cohorts provisional.  They are not official vulnerability categories, do not change update guidance and are not displayed as relationships in the Security Update Guide.  Each vulnerability still needs review for exploitation, attack path, privileges, user interaction and product-specific instructions.  Microsoft explicitly warns that membership in a cohort does not mean one mitigation fixes every member.</p><p>Editorial assessment: This is worth a limited trial in a large patch cycle.  Store the environmental answer once, including its evidence and owner, then link relevant vulnerability decisions to it.  If an internet-facing gateway is added or a feature is enabled, that answer needs to change.  Otherwise, efficiency turns into repeated reliance on stale assumptions.</p><p>The proposal’s own illustrative table and worked examples contain differing counts for some groups.  This edition therefore does not treat them as a stable inventory or use their sum as the October release total.  The useful contribution is a method for reducing duplicate assessment work while preserving exceptions.  Measure whether it shortens review without concealing an exposed or actively exploited flaw.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.microsoft.com/en-us/msrc/blog/2026/10/using-risk-cohorts-to-prioritize-security-updates" target="_blank" rel="noreferrer">Microsoft’s proposal and explicit limitations</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><section class="department-briefs" aria-labelledby="enterprise-tech-more"><h3 class="more-heading" id="enterprise-tech-more">More in Enterprise Tech</h3><div class="briefs"><article class="brief" id="crypto"><span class="card-label">Cryptography · Draft for comment</span><h3>A SHA-3 draft lets applications stream input and output</h3><p>NIST’s Oct. 8 draft revision of Special Publication 800-185 adds streaming interfaces for extendable-output computations.  Applications can process input and request output incrementally without knowing the total lengths in advance.  The publication covers cSHAKE, KMAC, TupleHash and ParallelHash; comments are open through Dec. 7.  This is a draft standards development, not an announcement that existing cryptographic deployments have failed.</p><p><a href="https://www.nist.gov/news-events/news/2026/10/sha-3-derived-functions-draft-revision-sp-800-185-available-public-comment" target="_blank" rel="noreferrer">NIST’s draft announcement and comment deadline</a></p></article></div></section></section><section class="department" id="us-world" aria-labelledby="us-world-title"><header class="department-header"><span class="department-index">Department 04</span><h2 id="us-world-title">U.S. + World</h2></header><article class="article" id="ukraine"><p class="article-label">Ukraine · Today</p><h3>New power-grid attacks bring an intelligence-warning complaint</h3><p class="article-deck">Zelenskyy says partners again provided no early warning.  That claim needs to remain attributed.</p><p class="article-meta">October 19 morning edition</p><p class="article-opening">Russia attacked Ukraine’s energy infrastructure with ballistic missiles and jet-powered drones, President Volodymyr Zelenskyy said Monday, according to The Associated Press.  He said partners that had previously shared intelligence again provided no advance warning.  The report establishes his account; it does not independently establish why warning was absent.</p><p>Editorial assessment: The new issue is warning and infrastructure protection as winter approaches.  Whether intelligence was unavailable, withheld or ineffective would lead to different conclusions about the protection gap.  Do not collapse those possibilities into a confirmed explanation or treat the complaint itself as evidence of a new formal intelligence-sharing policy.</p><p class="sources"><strong>Sources:</strong> <a href="https://apnews.com/article/b041f78e5d037a0f3377b7108eac1dc7" target="_blank" rel="noreferrer">Associated Press’s Monday report</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="china"><p class="article-label">Global economy · Today</p><h3>China reports faster third-quarter growth</h3><p class="article-deck">The headline improves; one quarterly comparison cannot establish the strength of household demand.</p><p class="article-meta">October 19 morning edition</p><p class="article-opening">China’s economy grew 4.5% from a year earlier in the third quarter, up from 4.3% in the second, according to Monday’s Reuters report carried by AOL and an SBS account of the statistics release.  Reuters reports that the result exceeded the 4.4% forecast.  These are year-over-year comparisons, not a claim that output rose 4.5% in three months.</p><p>Editorial assessment: The acceleration reduces the case for describing growth as uniformly worsening.  It does not, by itself, establish a durable recovery in property, consumption or private investment.  For the global outlook, the next useful evidence is the composition of growth and the policy response.  This edition confines the update to the reported headline figures because the full underlying statistical release was not retrieved.</p><p class="sources"><strong>Sources:</strong> <a href="https://news.sbs.co.kr/english/article.do?news_id=N1008804095" target="_blank" rel="noreferrer">SBS account of the statistics release</a> · <a href="https://www.aol.com/articles/chinas-economic-growth-accelerates-4-024012000.html" target="_blank" rel="noreferrer">Reuters report carried by AOL</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><section class="department-briefs" aria-labelledby="us-world-more"><h3 class="more-heading" id="us-world-more">More in U.S. + World</h3><div class="briefs"><article class="brief" id="iran"><span class="card-label">Diplomacy · News brief</span><h3>Iran’s foreign minister calls for diplomacy on Hormuz</h3><p>Iranian Foreign Minister Abbas Araqchi called for diplomacy and blamed the United States for insecurity in the Strait of Hormuz at a joint appearance with Russian Foreign Minister Sergei Lavrov on Monday, Reuters reports.  The statement supplies a current diplomatic position, not evidence that a shipping arrangement has been concluded.  The actionable development would be published transit terms, credible implementation and evidence that vessels can use them.</p><p><a href="https://www.internazionale.it/ultime-notizie-reuters/2026/10/19/iran-s-araqchi-blames-us-for-strait-of-hormuz-tensions-calls-for-diplomacy" target="_blank" rel="noreferrer">Reuters report carried by Internazionale</a></p></article></div></section></section><section class="department" id="interesting" aria-labelledby="interesting-title"><header class="department-header"><span class="department-index">Department 05</span><h2 id="interesting-title">Things Steve Would Find Interesting</h2></header><article class="article" id="comet"><p class="article-label">Astronomy · New preprint</p><h3>A comet in the asteroid belt keeps producing dust</h3><p class="article-deck">Rubin and Keck observations support sustained activity.  Water ice remains a proposed explanation.</p><p class="article-meta">October 19 morning edition</p><p class="article-opening">A preprint submitted Oct. 15 combines Vera C. Rubin Observatory survey observations with Oct. 7 Keck imaging of P/2026 N2, an object in the outer main asteroid belt.  The researchers report active morphology over 102 days around its closest approach to the Sun.  Measurements from July and October are consistent with sustained observable activity.</p><p>The authors propose sublimating volatiles, possibly water ice, as the dust source.  They also find the object in 2021 archival images, but cannot establish its activity then.</p><p>The paper is submitted research, not a confirmed detection of water.  Its appeal is the combination of a wide survey, targeted follow-up and old images: different kinds of observations constrain the same small object.  The remaining question is what physically keeps the dust coming.</p><p class="sources"><strong>Sources:</strong> <a href="https://arxiv.org/abs/2610.22354" target="_blank" rel="noreferrer">Original Oct. 15 preprint and submission status</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><section class="department-briefs" aria-labelledby="interesting-more"><h3 class="more-heading" id="interesting-more">More in Things Steve Would Find Interesting</h3><div class="briefs"><article class="brief" id="orionids"><span class="card-label">Skywatching · This week</span><h3>The Orionids favor patience after moonset</h3><p>NASA places the Orionid peak on the night of Oct. 21–22.  Its October observing guide warns that a waxing gibbous Moon will obscure fainter meteors and suggests the pre-dawn interval after moonset, broadly around 3 a.m. local time.  The debris comes from Halley’s Comet.  Expect modest suburban counts rather than a sky full of streaks; the guide suggests roughly three to six per hour with ambient light.  Those are general observing conditions, not a Denver-specific weather or moonset forecast.</p><p><a href="https://www.nasa.gov/blogs/watch-the-skies/2026/10/05/disappearing-planets-dragon-fireballs-hunters-moon-fill-octobers-spooky-skies/" target="_blank" rel="noreferrer">NASA’s October observing guidance</a> · <a href="https://science.nasa.gov/solar-system/meteors-meteorites/orionids/" target="_blank" rel="noreferrer">NASA’s Orionid reference and peak night</a></p></article></div></section></section></div></main><footer class="footer"><strong>The Daily Brief</strong><p>Prepared for Steve.  Research cutoff: Oct. 19, 2026, 10:37 a.m. Mountain.  Primary sources anchor court and technical coverage.  Follow source links for current local orders, remediation details and subsequent updates.</p><p><a href="#cover">Return to the cover</a></p></footer><script>
+    (() => {
+      const progress = document.getElementById('reading-progress');
+      const updateProgress = () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const value = max > 0 ? (window.scrollY / max) * 100 : 0;
+        progress.style.width = `${Math.min(100, Math.max(0, value))}%`;
+      };
+      updateProgress();
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      window.addEventListener('resize', updateProgress);
+    })();
+  </script>
+</body>
+</html>
