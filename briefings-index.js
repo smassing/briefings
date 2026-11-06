@@ -32,5 +32,6 @@ window.BRIEFING_FILES = [
   "weekly/2026-08-28.html",
   "weekly/2026-09-04.html",
   "weekly/2026-09-13.html",
-  "weekly/2026-10-02.html"
+  "weekly/2026-10-02.html",
+  "weekly/2026-11-06.html"
 ];
