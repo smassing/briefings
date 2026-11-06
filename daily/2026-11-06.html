@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="The Daily Brief for Friday, November 6, 2026.">
+  <title>The Daily Brief | November 6, 2026</title>
+  <style>
+    :root {
+      --paper: #f5f1e8;
+      --paper-deep: #ebe4d6;
+      --card: #fbf9f4;
+      --ink: #17202a;
+      --muted: #667079;
+      --rule: #cfc7b8;
+      --navy: #173c55;
+      --navy-deep: #102d41;
+      --gold: #ad7c2f;
+      --rust: #a34a31;
+      --teal: #2c6b69;
+      --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+      --sans: Aptos, "Segoe UI", Helvetica, Arial, sans-serif;
+      --shadow: 0 20px 60px rgba(40, 34, 25, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 6.5rem; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(173, 124, 47, 0.08), transparent 27rem),
+        var(--paper);
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.67;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: var(--navy); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+    a:hover { color: var(--rust); }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+    .skip-link {
+      position: fixed;
+      z-index: 100;
+      left: 1rem;
+      top: -5rem;
+      padding: 0.65rem 1rem;
+      background: var(--ink);
+      color: white;
+      font-family: var(--sans);
+    }
+    .skip-link:focus { top: 1rem; }
+    .reading-progress {
+      position: fixed;
+      z-index: 60;
+      inset: 0 auto auto 0;
+      width: 0;
+      height: 3px;
+      background: var(--gold);
+    }
+    .utility-bar {
+      position: sticky;
+      z-index: 50;
+      top: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(16, 45, 65, 0.96);
+      color: white;
+      backdrop-filter: blur(12px);
+    }
+    .utility-inner {
+      width: min(1180px, calc(100% - 2rem));
+      min-height: 3.25rem;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .mini-masthead {
+      margin-right: auto;
+      color: white;
+      font-family: var(--serif);
+      font-size: 0.93rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .utility-nav { display: flex; gap: 1rem; overflow-x: auto; scrollbar-width: none; }
+    .utility-nav a {
+      flex: 0 0 auto;
+      color: rgba(255, 255, 255, 0.82);
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      letter-spacing: 0.045em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .utility-nav a:hover { color: white; }
+    .cover {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: clamp(3.5rem, 8vw, 7.25rem) 0 4rem;
+    }
+    .masthead-block {
+      text-align: center;
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      padding: 1.35rem 0 1.15rem;
+    }
+    .edition-line {
+      display: flex;
+      justify-content: center;
+      gap: 0.85rem;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 0.71rem;
+      font-weight: 650;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+    .edition-line span + span::before { content: "•"; margin-right: 0.85rem; color: var(--gold); }
+    .masthead {
+      margin: 0.22rem 0 0;
+      font-size: clamp(3rem, 9vw, 7.5rem);
+      font-weight: 600;
+      letter-spacing: -0.065em;
+      line-height: 0.95;
+    }
+    .tagline {
+      margin: 0.75rem 0 0;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .lead-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.72fr);
+      gap: clamp(2rem, 5vw, 5rem);
+      padding: clamp(3rem, 6vw, 5.75rem) 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .kicker {
+      margin: 0 0 0.85rem;
+      color: var(--rust);
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 750;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+    .lead-title {
+      max-width: 850px;
+      margin: 0;
+      font-size: clamp(2.75rem, 6.5vw, 5.8rem);
+      font-weight: 500;
+      letter-spacing: -0.045em;
+      line-height: 0.99;
+    }
+    .lead-deck {
+      max-width: 780px;
+      margin: 1.5rem 0 1.1rem;
+      color: #3f4950;
+      font-size: clamp(1.14rem, 2vw, 1.42rem);
+      line-height: 1.48;
+    }
+    .byline, .meta {
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 0.79rem;
+    }
+    .read-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: 1.25rem;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .read-link::after { content: "→"; transition: transform 160ms ease; }
+    .read-link:hover::after { transform: translateX(4px); }
+    .signal-art {
+      position: relative;
+      min-height: 440px;
+      overflow: hidden;
+      align-self: stretch;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.08), transparent 40%),
+        var(--navy-deep);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+    .signal-art::before, .signal-art::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 50%;
+    }
+    .signal-art::before { width: 360px; height: 360px; right: -135px; top: -100px; box-shadow: 0 0 0 55px rgba(255,255,255,0.035), 0 0 0 110px rgba(255,255,255,0.025); }
+    .signal-art::after { width: 230px; height: 230px; left: -110px; bottom: -75px; box-shadow: 0 0 0 45px rgba(173,124,47,0.12), 0 0 0 90px rgba(173,124,47,0.07); }
+    .signal-number {
+      position: absolute;
+      left: 2rem;
+      top: 1.5rem;
+      color: rgba(255,255,255,0.35);
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+    }
+    .signal-copy {
+      position: absolute;
+      z-index: 2;
+      left: 2rem;
+      right: 2rem;
+      bottom: 2rem;
+      color: white;
+    }
+    .signal-copy strong { display: block; font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 500; line-height: 0.9; }
+    .signal-copy span { display: block; margin-top: 1rem; font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .front-page { padding-top: 3.5rem; }
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .section-heading h2 {
+      margin: 0 0 0.55rem;
+      font-size: clamp(1.55rem, 3vw, 2.25rem);
+      font-weight: 550;
+      letter-spacing: -0.025em;
+    }
+    .section-heading p { margin: 0 0 0.7rem; color: var(--muted); font-family: var(--sans); font-size: 0.77rem; }
+    .story-grid { display: grid; grid-template-columns: repeat(12, 1fr); border-bottom: 1px solid var(--rule); }
+    .story-card {
+      grid-column: span 4;
+      padding: 1.5rem 1.6rem 1.8rem 0;
+      border-right: 1px solid var(--rule);
+      min-height: 220px;
+    }
+    .story-card:nth-child(3n+2), .story-card:nth-child(3n+3) { padding-left: 1.6rem; }
+    .story-card:nth-child(3n) { padding-right: 0; border-right: 0; }
+    .story-card:nth-child(n+4) { border-top: 1px solid var(--rule); }
+    .card-label { color: var(--rust); font-family: var(--sans); font-size: 0.68rem; font-weight: 750; letter-spacing: 0.1em; text-transform: uppercase; }
+    .story-card h3 { margin: 0.45rem 0 0.65rem; font-size: 1.42rem; line-height: 1.15; font-weight: 600; letter-spacing: -0.015em; }
+    .story-card h3 a { color: var(--ink); text-decoration: none; }
+    .story-card h3 a:hover { color: var(--rust); }
+    .story-card p { margin: 0; color: #4d565d; font-size: 0.95rem; line-height: 1.5; }
+    .edition-note {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.5rem;
+      margin: 3.4rem 0 0;
+      padding: 1.4rem 1.6rem;
+      border-left: 3px solid var(--gold);
+      background: rgba(255,255,255,0.45);
+    }
+    .edition-note strong { font-family: var(--sans); font-size: 0.73rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .edition-note p { margin: 0; color: #4d565d; font-size: 0.91rem; line-height: 1.55; }
+    .publication {
+      background: var(--card);
+      border-top: 1px solid var(--rule);
+      box-shadow: 0 -15px 45px rgba(54, 45, 32, 0.05);
+    }
+    .department {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: clamp(4rem, 8vw, 7rem) 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .department-header {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 4rem;
+    }
+    .department-index { color: var(--gold); font-family: var(--sans); font-size: 0.72rem; font-weight: 750; letter-spacing: 0.14em; text-transform: uppercase; }
+    .department h2 { margin: 0; font-size: clamp(2.3rem, 5vw, 4.5rem); font-weight: 500; letter-spacing: -0.045em; line-height: 1; }
+    .article {
+      width: min(740px, 100%);
+      margin: 0 auto;
+      scroll-margin-top: 6rem;
+    }
+    .article + .article { margin-top: 6rem; padding-top: 5rem; border-top: 1px solid var(--rule); }
+    .article p { margin: 0 0 1.35rem; }
+    .article p.article-label { margin: 0 0 0.9rem; color: var(--rust); font-family: var(--sans); font-size: 0.7rem; font-weight: 750; letter-spacing: 0.12em; text-transform: uppercase; }
+    .article h3 { margin: 0; padding-bottom: 0.18em; font-size: clamp(2.15rem, 5vw, 4rem); font-weight: 520; letter-spacing: -0.04em; line-height: 1.06; }
+    .article p.article-deck { margin: 1.85rem 0 0; color: #4c565d; font-size: 1.2rem; line-height: 1.48; }
+    .article p.article-meta { margin: 1.35rem 0 2.2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule); color: var(--muted); font-family: var(--sans); font-size: 0.76rem; }
+    .article-opening::first-letter {
+      float: left;
+      margin: 0.08em 0.1em 0 0;
+      color: var(--navy);
+      font-size: 4.25rem;
+      line-height: 0.78;
+    }
+    .action-box {
+      margin: 2.2rem 0;
+      padding: 1.25rem 1.4rem;
+      border-top: 1px solid var(--navy);
+      border-bottom: 1px solid var(--navy);
+      background: #eef2f3;
+    }
+    .action-box strong { display: block; margin-bottom: 0.35rem; color: var(--navy); font-family: var(--sans); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .action-box p { margin: 0; font-size: 0.96rem; line-height: 1.55; }
+    .sources { margin-top: 2.3rem; padding-top: 1rem; border-top: 1px dotted var(--rule); font-family: var(--sans); font-size: 0.78rem; line-height: 1.55; }
+    .sources strong { color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+    .sources a { margin-right: 0.45rem; }
+    .back-link { display: inline-block; margin-top: 1.5rem; font-family: var(--sans); font-size: 0.76rem; font-weight: 650; text-decoration: none; text-transform: uppercase; }
+    .briefs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+    .department-briefs { width: min(980px, 100%); margin: 5rem auto 0; }
+    .more-heading {
+      margin: 0 0 1rem;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 750;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .briefs.two-up { grid-template-columns: repeat(2, 1fr); }
+    .brief { padding: 1.6rem; background: var(--card); }
+    .brief h3 { margin: 0.45rem 0 0.7rem; font-size: 1.35rem; font-weight: 600; line-height: 1.18; }
+    .brief p { margin: 0 0 1rem; color: #4c565d; font-size: 0.93rem; line-height: 1.5; }
+    .brief a { font-family: var(--sans); font-size: 0.75rem; font-weight: 650; }
+    .footer {
+      padding: 4rem 1rem 5rem;
+      background: var(--navy-deep);
+      color: rgba(255,255,255,0.78);
+      text-align: center;
+    }
+    .footer strong { display: block; color: white; font-size: 1.35rem; letter-spacing: 0.04em; }
+    .footer p { max-width: 650px; margin: 0.75rem auto 0; font-family: var(--sans); font-size: 0.8rem; line-height: 1.55; }
+    .footer a { color: white; }
+
+    @media (max-width: 850px) {
+      .lead-grid { grid-template-columns: 1fr; }
+      .signal-art { min-height: 280px; order: -1; }
+      .story-card { grid-column: span 6; }
+      .story-card:nth-child(n) { padding: 1.4rem; border-right: 1px solid var(--rule); }
+      .story-card:nth-child(2n) { border-right: 0; }
+      .story-card:nth-child(n+3) { border-top: 1px solid var(--rule); }
+      .department-header { grid-template-columns: 1fr; gap: 0.7rem; }
+      .briefs { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      body { font-size: 17px; }
+      .utility-inner { width: calc(100% - 1rem); }
+      .utility-nav { max-width: 65vw; }
+      .cover, .department { width: min(100% - 1.3rem, 1180px); }
+      .edition-line { flex-direction: column; gap: 0.1rem; }
+      .edition-line span + span::before { content: none; }
+      .lead-title { font-size: 2.75rem; }
+      .story-card { grid-column: 1 / -1; min-height: 0; }
+      .story-card:nth-child(n) { border-right: 0; border-top: 1px solid var(--rule); }
+      .story-card:first-child { border-top: 0; }
+      .edition-note { grid-template-columns: 1fr; gap: 0.5rem; }
+      .department { padding: 4rem 0; }
+      .article + .article { margin-top: 4rem; padding-top: 4rem; }
+    }
+    @media print {
+      :root { --paper: white; --card: white; }
+      .utility-bar, .reading-progress, .back-link { display: none; }
+      body { background: white; font-size: 11pt; }
+      .cover, .department { width: 100%; }
+      .cover { padding-top: 1rem; }
+      .signal-art { min-height: 240px; box-shadow: none; }
+      .article { break-inside: avoid; }
+      a { color: inherit; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body><a class="skip-link" href="#main">Skip to the briefing</a><div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+<header class="utility-bar"><div class="utility-inner"><a class="mini-masthead" href="#cover">The Daily Brief</a><nav class="utility-nav" aria-label="Briefing departments"><a href="#security-ai">Security + AI</a><a href="#enterprise-tech">Enterprise Tech</a><a href="#courts-law">Courts + Law</a><a href="#us-world">U.S. + World</a></nav></div></header>
+<main id="main"><section class="cover" id="cover" aria-labelledby="masthead"><header class="masthead-block"><div class="edition-line"><span>Friday, November 6, 2026</span><span>Morning edition</span></div><h1 class="masthead" id="masthead">The Daily Brief</h1><p class="tagline">Security, courts, technology and the wider world</p></header>
+<section class="lead-grid" aria-labelledby="lead-cover-title"><div><p class="kicker">The lead · PHP2Shell</p><h2 class="lead-title" id="lead-cover-title">The PHP flaw moved<br>into the firewall.</h2><p class="lead-deck">Two weeks after PHP’s emergency fixes, attackers are using the same bugs against security appliances, where the runtime belongs to the vendor and the patch arrives as firmware.</p><p class="byline">Also: a one-connection SSH login bypass on Alpine, Ivanti customers upgrade twice, Democrats take Congress, and a Tenth Circuit ruling on AI and legal fees.</p><a class="read-link" href="#php2shell">Read the lead story</a></div><div class="signal-art" aria-hidden="true"><span class="signal-number">SIGNAL / 01</span><div class="signal-copy"><strong>6</strong><span>Appliance vendors named in Singapore’s alert</span></div></div></section>
+<section class="front-page" aria-labelledby="front-page-title"><div class="section-heading"><h2 id="front-page-title">Inside today’s brief</h2><p>21 stories · About a 20-minute read</p></div><div class="story-grid"><article class="story-card"><span class="card-label">OpenSSH · Fixed Nov. 5</span><h3><a href="#sshole">On Alpine, a long password can open an account that has none</a></h3><p>Update and restart sshd, or turn off password logins.  One connection is enough.</p></article><article class="story-card"><span class="card-label">Ivanti · Patch again</span><h3><a href="#ivanti">Connect Secure customers who patched in October need a second upgrade</a></h3><p>Two more zero-days in the same attack chain are fixed in new builds.</p></article><article class="story-card"><span class="card-label">Identity · Token spraying</span><h3><a href="#token-spraying">Stolen Microsoft 365 sessions reached 79 organizations without a password</a></h3><p>The persistence came from fake devices and swapped MFA methods.</p></article><article class="story-card"><span class="card-label">AI-assisted offense · Research</span><h3><a href="#ai-exploits">An AI model built five working exploit chains, and OpenSSH changed its release pace</a></h3><p>Patch latency is now the part defenders control.</p></article><article class="story-card"><span class="card-label">Windows · Store-only fix</span><h3><a href="#paint">Windows Update will not fix Paint</a></h3><p>The fix ships through the Microsoft Store, and two official records disagree on the fixed build.</p></article><article class="story-card"><span class="card-label">Tenth Circuit · Attorney fees</span><h3><a href="#ai-fees">Using AI is not, by itself, a reason to cut a fee award</a></h3><p>The challenger has to show what was actually overbilled.</p></article><article class="story-card"><span class="card-label">Justice Department · New task force</span><h3><a href="#doj-sitf">The Justice Department organizes its AI enforcement work</a></h3><p>The new task force centralizes cases but creates no new offense.</p></article><article class="story-card"><span class="card-label">Midterms · Results</span><h3><a href="#midterms">Democrats will control both chambers in January</a></h3><p>Two Senate races remain uncalled.</p></article><article class="story-card"><span class="card-label">Ukraine · Talks set</span><h3><a href="#ukraine">Three-way talks are scheduled for Abu Dhabi</a></h3><p>The talks are set for Nov. 10 and 11, while strikes continue.</p></article></div></section><aside class="edition-note" aria-label="Edition note"><strong>Edition note</strong><p>Research cutoff: 10:45 a.m. Mountain, Nov. 6, 2026 (17:45 UTC).  This is the first edition since Oct. 21 and runs longer than usual because selected developments from the intervening two weeks appear with their dates.  PHP returns because exploitation is now confirmed in security appliances.  Ukraine returns because talks now have a date and place.  Several security items rely on specialist reporting; primary sources are linked where they were available.  Analysis and operational recommendations are labeled.</p></aside></section><div class="publication"><section class="department" id="security-ai" aria-labelledby="security-ai-title"><header class="department-header"><span class="department-index">Department 01</span><h2 id="security-ai-title">Security + AI</h2></header><article class="article" id="php2shell"><p class="article-label">The lead · Exploited in appliances</p><h3>PHP2Shell has reached the devices that guard the network</h3><p class="article-deck">Attackers are exploiting the October PHP flaws in firewall management interfaces.  Other vendors’ appliances embed the same runtime, and their fixes come from the vendor.</p><p class="article-meta">November 6 morning edition</p><p class="article-opening">The two PHP remote-code-execution flaws that led the Oct. 21 edition, now widely called PHP2Shell, are being exploited in security appliances.  Palo Alto Networks updated its advisory on Oct. 29 to report active exploitation against PAN-OS management interfaces exposed to the internet.  The company rates the issue at its highest urgency, says no special configuration is required, and limits the exposure to the management web interface and XML API, plus any dataplane interface with a management profile attached.</p><p>Days earlier, Israeli security firm Dream reported that a suspected China-nexus actor had used the flaws with a Linux kernel privilege-escalation bug, Fragnesia (CVE-2026-46300), to gain root on 25 servers in the United States, Japan, Taiwan and South Korea.  Dream says three of those systems belonged to a U.S. government-affiliated environment and that the attacker went on to extract credentials and enumerate Active Directory.  It described the devices only as a large vendor’s firewall software.  The Hacker News reports that the timing suggests the two reports are related; that link is inference, not confirmation.</p><p>The Cybersecurity and Infrastructure Security Agency (CISA) added both PHP flaws to its Known Exploited Vulnerabilities (KEV) catalog on Oct. 26 and Fragnesia on Oct. 28, each with a three-day federal deadline.  Singapore’s Cyber Security Agency (CSA) followed on Nov. 3 with an alert listing affected products from Palo Alto Networks, Cisco, Citrix, F5, Siemens and Fortinet.  The list includes Cisco’s Duo Access Gateway and Expressway, NetScaler ADC and Gateway, F5 BIG-IP APM and its configuration utility, and FortiSOAR.  The CSA says the list is not exhaustive.</p><p>Palo Alto’s fixed PAN-OS builds span five release trains, and some carried late-October arrival estimates.  For versions without a fix, the company recommends taking management access off the internet, restricting it to trusted internal addresses, and inspecting traffic that does reach the management interface.</p><p>Operational assessment: This is a different job from the Oct. 21 task of updating web servers.  An appliance’s PHP runtime is not touched by an operating-system package update, so the inventory has to come from each vendor’s advisory and the firmware actually installed.  The quickest risk reduction is the same everywhere: confirm that no management interface accepts connections from the internet, then confirm it from outside the network rather than from a configuration screen.</p><p>For any device whose management interface was exposed after Oct. 21, treat the patch as the start of a compromise review, not the end of one.  The reported attacks moved from the appliance to directory credentials.  That makes credentials stored on or passing through the device, including service accounts used for directory lookups, part of the response.</p><p class="sources"><strong>Sources:</strong> <a href="https://security.paloaltonetworks.com/CVE-2026-109618" target="_blank" rel="noreferrer">Palo Alto Networks’ advisory, fixed builds and exploitation status</a> · <a href="https://www.csa.gov.sg/alerts-and-advisories/alerts/al-2026-157/" target="_blank" rel="noreferrer">Singapore CSA’s Nov. 3 multivendor alert</a> · <a href="https://thehackernews.com/2026/10/attackers-exploit-php2shell-flaws-in.html" target="_blank" rel="noreferrer">The Hacker News on Dream’s findings and CISA’s Fragnesia listing</a> · <a href="https://www.securityweek.com/php2shell-attacks-root-palo-alto-firewalls-but-fail-against-wordpress/" target="_blank" rel="noreferrer">SecurityWeek on the firewall attacks</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="sshole"><p class="article-label">OpenSSH · Fixed Nov. 5</p><h3>On Alpine, a long password can open an account that has none</h3><p class="article-deck">A password-authentication bypass affects sshd built with musl and without PAM.  Updating requires a restart; disabling password logins also closes it.</p><p class="article-meta">November 6 morning edition</p><p class="article-opening">Portable OpenSSH 10.6p2, released Thursday, fixes a password-authentication bypass in sshd on Linux systems that use the musl C library without PAM.  The CVE record, CVE-2026-123158, says that for some account configurations any password between 256 and 1,024 characters succeeds.  Alpine Linux, the best-known platform in that category, published an advisory the same day telling administrators to update and restart sshd now.</p><p>Alpine’s description is blunt: one connection, no retries.  The attacker needs the name of an account whose password field is an asterisk, which is normal for key-only accounts, and the machine needs at least one other local account with a standard hashed password.  Root ships that way in Alpine’s base image, but OpenSSH’s default root-login setting still protects root itself.  That protection does not help if another reachable account can become root.  Accounts supplied by a directory service through musl-nscd are also in scope.</p><p>Alpine says systems with PasswordAuthentication set to no are not affected, nor are containers that do not run sshd, nor cloud images configured by cloud-init.  Fixed packages are available for every branch back to 3.16, including releases that no longer receive regular updates.  CISA’s enrichment of the CVE record lists a public proof of concept and rates the attack as not automatable; we found no authoritative report of exploitation.</p><p>Operational assessment: The most likely exposure is not a general-purpose server but an Alpine-based appliance, jump host, lab system or container image that someone gave sshd and a password.  Search for those, update, and restart the daemon.  Where an immediate update is not possible, Alpine’s fallback of disabling password authentication is a supported, complete mitigation, provided key-based access is confirmed first.</p><p class="sources"><strong>Sources:</strong> <a href="https://alpinelinux.org/posts/2026-11-05-openssh-password-authentication-bypass/" target="_blank" rel="noreferrer">Alpine’s advisory, affected conditions and fixed packages</a> · <a href="https://www.openssh.org/releasenotes.html" target="_blank" rel="noreferrer">OpenSSH 10.6p2 release notes</a> · <a href="https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/123xxx/CVE-2026-123158.json" target="_blank" rel="noreferrer">CVE-2026-123158 record and CISA enrichment</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="ivanti"><p class="article-label">Ivanti Connect Secure · Oct. 29 fixes</p><h3>Connect Secure customers who patched in October need a second upgrade</h3><p class="article-deck">Ivanti fixed the two remaining zero-days in an attack chain that reached root on fully patched appliances.</p><p class="article-meta">November 6 morning edition</p><p class="article-opening">Ivanti released fixes on Oct. 29 for two more Connect Secure zero-days that attackers chained with CVE-2026-104935, the authentication bypass the company disclosed on Oct. 13.  CVE-2026-111357 is a privilege-escalation flaw; CVE-2026-118527 lets an authenticated attacker write chosen content to a predictable location on disk.  The fixes are in versions 25.1.1.3 and 22.8R2.6.</p><p>The detail that matters operationally is that 25.1.1.2 and 22.8R2.5, the builds that fixed the October authentication bypass, are themselves affected.  Organizations that patched promptly in October have to upgrade again.  Ivanti says the newest release addresses every vulnerability in the exploited chain.  CISA added both flaws to the KEV catalog on Oct. 30, with federal deadlines of Nov. 2 and Nov. 13.</p><p>Volexity, which found the activity during an incident response, says the chain gave a previously unknown actor, UTA0576, unauthenticated root code execution on an appliance that was fully patched at the time.  The attackers stole credentials, exfiltrated data, scanned internal networks and tampered with logs.  Volexity assesses with low confidence that the group is criminal rather than espionage-focused.</p><p>Operational assessment: Log tampering weakens the usual evidence for a compromise review.  Any appliance exposed during October deserves review with Ivanti’s integrity tooling and logs held off the device, followed by rotation of credentials that the appliance handled.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.securityweek.com/ivanti-patches-two-more-zero-days-exploited-in-connect-secure-attack-chain/" target="_blank" rel="noreferrer">SecurityWeek on the fixes, affected builds and Volexity’s findings</a> · <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noreferrer">CISA’s KEV catalog</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="token-spraying"><p class="article-label">Identity · Research disclosed Oct. 23</p><h3>Stolen Microsoft 365 sessions reached 79 organizations without a password</h3><p class="article-deck">A ten-week campaign replayed stolen tokens in bulk, then made access stick with registered devices and new MFA methods.</p><p class="article-meta">November 6 morning edition</p><p class="article-opening">Huntress reports that an attacker replaying stolen Microsoft 365 session tokens compromised 97 accounts at 79 organizations between July 14 and Sept. 22.  Most tokens came from adversary-in-the-middle phishing pages that relayed Microsoft’s real sign-in and multifactor authentication (MFA) prompts while keeping the session token issued afterward.  Others came from device-code phishing.  Because the token is issued after MFA, its holder does not need to pass MFA again.</p><p>Huntress calls the pattern token spraying: the logic of password spraying applied to stolen sessions, replayed at volume from a small block of hosting addresses.  Sessions were often used within minutes of the victim reaching the MFA prompt.  The attacker rotated through six addresses in four phases, so blocking any one address would have stopped one phase at most.</p><p>The persistence techniques are the useful part for administrators.  Huntress found at least 48 rogue devices registered in victims’ Entra directories, named DESKTOP- followed by eight hexadecimal characters.  In 19 organizations the victim’s MFA methods were wiped and a new authenticator registered within three hours.  Inbox rules with names such as a single period hid or deleted mail, including, in one case, all replies from an outside accountant to whom the attacker had sent a payroll-related request from the compromised mailbox.</p><p>Operational assessment: A password reset alone does not remove a registered device or an attacker’s authenticator.  When an account is suspected, review its devices, authentication methods and inbox rules in the same response.  Detection that alerts on new MFA registration shortly after a sign-in from an unfamiliar host would have caught the pattern described here, and requiring compliant devices for sensitive access narrows what a replayed session can do.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.huntress.com/blog/token-replay-spray" target="_blank" rel="noreferrer">Huntress’ original report</a> · <a href="https://www.helpnetsecurity.com/2026/10/23/microsoft-365-accounts-stolen-sessions/" target="_blank" rel="noreferrer">Help Net Security’s detailed account</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="ai-exploits"><p class="article-label">AI-assisted offense · Research Oct. 27</p><h3>An AI model built five working exploit chains, and OpenSSH changed its release pace</h3><p class="article-deck">Anthropic’s red team reports chained exploits in major browsers and operating systems.  OpenSSH says AI-found bugs are being rediscovered by others.</p><p class="article-meta">November 6 morning edition</p><p class="article-opening">Anthropic’s Frontier Red Team says an unreleased internal research model found critical vulnerabilities in Chrome, Safari, Android, Windows and Linux and chained them into five working exploits with little human involvement.  The reported results include one-click code execution from Chrome on macOS, a Safari bypass of the same-origin policy, data theft from a locked Android phone, remote root on Linux servers and a remote crash of Windows systems.  Anthropic says every affected vendor has fixed the flaws, including 62 Chrome vulnerabilities patched by Chrome 156.</p><p>The capability claims are Anthropic’s own; Dark Reading’s account rests on the company’s post rather than independent reproduction.  The Chrome chain is the clearest example of what changed: four separate bugs, each defeating a different control, combined to escape the browser sandbox.  That kind of work has traditionally required a specialized team.</p><p>A second signal arrived Thursday from a project with no stake in the marketing.  OpenSSH’s 10.6p2 release notes say the team has received a large number of reports found by or with AI, and that it has seen several cases where an AI-found bug was later found independently by a different researcher.  The project concludes that adversaries can probably find the same bugs, and says it will ship fixes more often rather than batch them.</p><p>Editorial assessment: Put together, these accounts shift the defender’s question from whether a bug will be found to how long a fix takes to reach production.  More frequent upstream releases only help if downstream patching can absorb them.  It is worth measuring how long a routine fix for a browser, SSH or a VPN appliance takes to reach every system, because that interval is now the controllable part of the risk.</p><p class="sources"><strong>Sources:</strong> <a href="https://red.anthropic.com/" target="_blank" rel="noreferrer">Anthropic Frontier Red Team research index</a> · <a href="https://darkreading.com/application-security/claude-model-exploits-major-browsers-oses" target="_blank" rel="noreferrer">Dark Reading’s account of the five chains</a> · <a href="https://www.openssh.org/releasenotes.html" target="_blank" rel="noreferrer">OpenSSH’s note on AI reports and release cadence</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><section class="department-briefs" aria-labelledby="security-ai-more"><h3 class="more-heading" id="security-ai-more">Briefs in Security + AI</h3><div class="briefs"><article class="brief" id="claude-extension"><span class="card-label">Developer tools · Oct. 29 incident</span><h3>A trojanized Claude Code extension reached Cursor users for 11 hours</h3><p>A tampered build of the Claude Code extension, version 2.1.313, was served to Cursor users under the legitimate publisher ID on Oct. 29.  Cursor says at most 5,000 users were affected and that Anthropic did not produce the build.  The payload planted an SSH key, opened a reverse tunnel and installed persistence that survives removing the extension.  Affected users should update to 2.1.314 and remove the planted key, scripts and scheduled tasks.</p><p><a href="https://www.helpnetsecurity.com/2026/10/30/claude-code-extension-ssh-backdoor/" target="_blank" rel="noreferrer">Help Net Security on Phorion’s analysis and Cursor’s notice</a></p></article><article class="brief" id="node-red"><span class="card-label">Industrial software · Exploited</span><h3>Exposed Node-RED instances are being taken over with one request</h3><p>VulnCheck observed exploitation of CVE-2026-58115, a maximum-severity missing-authentication flaw in Node-RED’s HTTP interface, beginning Oct. 30, with 15 more attacks by Nov. 1.  Attackers deployed flows that ran system commands and installed bots or webshells.  Instances without adminAuth are the target.  Check internet reachability, including Node-RED embedded in industrial devices, and review flows for unexpected exec nodes.</p><p><a href="https://www.securityweek.com/critical-node-red-flaw-exploited-in-attacks/" target="_blank" rel="noreferrer">SecurityWeek on VulnCheck’s findings</a></p></article><article class="brief" id="apple-kev"><span class="card-label">Apple · KEV Nov. 4</span><h3>A 2024 Apple flaw returns to the exploited list</h3><p>CISA added CVE-2024-27834, a pointer-authentication bypass Apple fixed in May 2024, to the KEV catalog on Wednesday, with a Nov. 18 federal deadline.  The listing follows Sekoia’s report that APT29 used already-patched Safari and Chrome flaws through compromised websites and a tampered analytics script.  The practical exposure is devices that never received 2024 updates.</p><p><a href="https://thehackernews.com/2026/11/hackers-exploit-patched-apple-flaw-to.html" target="_blank" rel="noreferrer">The Hacker News on the listing and Sekoia’s attribution</a></p></article><article class="brief" id="wordpress"><span class="card-label">WordPress · KEV Nov. 3</span><h3>A WordPress update race drew attacks within minutes</h3><p>WordPress 7.1.4, released Oct. 28, fixes CVE-2026-119977, a race condition that can let an unauthenticated attacker abuse files during a core update.  Wordfence recorded more than 18,500 probing requests in 21 hours but no confirmed compromises.  CISA’s federal deadline is today.  The same release updates WordPress’ bundled root certificates for the eMudhra distrust covered Oct. 21.</p><p><a href="https://www.securityweek.com/fresh-wordpress-vulnerability-in-attackers-crosshairs/" target="_blank" rel="noreferrer">SecurityWeek on Defiant’s findings and the KEV listing</a></p></article><article class="brief" id="zyxel"><span class="card-label">Network switches · Corrected attribution</span><h3>The Zyxel switch hacks used a different, unknown flaw</h3><p>Binarly says the August compromise of about 1,000 Zyxel GS1900 switches, earlier blamed on a June-patched bug, actually exploited a zero-day now tracked as CVE-2026-107441.  Zyxel shipped fixes Oct. 23 and an advisory Nov. 3 covering 10 models.  Devices patched only against the earlier CVE were never protected from this attacker.</p><p><a href="https://www.securityweek.com/zyxel-switch-hacks-blamed-on-patched-flaw-actually-exploited-a-zero-day/" target="_blank" rel="noreferrer">SecurityWeek on Binarly’s analysis</a></p></article></div></section></section><section class="department" id="enterprise-tech" aria-labelledby="enterprise-tech-title"><header class="department-header"><span class="department-index">Department 02</span><h2 id="enterprise-tech-title">Enterprise Tech</h2></header><article class="article" id="paint"><p class="article-label">Windows · Store-delivered fix</p><h3>Windows Update will not fix Paint</h3><p class="article-deck">The fix for a network-reachable Paint flaw ships only through the Microsoft Store, and Microsoft’s two official records name different fixed builds.</p><p class="article-meta">November 6 morning edition</p><p class="article-opening">A fix for CVE-2026-83844, a remote-code-execution flaw in Windows Paint that Microsoft rates Important at 8.1, is now available, but only through the Microsoft Store.  Windows updates do not deliver it.  The Hacker News found the fixed build, 11.2609.401.0, as the newest Paint release in every country it checked today.  Microsoft disclosed the flaw Oct. 13 and reported no exploitation.</p><p>The records disagree.  Microsoft’s advisory names 11.2609.401.0 as fixed, while the CVE record and its National Vulnerability Database entry still list Paint as affected only below 11.2605.91.0.  A scanner reading the CVE record would therefore pass builds that the advisory treats as vulnerable.  The advisory’s revision history does not record the change.</p><p>Paint, like other Store apps, is installed per user, and Windows can hold a provisioned copy for new accounts.  Checking only the signed-in user can miss older copies.  The report gives two administrator PowerShell checks: Get-AppxPackage -AllUsers -Name Microsoft.Paint for installed copies and Get-AppxProvisionedPackage -Online for the provisioned one.</p><p>Operational assessment: Use 11.2609.401.0 as the compliance threshold, not the CVE record’s number.  In Intune, a Store app update scan can push the fixed build broadly; verification should cover every user profile and the provisioned package.  The case also exposes a general gap: inbox apps serviced through the Store can sit outside a patch process built around monthly cumulative updates.</p><p class="sources"><strong>Sources:</strong> <a href="https://thehackernews.com/2026/11/microsoft-paint-rce-fix-now-available.html" target="_blank" rel="noreferrer">The Hacker News on the Store fix, build discrepancy and checks</a> · <a href="https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-83844" target="_blank" rel="noreferrer">Microsoft’s security update guide entry</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><section class="department-briefs" aria-labelledby="enterprise-tech-more"><h3 class="more-heading" id="enterprise-tech-more">Briefs in Enterprise Tech</h3><div class="briefs two-up"><article class="brief" id="authenticator"><span class="card-label">Microsoft Authenticator · Patched</span><h3>An Android app could pose as Teams to obtain work tokens</h3><p>Enclave disclosed on Oct. 23 that Microsoft Authenticator for Android accepted a requesting app’s claimed identity without verifying it, letting a malicious app with no permissions obtain work-account tokens.  The attack requires a malicious app on the device, and Microsoft says it also requires a sign-in step and has not been exploited.  Microsoft fixed it before disclosure.  Confirm managed Android devices run a current Authenticator build.</p><p><a href="https://www.helpnetsecurity.com/?p=389181" target="_blank" rel="noreferrer">Help Net Security on Enclave’s findings</a></p></article><article class="brief" id="patch-tuesday"><span class="card-label">Calendar · Next week</span><h3>November’s Patch Tuesday lands Nov. 10, during a crowded week</h3><p>Microsoft’s monthly updates arrive Tuesday, the same week as Ivanti’s second Connect Secure federal deadline on Nov. 13.  The Apple KEV deadline follows on Nov. 18.  Editorial note: appliance firmware, Store-serviced apps and Alpine images each need their own track outside the normal Windows cycle.</p><p><a href="https://msrc.microsoft.com/update-guide" target="_blank" rel="noreferrer">Microsoft Security Update Guide</a></p></article></div></section></section><section class="department" id="courts-law" aria-labelledby="courts-law-title"><header class="department-header"><span class="department-index">Department 03</span><h2 id="courts-law-title">Courts + Law</h2></header><article class="article" id="ai-fees"><p class="article-label">Tenth Circuit · Oct. 30 decision</p><h3>Using AI is not, by itself, a reason to cut a fee award</h3><p class="article-deck">The Tenth Circuit affirmed a fee award against a challenge built on the prevailing firm’s use of AI tools.</p><p class="article-meta">November 6 morning edition</p><p class="article-opening">The Tenth Circuit on Oct. 30 rejected an argument that a law firm’s use of artificial intelligence required reducing its fee award, Reuters reported.  In Flux Drive Inc. v. Qiang Rong, No. 25-1308, a Colorado district court had awarded the defendants, represented by Brownstein Hyatt Farber Schreck, $114,663.11 in a trade-secrets case.  Flux Drive argued on appeal that the firm’s AI tools produced unreasonable billing.</p><p>According to the reporting, the panel relied on the district judge’s review of the submitted billing records and finding that the award was reasonable.  Judge Carolyn McHugh wrote the opinion, joined by Judges Matheson and Federico, according to the coverage.  Coverage notes that the decision leaves room for a challenger who identifies specific inflated entries with evidence.</p><p>Editorial assessment: The ruling treats AI as one more fact in an ordinary reasonableness review, rather than a categorical reason to discount hours.  That places the burden where fee disputes usually put it, on specific entries.  It does not resolve how courts will treat hours claimed for work a tool performed in minutes.  The opinion itself was not reviewed for this edition; the details above come from secondary reporting of Reuters’ account and should be checked against the slip opinion.</p><p class="sources"><strong>Sources:</strong> <a href="https://cryptobriefing.com/10th-circuit-ai-use-legal-fees-ruling/" target="_blank" rel="noreferrer">Account of the decision citing Reuters</a> · <a href="https://www.jdjournal.com/2026/11/03/court-ruling-ai-law-firm-legal-fees/" target="_blank" rel="noreferrer">JD Journal’s summary</a> · <a href="https://www.ca10.uscourts.gov/" target="_blank" rel="noreferrer">Tenth Circuit opinions and court information</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><article class="article" id="doj-sitf"><p class="article-label">Justice Department · Announced Nov. 5</p><h3>The Justice Department organizes its AI enforcement work</h3><p class="article-deck">The Super Intelligence Task Force centralizes cases and absorbs January’s AI litigation unit.  It creates no new offense.</p><p class="article-meta">November 6 morning edition</p><p class="article-opening">The Justice Department announced Thursday a Super Intelligence Task Force to coordinate criminal and civil enforcement involving advanced AI.  Associate Attorney General Stanley Woodward and Associate Deputy Attorney General Stephen Weiss co-chair it.  Attorney General Todd Blanche’s Oct. 13 memo says it targets misuse by foreign state and state-sponsored actors, transnational criminal organizations, and individuals or companies engaged in fraud.  It also directs the group to promote what the memo calls American dominance in the field.</p><p>The task force absorbs the AI Litigation Task Force created in January, deconflicts investigations across components and U.S. attorneys’ offices, and serves as the department’s contact with the White House Super Intelligence Force.  Tech Times reports that the memo asks prosecutors to notify the task force when opening AI-related investigations and before charging or resolving them, with an exception for emergencies.</p><p>The vocabulary follows Executive Order 14434, signed Sept. 29, which directs agencies to say super intelligence in non-statutory documents and defines the term by reference to the existing statutory definition of AI.  Neither the announcement nor the memo identifies a new offense or statute.</p><p>Editorial assessment: The practical effect is central visibility and coordination, not new law.  The open legal question is how existing computer-crime statutes, written around human intent, apply when an autonomous agent performs an intrusion.  Watch for the guidance the memo promises on charging and compliance measures; that document will say more than the name.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.govexec.com/technology/2026/11/department-justice-forms-ai-task-force/417075/" target="_blank" rel="noreferrer">Nextgov/FCW on the announcement and memo</a> · <a href="https://www.techtimes.com/articles/330168/20261106/doj-super-intelligence-task-force-launches-no-new-offense-hacking-law-needs-human-intent.htm" target="_blank" rel="noreferrer">Tech Times on the memo’s duties and legal limits</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><section class="department-briefs" aria-labelledby="courts-law-more"><h3 class="more-heading" id="courts-law-more">Briefs in Courts + Law</h3><div class="briefs"><article class="brief" id="sealing"><span class="card-label">E.D. Pa. · Sealing and AI</span><h3>Uploading a filing to a consumer AI tool undercut a request to seal it</h3><p>In Fry v. Fry, an Aug. 27 ruling drawing commentary this week, the court denied wholesale sealing after a pro se litigant said he had uploaded the documents to non-enterprise Claude products.  It allowed narrow redactions for children’s identifiers and medical information and required a sworn statement of the tool, prompts and uploads.  This is one district court ruling, not binding precedent.</p><p><a href="https://www.reedsmith.com/our-insights/blogs/viewpoints/102nzrz/uploading-litigation-documents-to-public-ai-tools-may-defeat-sealing/" target="_blank" rel="noreferrer">Reed Smith’s analysis of the order</a></p></article><article class="brief" id="anthropic-appeal"><span class="card-label">Ninth Circuit · Appeal filed Oct. 26</span><h3>The government appeals the ruling that lifted its Anthropic ban</h3><p>The Justice Department filed a notice of appeal of Judge Rita F. Lin’s August order, covered here Aug. 28, that blocked the federal ban on agency use of Anthropic’s models, Bloomberg reports.  The order remains in effect unless the Ninth Circuit stays it.</p><p><a href="https://www.bloomberg.com/news/articles/2026-10-26/doj-appeals-court-ruling-lifting-ban-on-agency-anthropic-use" target="_blank" rel="noreferrer">Bloomberg’s Oct. 26 report</a></p></article><article class="brief" id="ross"><span class="card-label">Third Circuit · Rehearing sought</span><h3>ROSS asks the full court to revisit its AI-training loss</h3><p>ROSS Intelligence has asked the Third Circuit to rehear its Sept. 29 ruling that training a legal-research tool on Westlaw case summaries was not fair use, MLex reports.  Rehearing is rarely granted, but the petition keeps the most direct appellate ruling on AI training data in play.</p><p><a href="https://mlex.com/mlex/artificial-intelligence/articles/2545944/ross-intelligence-asked-us-appeals-court-to-revisit-ai-case-over-westlaw" target="_blank" rel="noreferrer">MLex’s report</a></p></article></div></section></section><section class="department" id="us-world" aria-labelledby="us-world-title"><header class="department-header"><span class="department-index">Department 04</span><h2 id="us-world-title">U.S. + World</h2></header><article class="article" id="midterms"><p class="article-label">Midterms · Results</p><h3>Democrats will control both chambers in January</h3><p class="article-deck">Tuesday’s midterms produced a wide House majority and at least 54 Senate seats, with Mississippi and Alaska still uncalled.</p><p class="article-meta">November 6 morning edition</p><p class="article-opening">Democrats won control of the House and Senate in Tuesday’s midterm elections, according to CBS News projections and other network calls.  CBS estimates the party will hold between 251 and 268 House seats after flipping more than two dozen Republican-held districts.  In the Senate, Democrats have secured at least 54 seats, including first Democratic senators in decades from Texas, Kansas and South Carolina, with races in Mississippi and Alaska still too close to call.</p><p>The consequences began quickly.  House Speaker Mike Johnson told staff he will not seek to lead the Republican conference, and Rep. Hakeem Jeffries is in line to become speaker.  Vice President JD Vance called the Iran war the reason Republicans lost, and Senate Democratic leader Chuck Schumer previewed an agenda of investigations.</p><p>Editorial assessment: For the federal courts, the most direct effects run through the Senate, which controls judicial confirmations, and through appropriations, which fund judiciary operations and modernization.  Both change hands in January.  The current Congress still returns for a lame-duck session first, where funding and pending nominations will be the items to watch.</p><p class="sources"><strong>Sources:</strong> <a href="https://www.cbsnews.com/live-updates/election-day-2026-midterms/" target="_blank" rel="noreferrer">CBS News results and projections</a> · <a href="https://www.cnbc.com/2026/11/04/2026-midterm-election-results-live-updates.html" target="_blank" rel="noreferrer">CNBC’s results coverage</a></p><a class="back-link" href="#cover">Back to the cover ↑</a></article><section class="department-briefs" aria-labelledby="us-world-more"><h3 class="more-heading" id="us-world-more">Briefs in U.S. + World</h3><div class="briefs two-up"><article class="brief" id="ukraine"><span class="card-label">Ukraine · Talks set</span><h3>Three-way talks are scheduled for Abu Dhabi</h3><p>Following the Kremlin’s Oct. 21 signal, U.S. envoy Steve Witkoff said the United States will mediate talks with Russia and Ukraine in Abu Dhabi on Nov. 10 and 11, the first in-person meeting with Russian negotiators since February.  Separate technical talks on reconstruction and security guarantees began in Brussels this week.  Both sides launched heavy drone strikes overnight into Thursday.</p><p><a href="https://www.axios.com/2026/11/03/us-russia-ukraine-peace-talks-uae-trump-witkoff-kushner" target="_blank" rel="noreferrer">Axios on the Abu Dhabi talks</a> · <a href="https://abcnews.com/International/wireStory/russia-ukraine-trade-airstrikes-reconstruction-security-talks-resume-137871457" target="_blank" rel="noreferrer">AP via ABC News on strikes and Brussels talks</a></p></article><article class="brief" id="iran"><span class="card-label">Iran · Hormuz</span><h3>New strikes and tanker hits stall the Iran deal</h3><p>U.S. forces carried out what officials called limited, defensive strikes near the Strait of Hormuz on Monday after an apparent Iranian attack on a U.S. aircraft, CBS News reports.  A senior Iranian figure called Washington’s response to the latest proposal not convincing, and two vessels were struck off Oman.  Qatari mediators are working on a framework that trades an end to Hormuz attacks for lifting the U.S. port blockade.</p><p><a href="https://www.cbsnews.com/live-updates/iran-war-us-trump-negotiations-midterms/" target="_blank" rel="noreferrer">CBS News’ Iran war updates</a></p></article></div></section></section></div></main><footer class="footer"><strong>The Daily Brief</strong><p>Prepared for Steve.  Research cutoff: Nov. 6, 2026, 10:45 a.m. Mountain.  Follow linked advisories for fixed builds and later changes.  Court items relying on secondary reporting should be checked against the underlying opinions and orders.</p><p><a href="#cover">Return to the cover</a></p></footer><script>
+    (() => {
+      const progress = document.getElementById('reading-progress');
+      const updateProgress = () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const value = max > 0 ? (window.scrollY / max) * 100 : 0;
+        progress.style.width = `${Math.min(100, Math.max(0, value))}%`;
+      };
+      updateProgress();
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      window.addEventListener('resize', updateProgress);
+    })();
+  </script>
+</body>
+</html>
